@@ -218,7 +218,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
             </div>
             
               {/* Read More Link for All Newsletters */}
-              <div className="flex justify-center mt-6">
+              <div className="flex justify-left mt-6">
                 <Link to="blog/index" className="text-indigo-600 font-medium hover:underline text-lg">
                   Read More Newsletters →
                 </Link>
