@@ -198,7 +198,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h2 className="text-3xl font-bold mb-6">TSD Newsletters</h2>
+            <h2 className="text-3xl font-bold mb-6">TSD Blog</h2>
 
             {/* Newsletter Articles */}
             <div className="space-y-4">
