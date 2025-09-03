@@ -21,17 +21,23 @@ const plans = [
   {
     title: "BASIC",
     price: "Free",
-    features: ["Name and contact details", "Minimal listing & photos (1–2 units max)"],
+    caption:"",
+    features: ["Minimal listing and photos ","List up to 2 units/room types with a single photo per unit","Listing on TSD for 30 days","Display of contact info (email & phone)","Visible in student searches (default order)","Provider dashboard for managing your listings"],
+   additionalinfo:"",
   },
   {
     title: "STANDARD",
     price: "AED 300/month",
-    features: ["Profile page with photos, amenities", "Maximum 3 units/room types"],
+    caption:"Everything in Basic, plus:",
+    features: ["Profile page with photos, amenities","Maximum 5 units/room types","Add custom photos and videos","Appear above Basic listings in search results","Priority support for listing edits"],
+      additionalinfo:"*Enjoy up to 25% off premium add-ons including social media features, homepage banners, and content creation.",
   },
   {
     title: "FEATURED",
     price: "AED 550/month",
-    features: ["Priority placement on search results", "Homepage banner/feature", "Maximum 5 units/room types"],
+    caption:"Everything in Standard, plus:",
+    features: ["Priority placement on search results, photos, amenities ","Highlighted listing with coloured border & priority tag","Appear in top results ","One Social media feature (worth AED 499)","One banner ad on homepage for 14 days (worth AED 400)","Custom content creation (copy + layout assistance)"],
+      additionalinfo:"*Need more visibility? Featured partners can purchase extra social features, content packages, and banners at special rates",
     featured: true,
   },
 ];
@@ -119,7 +125,7 @@ const plans = [
 
           <h3 className="font-bold text-indigo-700 text-lg">{item.step}</h3>
           <h4 className="mt-2 font-semibold text-xl">{item.title}</h4>
-
+          
           <p className="text-sm text-gray-500 mt-2">{item.caption}</p>
           <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
         </div>
@@ -131,16 +137,18 @@ const plans = [
       {/* SUBSCRIPTION PLANS */}
 <section id="subscription-plans" className="py-16 bg-gray-50">
   <h2 className="text-3xl font-bold text-center mb-10">Subscription Plans</h2>
-  <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
 
+  <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
     {plans.map((item, i) => (
       <div
         key={i}
-        className="p-6 bg-white shadow-md rounded-2xl border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition duration-300"
+        className="group p-6 bg-white shadow-md rounded-2xl border border-gray-200 flex flex-col 
+                   transition duration-300 transform hover:scale-105 hover:shadow-2xl hover:border-indigo-500"
       >
         {/* Title & Price */}
         <h3 className="font-bold text-indigo-700 text-lg">{item.title}</h3>
         <h4 className="mt-2 font-semibold text-xl">{item.price}</h4>
+        <div className="mt-2 font-semibold">{item.caption}</div>
 
         {/* Features list */}
         <ul className="mb-6 space-y-3 text-gray-700 mt-4">
@@ -152,15 +160,22 @@ const plans = [
           ))}
         </ul>
 
-        {/* CTA button */}
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
+        {/* Additional info */}
+        <div className="mt-2 text-blue italic">{item.additionalinfo}</div> 
+
+        {/* CTA button aligned bottom */}
+        <button
+          className="mt-auto px-6 py-3 rounded-lg font-semibold transition 
+                     bg-blue-600 text-white hover:bg-blue-700 
+                     group-hover:shadow-lg group-hover:shadow-indigo-400/50 group-hover:scale-105"
+        >
           Get Started
         </button>
       </div>
     ))}
-
   </div>
 </section>
+
 <section className="relative py-16 bg-gray-50 overflow-hidden">
         {/* Add-On Services */}
        <div className="mt-16 max-w-6xl mx-auto px-6 text-center"

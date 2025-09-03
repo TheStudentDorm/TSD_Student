@@ -246,40 +246,53 @@ export default function Home({ overlay = "light" }: HomeProps) {
               </div>
             </div>
           ))}
-       <div className="flex justify-end mt-6">
+       
+          </div>
+          <div className="flex justify-center mt-6">
           <Link to="students/Events" className="text-indigo-600 font-medium hover:underline text-lg">
             See All Events →
           </Link>
-          </div>
         </div>
           
       </section>
       {/* ======================== PARTNER SECTION ======================== */}
       <section
-        className="relative py-24 bg-cover bg-center text-center text-white"
-        style={{ backgroundImage: "url('/partner-bg.png')" }}
+  className="relative w-full h-screen bg-cover bg-center bg-fixed text-center text-white"
+  style={{ backgroundImage: `url('partner-bg.png')` }}
+>
+  {/* Dark overlay */}
+  <div className="absolute inset-0 bg-black/50"></div>
+
+  {/* Content */}
+  <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center justify-center h-full px-4">
+    <h2 className="text-4xl md:text-5xl font-bold mb-4">PARTNER WITH US</h2>
+    <p className="mb-6 text-lg md:text-xl">
+      Are you an Accommodation Provider? <br /> Get discovered by thousands of students every month.
+    </p>
+    <Link
+      to="/providers#subscription-plans"
+      className="relative inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+    >
+      View Pricing Plans
+      <svg
+        className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
       >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 max-w-2xl mx-auto hover:opacity-90 transition-opacity duration-300">
-          <h2 className="text-3xl font-bold mb-4">PARTNER WITH US</h2>
-          <p className="mb-6">Are you an Accommodation Provider? <br /> Get discovered by thousands of students every month.</p>
-          <Link
-            to="/providers#subscription-plans"
-            className="relative inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            View Pricing Plans
-            <svg className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-          </Link>
-        </div>
-      </section>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </Link>
+  </div>
+</section>
+
 
       {/* ======================== CONTACT FORM ======================== */}
       <section className="py-16 bg-gray-50 text-center">
         <h2 className="text-3xl font-bold mb-4">HAVE QUESTIONS? SUGGESTIONS?</h2>
         <p className="text-lg text-gray-700 mb-2">Tell us what you think or need help with. We're here to assist you!</p>
-        <p className="text-gray-600 mb-8 max-w-2xl mx-auto">Whether you have questions about our services, need assistance, or want to share your feedback, we'd love to hear from you. Your input helps us improve and serve you better.</p>
+        {/* <p className="text-gray-600 mb-8 max-w-2xl mx-auto">Whether you have questions about our services, need assistance, or want to share your feedback, we'd love to hear from you. Your input helps us improve and serve you better.</p> */}
 
         <form ref={formRef} onSubmit={sendEmail} className="max-w-xl mx-auto space-y-4">
           <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
