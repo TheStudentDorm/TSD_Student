@@ -12,7 +12,8 @@ const careersTips = [
 
 export default function Careers() {
   return (
-    <main className="max-w-6xl mx-auto">
+    <main className="max-w-6xl mx-auto py-16 px-6">
+      {/* Hero Section */}
       <HeroSectionSmall
         title="Careers & Internships"
         subtitle="Explore internships, part-time jobs, and career opportunities tailored for students in the UAE."
@@ -20,15 +21,27 @@ export default function Careers() {
         image="/images/student-hero-careers.jpg"
       />
 
-      <div className="py-16 px-6">
-        <div className="p-6 bg-white shadow rounded-lg mb-12">
-          Career listings and tips.
+      {/* Coming Soon */}
+      <section className="mt-20 text-center">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">💼 Career Listings</h2>
+        <div className="p-10 bg-white rounded-2xl shadow-md inline-block">
+          <p className="text-xl font-semibold text-gray-600">Coming Soon 🚧</p>
+          <p className="text-gray-500 mt-2">
+            We’re building a curated list of internships, part-time jobs, and student opportunities in the UAE.
+          </p>
         </div>
+      </section>
 
-        <h2 className="text-2xl font-semibold mb-4">TSD Pro Tips!</h2>
+      {/* Pro Tips Carousel */}
+      <section className="mt-20">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">TSD Pro Tips!</h2>
         <TipsCarousel tips={careersTips} duration={30} />
+      </section>
+
+      {/* Navigation */}
+      <div className="mt-16">
+        <NavigationButtons />
       </div>
-      <NavigationButtons/>
     </main>
   );
 }

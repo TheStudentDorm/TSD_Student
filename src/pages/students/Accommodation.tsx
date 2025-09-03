@@ -12,23 +12,34 @@ const accommodationTips = [
 
 export default function Accommodation() {
   return (
-    
-    <main className="max-w-5xl mx-auto py-16 px-6">
-        <HeroSectionSmall
+    <main className="max-w-6xl mx-auto py-16 px-6">
+      {/* Hero Section */}
+      <HeroSectionSmall
         title="Find Student Accommodation"
         subtitle="Discover your next home in the UAE. Verified listings, tips, and guides to make your student housing search simple."
         icon="/icons/accomodation.svg"
         image="/images/student_acc.jpg"
-      /><br/><br/>
-      <h2 className="text-2xl font-semibold mb-4">Popular Student Accommodations</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <div className="p-6 bg-white shadow rounded-lg">Accommodation Listing 1</div>
-        <div className="p-6 bg-white shadow rounded-lg">Accommodation Listing 2</div>
-      </div>
+      />
 
-      <h2 className="text-2xl font-semibold mb-4">TSD Pro Tips!</h2>
-      <TipsCarousel tips={accommodationTips} duration={30}/>
-      <NavigationButtons/>
+      {/* Coming Soon */}
+      <section className="mt-20 text-center">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">🏠 Popular Student Accommodations</h2>
+        <div className="p-10 bg-white rounded-2xl shadow-md inline-block">
+          <p className="text-xl font-semibold text-gray-600">Coming Soon 🚧</p>
+          <p className="text-gray-500 mt-2">We’re working hard to bring you verified student housing options.</p>
+        </div>
+      </section>
+
+      {/* Pro Tips Carousel */}
+      <section className="mt-20">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">TSD Pro Tips!</h2>
+        <TipsCarousel tips={accommodationTips} duration={30} />
+      </section>
+
+      {/* Navigation */}
+      <div className="mt-16">
+        <NavigationButtons />
+      </div>
     </main>
   );
 }

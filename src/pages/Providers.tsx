@@ -151,7 +151,7 @@ const plans = [
         <div className="mt-2 font-semibold">{item.caption}</div>
 
         {/* Features list */}
-        <ul className="mb-6 space-y-3 text-gray-700 mt-4">
+        <ul className="space-y-3 text-gray-700 mt-4 flex-1">
           {item.features.map((feature, idx) => (
             <li key={idx} className="flex items-center gap-2">
               <span className="w-6 h-6 flex items-center justify-center bg-blue-600 text-white rounded-full">✓</span>
@@ -160,12 +160,14 @@ const plans = [
           ))}
         </ul>
 
-        {/* Additional info */}
-        <div className="mt-2 text-blue italic">{item.additionalinfo}</div> 
+        {/* Additional info (just above button) */}
+        {item.additionalinfo && (
+          <p className="mt-4 text-sm text-blue-700 italic">{item.additionalinfo}</p>
+        )}
 
         {/* CTA button aligned bottom */}
         <button
-          className="mt-auto px-6 py-3 rounded-lg font-semibold transition 
+          className="mt-4 px-6 py-3 rounded-lg font-semibold transition 
                      bg-blue-600 text-white hover:bg-blue-700 
                      group-hover:shadow-lg group-hover:shadow-indigo-400/50 group-hover:scale-105"
         >
@@ -174,7 +176,14 @@ const plans = [
       </div>
     ))}
   </div>
+
+  {/* Note under plans */}
+  <p className="mt-10 text-center text-gray-900 italic text-md">
+    *Receive full list of plans and discounts upon enquiry only
+  </p>
 </section>
+
+
 
 <section className="relative py-16 bg-gray-50 overflow-hidden">
         {/* Add-On Services */}
@@ -192,9 +201,11 @@ const plans = [
         <span className="text-3xl">📸</span>
         <h3 className="font-semibold text-xme text-left">Photography & Content</h3>
       </div>
-      <p className="text-gray-800 text-me">AED 300 / listing</p>
+     <br/>
       <p className="text-indigo-700 text-sm italic">Professional photos, videos and descriptions that make your listing stand out and attract more students. </p>
+   <br/><br/>  <p className="text-gray-800 text-me">AED 300 / listing</p>
     </div>
+
 
     {/* Service 2 */}
     <div className="p-6 border border-gray-100">
@@ -202,8 +213,9 @@ const plans = [
         <span className="text-3xl">✨</span>
         <h3 className="font-semibold">Highlight in Search</h3>
       </div>
-      <p className="text-gray-800 text-me">AED 100 / 7 days</p>
+      <br/>
       <p className="text-indigo-700 text-sm italic">Get priority visibility in student search results to boost clicks and inquiries</p>
+     <br/><br/> <p className="text-gray-800 text-me">AED 100 / 7 days</p>
     </div>
 
     {/* Service 3 */}
@@ -211,10 +223,10 @@ const plans = [
       <div className="flex items-center gap-3 mb-2">
         <span className="text-3xl">🏠</span>
         <h3 className="font-semibold">Homepage Banners</h3>
-      </div>
-      <p className="text-gray-800 text-me">AED 200 / week</p>
+      </div><br/>
+            <p className="text-indigo-700 text-sm italic">Feature your brand front and centre on the TSD homepage for maximum exposure</p>
+            <br/><br/><p className="text-gray-800 text-me">AED 200 / week</p>
       <p className="text-gray-700 text-sm">(AED 700 / month)</p>
-      <p className="text-indigo-700 text-sm italic">Feature your brand front and centre on the TSD homepage for maximum exposure</p>
     </div>
 
     {/* Service 4 */}
@@ -223,9 +235,11 @@ const plans = [
         <span className="text-3xl">📢</span>
         <h3 className="font-semibold">Social Media Feature</h3>
       </div>
-      <p className="text-gray-800 text-me">AED 499 for 3 posts</p>
-      <p className="text-gray-700 text-sm">(Instagram & LinkedIn)</p>
-      <p className="text-indigo-700 text-sm italic">Reach thousands of students with a spotlight, co-branded post on our active social media channels.</p>
+
+      <p className="font-semibold text-gray-700 text-md">(Instagram & LinkedIn)</p>
+     <br/> <p className="text-indigo-700 text-sm italic">Reach thousands of students with a spotlight, co-branded post on our active social media channels.</p>
+      <br/><br/>
+            <p className="text-gray-800 text-me">AED 499 for 3 posts</p>   
     </div>
   </div>
 </div>
