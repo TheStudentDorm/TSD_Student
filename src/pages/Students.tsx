@@ -14,49 +14,49 @@ interface Resource {
 export default function Students() {
   const resources: Resource[] = [
     {
-      link: "/students/accommodation",
+      link: "accommodation",
       icon: "/icons/accomodation.svg",
       title: "Find Student Accommodation",
       desc: "Your next home, sorted.",
     },
     {
-      link: "/students/visa",
+      link: "visa",
       icon: "/icons/visa.svg",
       title: "Student Visa Guide",
       desc: "From application to arrival, stress-free.",
     },
     {
-      link: "/students/transport",
+      link: "transport",
       icon: "/icons/transport.svg",
       title: "Transport Made Simple",
       desc: "Getting around made easier.",
     },
     {
-      link: "/students/discounts",
+      link: "discounts",
       icon: "/icons/discount.svg",
       title: "Student Discounts & Perks",
       desc: "Stretch your dirhams further.",
     },
     {
-      link: "/students/careers",
+      link: "careers",
       icon: "/icons/career.svg",
       title: "Careers & Internships",
       desc: "Start building your future today.",
     },
     {
-      link: "/students/emergency",
+      link: "emergency",
       icon: "/icons/emergency.svg",
       title: "Emergency & Essential Contacts",
       desc: "Help when you need it most.",
     },
     {
-      link: "/students/academics",
+      link: "academics",
       icon: "/icons/academics.svg",
       title: "Academics & Learning",
       desc: "Tips, courses, and guidance to excel academically.",
     },
     {
-      link: "/students/attractions",
+      link: "attractions",
       icon: "/icons/attractions.svg",
       title: "Explore UAE Attractions",
       desc: "Discover cultural and fun spots around the UAE.",

@@ -16,7 +16,8 @@ export default function Home({ overlay = "light" }: HomeProps) {
   const location = useLocation();
 
   const [showContent, setShowContent] = useState(false);
-  const [offsetY, setOffsetY] = useState(0);
+  const [offsetY, setOffsetY] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
   // ======================== EmailJS Handler ========================
   const sendEmail = (e: React.FormEvent) => {
@@ -56,12 +57,25 @@ export default function Home({ overlay = "light" }: HomeProps) {
       setOffsetY(-rect.top * 0.3);
     }
   };
+  useEffect(() => {
+  const timer = setTimeout(() => setShowContent(true), 9000);
+  return () => clearTimeout(timer);
+}, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+ // ======================== Detect Mobile ========================
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
 
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   // ======================== Smooth Scroll for Hash ========================
   useEffect(() => {
     if (location.hash) {
@@ -140,43 +154,62 @@ export default function Home({ overlay = "light" }: HomeProps) {
   // ======================== Render ========================
   return (
     <div className="relative w-full">
-      {/* ======================== HERO SECTION ======================== */}
-      <div className="relative w-full h-screen overflow-hidden">
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          playsInline
-          preload="none"
-          onEnded={() => setShowContent(true)}
-        >
-          <source src="/home-bg.mp4" type="video/mp4" />
-        </video>
+     {/* ======================== HERO SECTION ======================== */}
+<div className="relative w-full h-screen overflow-hidden">
+  {/* ======================== Background Video / Mobile Lighter Video ======================== */}
+  {!isMobile ? (
+    <video
+      className="absolute top-0 left-0 w-full h-full object-cover"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+    >
+      <source src="/home-bg.mp4" type="video/mp4" />
+    </video>
+  ) : (
+    <video
+      className="absolute top-0 left-0 w-full h-full object-cover"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+    >
+      <source src="/home-bg-mobile.mp4" type="video/mp4" />
+    </video>
+  )}
 
-        <div className={overlayClasses}></div>
+  {/* Overlay */}
+  <div className={overlayClasses}></div>
 
-        {/* Logo */}
-        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
-          <img
-            src="/logo.png"
-            alt="The Student Dorm Logo"
-            className="w-24 sm:w-28 md:w-32"
-          />
-        </div>
+  {/* Logo */}
+  <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+    <img
+      src="/logo.png"
+      alt="The Student Dorm Logo"
+      className="w-24 sm:w-28 md:w-32"
+    />
+  </div>
 
-        {showContent && (
-          <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-4 pb-12 sm:pb-16 animate-fadeIn">
-            <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg">
-              Your Student Life, Simplified
-            </h1>
-            <p className="max-w-md sm:max-w-2xl text-sm sm:text-base md:text-lg text-gray-100 drop-shadow">
-              All-in-one platform for students in the UAE. From finding
-              accommodation to exploring career opportunities, staying informed,
-              and making the most of your journey.
-            </p>
-          </div>
-        )}
-      </div>
+  {/* Hero Content */}
+  <div
+    className={`relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-4 pb-12 sm:pb-16 transition-opacity duration-1000 ${
+      showContent ? "opacity-100" : "opacity-0"
+    }`}
+  ><br/>
+    <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg">
+      Your Student Life, Simplified
+    </h1>
+    <p className="max-w-md sm:max-w-2xl text-xsm sm:text-base md:text-lg text-gray-100 drop-shadow">
+      All-in-one platform for students in the UAE. From finding accommodation
+      to exploring career opportunities, staying informed, and making the most
+      of your journey.
+    </p>
+  </div>
+</div>
+
 
       {/* ======================== STUDENT RESOURCES ======================== */}
       <section
