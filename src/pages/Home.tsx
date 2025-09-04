@@ -1,12 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Calendar, MapPin, Ticket } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+import ParallaxBanner from "../components/Parallel";
+import NavigationButtons from "../components/NavigationButtons";
 
 interface HomeProps {
   overlay?: "light" | "ultraLight";
 }
 
 export default function Home({ overlay = "light" }: HomeProps) {
+  const formRef = useRef<HTMLFormElement>(null);
+  const location = useLocation();
+
   const [showContent, setShowContent] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [offsetY, setOffsetY] = useState(0);
+
+  // ======================== EmailJS Handler ========================
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    emailjs
+      .sendForm(
+        "service_nm9wacb",
+        "template_h0afoa3",
+        formRef.current,
+        "wYMZ0-6j3wayjyNO-"
+      )
+      .then(
+        () => {
+          alert("✅ Message sent successfully!");
+          formRef.current?.reset();
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          alert("❌ Failed to send. Please try again later.");
+        }
+      );
+  };
 
   // ======================== Overlay Classes ========================
   const overlayClasses =
@@ -14,79 +48,135 @@ export default function Home({ overlay = "light" }: HomeProps) {
       ? "absolute inset-0 bg-gradient-to-t from-black/25 via-indigo-900/15 to-transparent"
       : "absolute inset-0 bg-gradient-to-t from-black/40 via-indigo-900/30 to-transparent";
 
-  // ======================== Detect Mobile ========================
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
-    };
+  // ======================== Parallax Scroll ========================
+  const handleScroll = () => {
+    const section = document.getElementById("student-resources");
+    if (section) {
+      const rect = section.getBoundingClientRect();
+      setOffsetY(-rect.top * 0.3);
+    }
+  };
 
-    handleResize(); // initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ======================== Show Hero Content After 2s ========================
+  // ======================== Smooth Scroll for Hash ========================
   useEffect(() => {
-    const timer = setTimeout(() => setShowContent(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
+    }
+  }, [location]);
 
+  // ======================== Resources & Events Data ========================
+  const resources = [
+    {
+      link: "/students/accommodation",
+      icon: "/icons/accomodation.svg",
+      title: "Find Student Accommodation",
+      desc: "Your next home, sorted.",
+    },
+    {
+      link: "/students/Visa",
+      icon: "/icons/visa.svg",
+      title: "Student Visa Guide",
+      desc: "From application to arrival, stress-free.",
+    },
+    {
+      link: "/students/transport",
+      icon: "/icons/transport.svg",
+      title: "Transport Made Simple",
+      desc: "Getting around made easier.",
+    },
+    {
+      link: "/students/discounts",
+      icon: "/icons/discount.svg",
+      title: "Student Discounts & Perks",
+      desc: "Stretch your dirhams further.",
+    },
+    {
+      link: "/students/careers",
+      icon: "/icons/career.svg",
+      title: "Careers & Internships",
+      desc: "Start building your future today.",
+    },
+    {
+      link: "/students/emergency",
+      icon: "/icons/emergency.svg",
+      title: "Emergency & Essential Contacts",
+      desc: "Help when you need it most.",
+    },
+  ];
+
+  const events = [
+    {
+      title: "Meet The Top Students 2025",
+      description:
+        "Mentoring successful student applications abroad, including personal statements, profile building and more!",
+      admission: "Free Admission",
+      date: "31 August, 2025, 10:00 AM - 7 PM",
+      location: "Millennium Plaza Downtown Hotel, Dubai",
+      link: "https://eventbrite.com",
+      image: "/images/event1.jpg",
+    },
+    {
+      title: "GCC Exhibition for Education & Training 2025",
+      description: "Explore universities and education opportunities in the UAE!",
+      admission: "Free Admission",
+      date: "22 - 24 September, 2025",
+      location: "Etihad Arena, Abu Dhabi",
+      link: "https://gccexhibition.com",
+      image: "/images/event2.jpg",
+    },
+  ];
+
+  // ======================== Render ========================
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      {/* ======================== Background Video / Mobile Lighter Video ======================== */}
-      {!isMobile ? (
+    <div className="relative w-full">
+      {/* ======================== HERO SECTION ======================== */}
+      <div className="relative w-full h-screen overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
           autoPlay
           muted
-          loop
           playsInline
-          preload="auto"
+          preload="none"
+          onEnded={() => setShowContent(true)}
         >
           <source src="/home-bg.mp4" type="video/mp4" />
         </video>
-      ) : (
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src="/home-bg-mobile.mp4" type="video/mp4" />
-        </video>
-      )}
 
-      {/* ======================== Overlay ======================== */}
-      <div className={overlayClasses}></div>
+        <div className={overlayClasses}></div>
 
-      {/* ======================== Logo ======================== */}
-      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
-        <img
-          src="/logo.png"
-          alt="The Student Dorm Logo"
-          className="w-24 sm:w-28 md:w-32"
-        />
-      </div>
-
-      {/* ======================== Hero Content ======================== */}
-      {showContent && (
-        <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-4 pb-12 sm:pb-16 animate-fadeIn">
-          <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg">
-            Your Student Life, Simplified
-          </h1>
-          <p className="max-w-md sm:max-w-2xl text-sm sm:text-base md:text-lg text-gray-100 drop-shadow">
-            All-in-one platform for students in the UAE. From finding
-            accommodation to exploring career opportunities, staying informed,
-            and making the most of your journey.
-          </p>
+        {/* Logo */}
+        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+          <img
+            src="/logo.png"
+            alt="The Student Dorm Logo"
+            className="w-24 sm:w-28 md:w-32"
+          />
         </div>
-      )}
-    </div>
-  );
-}
 
+        {showContent && (
+          <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-4 pb-12 sm:pb-16 animate-fadeIn">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg">
+              Your Student Life, Simplified
+            </h1>
+            <p className="max-w-md sm:max-w-2xl text-sm sm:text-base md:text-lg text-gray-100 drop-shadow">
+              All-in-one platform for students in the UAE. From finding
+              accommodation to exploring career opportunities, staying informed,
+              and making the most of your journey.
+            </p>
+          </div>
+        )}
+      </div>
 
       {/* ======================== STUDENT RESOURCES ======================== */}
       <section
