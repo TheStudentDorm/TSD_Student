@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Ticket, ChevronDown, ChevronRight } from "lucide-react";
+import { Calendar, MapPin, Ticket } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 import ParallaxBanner from "../components/Parallel";
@@ -77,18 +77,49 @@ export default function Home({ overlay = "light" }: HomeProps) {
 
   // ======================== Resources & Events Data ========================
   const resources = [
-    { link: "/students/accommodation", icon: "/icons/accomodation.svg", title: "Find Student Accommodation", desc: "Your next home, sorted." },
-    { link: "/students/Visa", icon: "/icons/visa.svg", title: "Student Visa Guide", desc: "From application to arrival, stress-free." },
-    { link: "/students/transport", icon: "/icons/transport.svg", title: "Transport Made Simple", desc: "Getting around made easier." },
-    { link: "/students/discounts", icon: "/icons/discount.svg", title: "Student Discounts & Perks", desc: "Stretch your dirhams further." },
-    { link: "/students/careers", icon: "/icons/career.svg", title: "Careers & Internships", desc: "Start building your future today." },
-    { link: "/students/emergency", icon: "/icons/emergency.svg", title: "Emergency & Essential Contacts", desc: "Help when you need it most." },
+    {
+      link: "/students/accommodation",
+      icon: "/icons/accomodation.svg",
+      title: "Find Student Accommodation",
+      desc: "Your next home, sorted.",
+    },
+    {
+      link: "/students/Visa",
+      icon: "/icons/visa.svg",
+      title: "Student Visa Guide",
+      desc: "From application to arrival, stress-free.",
+    },
+    {
+      link: "/students/transport",
+      icon: "/icons/transport.svg",
+      title: "Transport Made Simple",
+      desc: "Getting around made easier.",
+    },
+    {
+      link: "/students/discounts",
+      icon: "/icons/discount.svg",
+      title: "Student Discounts & Perks",
+      desc: "Stretch your dirhams further.",
+    },
+    {
+      link: "/students/careers",
+      icon: "/icons/career.svg",
+      title: "Careers & Internships",
+      desc: "Start building your future today.",
+    },
+    {
+      link: "/students/emergency",
+      icon: "/icons/emergency.svg",
+      title: "Emergency & Essential Contacts",
+      desc: "Help when you need it most.",
+    },
   ];
 
   const events = [
     {
       title: "Meet The Top Students 2025",
-      description: "Mentoring successful student applications abroad, including personal statements, profile building and more!",
+      description:
+        "Mentoring successful student applications abroad, including personal statements, profile building and more!",
       admission: "Free Admission",
       date: "31 August, 2025, 10:00 AM - 7 PM",
       location: "Millennium Plaza Downtown Hotel, Dubai",
@@ -109,12 +140,14 @@ export default function Home({ overlay = "light" }: HomeProps) {
   // ======================== Render ========================
   return (
     <div className="relative w-full">
-
       {/* ======================== HERO SECTION ======================== */}
       <div className="relative w-full h-screen overflow-hidden">
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
-          autoPlay muted playsInline
+          autoPlay
+          muted
+          playsInline
+          preload="none"
           onEnded={() => setShowContent(true)}
         >
           <source src="/home-bg.mp4" type="video/mp4" />
@@ -123,17 +156,23 @@ export default function Home({ overlay = "light" }: HomeProps) {
         <div className={overlayClasses}></div>
 
         {/* Logo */}
-        <div className="absolute top-6 left-6 z-20">
-          <img src="/logo.png" alt="The Student Dorm" className="w-28 md:w-32" />
+        <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+          <img
+            src="/logo.png"
+            alt="The Student Dorm Logo"
+            className="w-24 sm:w-28 md:w-32"
+          />
         </div>
 
         {showContent && (
-          <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-6 pb-16 animate-fadeIn">
-            <h1 className="text-2xl md:text-4xl font-bold mb-4 drop-shadow-lg">
+          <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-4 pb-12 sm:pb-16 animate-fadeIn">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg">
               Your Student Life, Simplified
             </h1>
-            <p className="max-w-3xl text-3xl md:text-base text-gray-100 drop-shadow">
-              All-in-one platform for students in the UAE. From finding accommodation to exploring career opportunities, staying informed, and making the most of your journey.
+            <p className="max-w-md sm:max-w-2xl text-sm sm:text-base md:text-lg text-gray-100 drop-shadow">
+              All-in-one platform for students in the UAE. From finding
+              accommodation to exploring career opportunities, staying informed,
+              and making the most of your journey.
             </p>
           </div>
         )}
@@ -142,7 +181,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
       {/* ======================== STUDENT RESOURCES ======================== */}
       <section
         id="student-resources"
-        className="py-16 text-center relative overflow-hidden"
+        className="py-12 sm:py-16 text-center relative overflow-hidden"
         style={{
           backgroundImage: "url('/images/student-bg.jpg')",
           backgroundAttachment: "scroll",
@@ -151,10 +190,12 @@ export default function Home({ overlay = "light" }: HomeProps) {
         }}
       >
         <div className="absolute inset-0 bg-black/40 z-0"></div>
-        <div className="relative z-10 px-6 py-16">
-          <h2 className="text-3xl font-bold mb-8 text-white">STUDENT RESOURCES</h2>
+        <div className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white">
+            STUDENT RESOURCES
+          </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
             {resources.map((res, idx) => (
               <motion.div
                 key={idx}
@@ -167,9 +208,15 @@ export default function Home({ overlay = "light" }: HomeProps) {
                   to={res.link}
                   className="p-6 bg-white bg-opacity-90 shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center"
                 >
-                  <img src={res.icon} alt={res.title} className="w-12 h-12 mb-4" />
-                  <p className="font-semibold mb-1">{res.title}</p>
-                  <p className="text-gray-700 text-sm">{res.desc}</p>
+                  <img
+                    src={res.icon}
+                    alt={res.title}
+                    className="w-10 h-10 sm:w-12 sm:h-12 mb-4"
+                  />
+                  <p className="text-sm sm:text-base font-semibold mb-1">
+                    {res.title}
+                  </p>
+                  <p className="text-xs sm:text-sm text-gray-700">{res.desc}</p>
                 </Link>
               </motion.div>
             ))}
@@ -178,8 +225,8 @@ export default function Home({ overlay = "light" }: HomeProps) {
       </section>
 
       {/* ======================== NEWSLETTER ======================== */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 sm:py-16 px-4 bg-gray-50">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -196,116 +243,216 @@ export default function Home({ overlay = "light" }: HomeProps) {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
-            <h2 className="text-3xl font-bold mb-6">TSD Blog</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+              TSD Blog
+            </h2>
 
             {/* Newsletter Articles */}
             <div className="space-y-4">
-              <div className="p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition duration-300">
-                <h3 className="text-xl font-semibold mb-2">How to Get Internship-Ready in 2 Weeks</h3>
-                <p className="text-gray-600 mb-2">Quick tips to land your first internship</p>
-                <p className="text-sm text-gray-500 mb-4">From polishing your LinkedIn to acing interview prep, this guide covers everything you need to become internship-ready fast.</p>
-                <Link to="/blog/internship-ready" className="text-indigo-600 font-medium hover:underline">Read Full Article →</Link>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition duration-300">
-                <h3 className="text-xl font-semibold mb-2">Do’s and Don’ts for a Great CV</h3>
-                <p className="text-gray-600 mb-2">Your roadmap to a standout resume</p>
-                <p className="text-sm text-gray-500 mb-4">Learn the essential tips to craft a CV that gets noticed and the common mistakes to avoid.</p>
-                <Link to="/blog/great-cv" className="text-indigo-600 font-medium hover:underline">Read Full Article →</Link>
-              </div>
-            </div>
-            
-              {/* Read More Link for All Newsletters */}
-              <div className="flex justify-left mt-6">
-                <Link to="blog/index" className="text-indigo-600 font-medium hover:underline text-lg">
-                  Read More Newsletters →
+              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition duration-300">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  How to Get Internship-Ready in 2 Weeks
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-2">
+                  Quick tips to land your first internship
+                </p>
+                <p className="text-xs sm:text-sm text-gray-500 mb-4">
+                  From polishing your LinkedIn to acing interview prep, this
+                  guide covers everything you need to become internship-ready
+                  fast.
+                </p>
+                <Link
+                  to="/blog/internship-ready"
+                  className="text-indigo-600 font-medium hover:underline text-sm sm:text-base"
+                >
+                  Read Full Article →
                 </Link>
               </div>
-            </motion.div>
+
+              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition duration-300">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  Do’s and Don’ts for a Great CV
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-2">
+                  Your roadmap to a standout resume
+                </p>
+                <p className="text-xs sm:text-sm text-gray-500 mb-4">
+                  Learn the essential tips to craft a CV that gets noticed and
+                  the common mistakes to avoid.
+                </p>
+                <Link
+                  to="/blog/great-cv"
+                  className="text-indigo-600 font-medium hover:underline text-sm sm:text-base"
+                >
+                  Read Full Article →
+                </Link>
+              </div>
+            </div>
+
+            {/* Read More Link */}
+            <div className="flex justify-start mt-4 sm:mt-6">
+              <Link
+                to="blog/index"
+                className="text-indigo-600 font-medium hover:underline text-base sm:text-lg"
+              >
+                Read More Newsletters →
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ======================== EVENTS ======================== */}
-      <section className="py-16 bg-gray-50 text-center">
-        <h2 className="text-3xl font-bold mb-2">TOP EVENTS</h2>
-        <p className="text-gray-600 mb-8">Discover upcoming student events, workshops, and opportunities.</p>
+      <section className="py-12 sm:py-16 bg-gray-50 text-center px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">TOP EVENTS</h2>
+        <p className="text-gray-600 mb-8 text-sm sm:text-base">
+          Discover upcoming student events, workshops, and opportunities.
+        </p>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {events.map((event, index) => (
-            <div key={index} className="bg-white border rounded-lg shadow hover:shadow-lg transition text-left">
-              <img src={event.image} alt={event.title} className="w-full h-40 object-cover rounded-t-lg" />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                <p className="text-gray-600 mb-4">{event.description}</p>
-                <div className="flex items-center text-sm text-gray-700 mb-2"><Ticket className="w-4 h-4 mr-2" />{event.admission}</div>
-                <div className="flex items-center text-sm text-gray-700 mb-2"><Calendar className="w-4 h-4 mr-2" />{event.date}</div>
-                <div className="flex items-center text-sm text-gray-700 mb-4"><MapPin className="w-4 h-4 mr-2" />{event.location}</div>
-                <a href={event.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-medium hover:underline">{new URL(event.link).hostname}</a>
+            <div
+              key={index}
+              className="bg-white border rounded-lg shadow hover:shadow-lg transition text-left flex flex-col"
+            >
+              <img
+                src={event.image}
+                alt={event.title}
+                className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
+                loading="lazy"
+              />
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  {event.title}
+                </h3>
+                <p className="text-sm sm:text-base text-gray-600 mb-4 flex-grow">
+                  {event.description}
+                </p>
+                <div className="flex items-center text-xs sm:text-sm text-gray-700 mb-2">
+                  <Ticket className="w-4 h-4 mr-2" />
+                  {event.admission}
+                </div>
+                <div className="flex items-center text-xs sm:text-sm text-gray-700 mb-2">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  {event.date}
+                </div>
+                <div className="flex items-center text-xs sm:text-sm text-gray-700 mb-4">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  {event.location}
+                </div>
+                <a
+                  href={event.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 font-medium hover:underline text-sm sm:text-base"
+                >
+                  {event.link.includes("eventbrite")
+                    ? "Register on Eventbrite"
+                    : "Visit Website"}
+                </a>
               </div>
             </div>
           ))}
-       
-          </div>
-          <div className="flex justify-center mt-6">
-          <Link to="students/Events" className="text-indigo-600 font-medium hover:underline text-lg">
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <Link
+            to="students/Events"
+            className="text-indigo-600 font-medium hover:underline text-base sm:text-lg"
+          >
             See All Events →
           </Link>
         </div>
-          
       </section>
+
       {/* ======================== PARTNER SECTION ======================== */}
       <section
-  className="relative w-full h-screen bg-cover bg-center bg-fixed text-center text-white"
-  style={{ backgroundImage: `url('partner-bg.png')` }}
->
-  {/* Dark overlay */}
-  <div className="absolute inset-0 bg-black/50"></div>
-
-  {/* Content */}
-  <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center justify-center h-full px-4">
-    <h2 className="text-4xl md:text-5xl font-bold mb-4">PARTNER WITH US</h2>
-    <p className="mb-6 text-lg md:text-xl">
-      Are you an Accommodation Provider? <br /> Get discovered by thousands of students every month.
-    </p>
-    <Link
-      to="/providers#subscription-plans"
-      className="relative inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 transition-all duration-300 shadow-lg hover:shadow-xl"
-    >
-      View Pricing Plans
-      <svg
-        className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
+        className="relative w-full h-[80vh] md:h-screen bg-cover bg-center md:bg-fixed text-center text-white"
+        style={{ backgroundImage: `url('partner-bg.png')` }}
       >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-      </svg>
-    </Link>
-  </div>
-</section>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
+        {/* Content */}
+        <div className="relative z-10 max-w-xl sm:max-w-2xl mx-auto flex flex-col items-center justify-center h-full px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+            PARTNER WITH US
+          </h2>
+          <p className="mb-6 text-base sm:text-lg md:text-xl">
+            Are you an Accommodation Provider? <br /> Get discovered by
+            thousands of students every month.
+          </p>
+          <Link
+            to="/providers#subscription-plans"
+            className="relative inline-flex items-center justify-center px-5 sm:px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 transition-all duration-300 shadow-lg hover:shadow-xl group"
+          >
+            View Pricing Plans
+            <svg
+              className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              ></path>
+            </svg>
+          </Link>
+        </div>
+      </section>
 
       {/* ======================== CONTACT FORM ======================== */}
-      <section className="py-16 bg-gray-50 text-center">
-        <h2 className="text-3xl font-bold mb-4">HAVE QUESTIONS? SUGGESTIONS?</h2>
-        <p className="text-lg text-gray-700 mb-2">Tell us what you think or need help with. We're here to assist you!</p>
-        {/* <p className="text-gray-600 mb-8 max-w-2xl mx-auto">Whether you have questions about our services, need assistance, or want to share your feedback, we'd love to hear from you. Your input helps us improve and serve you better.</p> */}
+      <section className="py-12 sm:py-16 bg-gray-50 text-center px-4">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+          HAVE QUESTIONS? SUGGESTIONS?
+        </h2>
+        <p className="text-sm sm:text-lg text-gray-700 mb-6">
+          Tell us what you think or need help with. We're here to assist you!
+        </p>
 
-        <form ref={formRef} onSubmit={sendEmail} className="max-w-xl mx-auto space-y-4">
-          <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
-          <input type="email" name="email" placeholder="Your Email" required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
-          <textarea name="message" placeholder="Your Message" rows={4} required className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
-          <button type="submit" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300">Send Message</button>
+        <form
+          ref={formRef}
+          onSubmit={sendEmail}
+          className="max-w-xl w-full mx-auto space-y-4"
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            className="w-full text-sm sm:text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            className="w-full text-sm sm:text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            rows={4}
+            required
+            className="w-full text-sm sm:text-base px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          ></textarea>
+          <button
+            type="submit"
+            className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+          >
+            Send Message
+          </button>
         </form>
 
         <div className="mt-8">
           <NavigationButtons />
         </div>
       </section>
-
     </div>
   );
 }

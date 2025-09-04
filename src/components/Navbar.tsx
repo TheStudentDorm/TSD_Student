@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
-  const [mobileOpen, setMobileOpen] = useState(false); // Mobile menu toggle
-  const [desktopClick, setDesktopClick] = useState(false); // Desktop hamburger click
-  const [desktopHover, setDesktopHover] = useState(false); // Desktop hamburger hover
-  const [studentsOpen, setStudentsOpen] = useState(location.pathname.startsWith("/students")); // Mobile students submenu
-  const [studentsDropdown, setStudentsDropdown] = useState(false); // Desktop students dropdown
+  const [mobileOpen, setMobileOpen] = useState(false); 
+  const [desktopClick, setDesktopClick] = useState(false);
+  const [desktopHover, setDesktopHover] = useState(false);
+  const [studentsOpen, setStudentsOpen] = useState(location.pathname.startsWith("/students"));
+  const [studentsDropdown, setStudentsDropdown] = useState(false);
+
+  // 🔥 Scroll hide/show states
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   let hideTimeout: NodeJS.Timeout;
 
   const isActive = (path: string) => location.pathname === path;
@@ -17,24 +22,46 @@ export default function Navbar() {
   const studentLinks = [
     { path: "/students/accommodation", label: "Accommodation" },
     { path: "/students/academics", label: "Academics" },
-    { path: "/students/visa", label: "Visa" },  
+    { path: "/students/visa", label: "Visa" },
     { path: "/students/transport", label: "Transport" },
     { path: "/students/careers", label: "Careers" },
     { path: "/students/discounts", label: "Discounts" },
     { path: "/students/events", label: "Events" },
     { path: "/students/attractions", label: "Attractions" },
     { path: "/students/emergency", label: "Emergency" },
-    
   ];
 
   const extraLinks = [
-    // { path: "/accommodation", label: "Providers Login" },
     { path: "/blog/index", label: "Blog" },
     { path: "/contact", label: "Contact" },
   ];
 
+  // 🔧 Scroll handler to hide/show navbar + close mobile menu
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowNavbar(false); // scrolling down → hide
+      } else {
+        setShowNavbar(true); // scrolling up → show
+      }
+      setLastScrollY(window.scrollY);
+
+      // auto-close mobile menu if open
+      if (mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY, mobileOpen]);
+
   return (
-    <nav className="bg-gray-900 text-white fixed top-0 w-full z-50 shadow-lg">
+    <nav
+      className={`bg-gray-900 text-white fixed top-0 w-full z-50 shadow-lg transform transition-transform duration-300 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center">
@@ -111,7 +138,7 @@ export default function Navbar() {
                     className={`block px-4 py-2 hover:bg-indigo-700 ${
                       isActive(link.path) ? "bg-indigo-700 font-semibold" : ""
                     }`}
-                    onClick={() => setDesktopClick(false)} // Close on click
+                    onClick={() => setDesktopClick(false)}
                   >
                     {link.label}
                   </Link>
@@ -136,6 +163,7 @@ export default function Navbar() {
           <Link
             to="/about"
             className={`block px-4 py-2 hover:bg-indigo-700 ${isActive("/about") ? "bg-indigo-700 font-semibold" : ""}`}
+            onClick={() => setMobileOpen(false)}
           >
             About
           </Link>
@@ -162,6 +190,7 @@ export default function Navbar() {
                   className={`block px-4 py-2 rounded transition-colors duration-200 ${
                     isActive(item.path) ? "bg-indigo-700 font-semibold" : "hover:bg-indigo-600"
                   }`}
+                  onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
                 </Link>
@@ -177,6 +206,7 @@ export default function Navbar() {
               className={`block px-4 py-2 hover:bg-indigo-700 ${
                 isActive(link.path) ? "bg-indigo-700 font-semibold" : ""
               }`}
+              onClick={() => setMobileOpen(false)}
             >
               {link.label}
             </Link>
@@ -185,6 +215,7 @@ export default function Navbar() {
           <Link
             to="/providers"
             className={`block px-4 py-2 hover:bg-indigo-700 ${isActive("/providers") ? "bg-indigo-700 font-semibold" : ""}`}
+            onClick={() => setMobileOpen(false)}
           >
             Providers
           </Link>
