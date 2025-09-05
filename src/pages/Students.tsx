@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Ticket } from "lucide-react";
 import NavigationButtons from "../components/NavigationButtons";
-
+import Ripple from "../components/Ripple"; 
 interface Resource {
   link: string;
   icon: string;
@@ -89,6 +89,7 @@ export default function Students() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
           >
+            <Ripple >
             <Link
               to={res.link}
               className="p-6 bg-white shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center"
@@ -97,6 +98,7 @@ export default function Students() {
               <p className="font-semibold mb-1 text-center">{res.title}</p>
               <p className="text-gray-700 text-sm text-center">{res.desc}</p>
             </Link>
+            </Ripple>
           </motion.div>
         ))}
       </div>
@@ -160,7 +162,16 @@ export default function Students() {
               </div>
             </div>
           </div>
+          
         </div>
+        <div className="flex justify-center mt-6">
+                    <Link
+                      to="students/Events"
+                      className="text-indigo-600 font-medium hover:underline text-base sm:text-lg"
+                    >
+                      See All Events →
+                    </Link>
+                  </div>
       </section>
       <NavigationButtons/>
     </div>

@@ -18,5 +18,22 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s linear;
+  position: absolute;
+  pointer-events: none;
+  transform: scale(0);
+}
 
 }
