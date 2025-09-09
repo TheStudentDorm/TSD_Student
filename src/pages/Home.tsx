@@ -16,7 +16,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
   const location = useLocation();
 
   const [showContent, setShowContent] = useState(false);
-  const [offsetY, setOffsetY] = useState(false);
+  const [offsetY, setOffsetY] = useState<number>(0);
     const [isMobile, setIsMobile] = useState(false);
 
   // ======================== EmailJS Handler ========================
