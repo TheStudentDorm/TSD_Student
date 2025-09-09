@@ -87,6 +87,24 @@ const overlayClasses = (overlay: "ultraLight" | "medium") =>
       }
     }
   }, [location]);
+  const [heroOffsetY, setHeroOffsetY] = useState<number>(0);
+
+useEffect(() => {
+  let animationFrame: number;
+
+  const handleScroll = () => {
+    animationFrame = requestAnimationFrame(() => {
+      // Subtle upward movement and fade as user scrolls down
+      setHeroOffsetY(window.scrollY * 0.05);
+    });
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    cancelAnimationFrame(animationFrame);
+  };
+}, []);
 
   // ======================== Resources & Events Data ========================
   const resources = [
@@ -154,8 +172,9 @@ const overlayClasses = (overlay: "ultraLight" | "medium") =>
   return (
     <div className="relative w-full">
      {/* ======================== HERO SECTION ======================== */}
+{/* ======================== HERO SECTION ======================== */}
 <div className="relative w-full h-screen sm:h-screen min-h-[500px] overflow-hidden">
-  {/* ======================== Animated Gradient Background ======================== */}
+  {/* Animated Gradient Background */}
   <div
     className="absolute inset-0 z-0"
     style={{
@@ -165,14 +184,20 @@ const overlayClasses = (overlay: "ultraLight" | "medium") =>
     }}
   ></div>
 
-  {/* ======================== Background Video ======================== */}
+  {/* Hero Video */}
   <video
-    className="absolute top-0 left-0 w-full h-full object-cover z-10"
+    className={`absolute top-0 left-0 w-full h-full object-cover z-10 ${
+      isMobile ? "scale-[1.2]" : "scale-100"
+    }`}
     autoPlay
     muted
     playsInline
     preload="auto"
     onEnded={(e) => e.currentTarget.pause()}
+    style={{
+      transform: `translateY(${heroOffsetY}px)`,
+      transition: "transform 0.1s linear",
+    }}
   >
     <source
       src={isMobile ? "/home-bg-mobile.mp4" : "/home-bg.mp4"}
@@ -180,8 +205,11 @@ const overlayClasses = (overlay: "ultraLight" | "medium") =>
     />
   </video>
 
-  {/* White Overlay */}
-  <div className="absolute inset-0 bg-white/10 z-20"></div>
+  {/* Overlay with fade effect */}
+  <div
+    className="absolute inset-0 bg-white/10 z-20"
+    style={{ opacity: 1 - heroOffsetY * 0.001 }}
+  ></div>
 
   {/* Logo */}
   <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
@@ -206,7 +234,6 @@ const overlayClasses = (overlay: "ultraLight" | "medium") =>
       to exploring career opportunities, staying informed, and making the most
       of your journey.
     </p>
-    
   </div>
 
   {/* Gradient Animation Keyframes */}
@@ -220,51 +247,55 @@ const overlayClasses = (overlay: "ultraLight" | "medium") =>
     `}
   </style>
 </div>
+
       {/* ======================== STUDENT RESOURCES ======================== */}
       <section
-        id="student-resources"
-        className="py-12 sm:py-16 text-center relative overflow-hidden"
-        style={{
-          backgroundImage: "url('/images/student-bg.jpg')",
-          backgroundAttachment: "scroll",
-          backgroundSize: "cover",
-          backgroundPosition: `center ${offsetY}px`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black/40 z-0"></div>
-        <div className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-[#02066f]">
-            STUDENT RESOURCES
-          </h2>
+  id="student-resources"
+  className="py-12 sm:py-16 text-center relative overflow-hidden"
+  style={{
+    backgroundImage: "url('/images/student-bg.jpg')",
+    backgroundAttachment: "scroll",
+    backgroundSize: "cover",
+    backgroundPosition: `center ${offsetY}px`,
+    transform: `scale(${1 + offsetY * 0.0005})`, // subtle zoom
+    opacity: `${1 - offsetY * 0.001}`, // subtle fade
+    transition: "transform 0.1s linear, opacity 0.1s linear"
+  }}
+>
+  <div className="absolute inset-0 bg-black/40 z-0"></div>
+  <div className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
+    <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-[#02066f]">
+      STUDENT RESOURCES
+    </h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+      {resources.map((res, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: idx * 0.1 }}
+        >
+          <Link
+            to={res.link}
+            className="p-6 bg-white bg-opacity-90 shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center border-t-4 border-[#02066f] hover:border-[#ff6d34]"
+          >
+            <img
+              src={res.icon}
+              alt={res.title}
+              className="w-10 h-10 sm:w-12 sm:h-12 mb-4"
+            />
+            <p className="text-sm sm:text-base font-semibold mb-1 text-[#02066f]">
+              {res.title}
+            </p>
+            <p className="text-xs sm:text-sm text-gray-700">{res.desc}</p>
+          </Link>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
-            {resources.map((res, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                <Link
-                  to={res.link}
-                  className="p-6 bg-white bg-opacity-90 shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center border-t-4 border-[#02066f] hover:border-[#ff6d34]"
-                  >
-                  <img
-                    src={res.icon}
-                    alt={res.title}
-                    className="w-10 h-10 sm:w-12 sm:h-12 mb-4"
-                  />
-                  <p className="text-sm sm:text-base font-semibold mb-1 text-[#02066f]">
-                  {res.title}
-                </p>
-                  <p className="text-xs sm:text-sm text-gray-700">{res.desc}</p>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ======================== NEWSLETTER ======================== */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
