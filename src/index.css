@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-html { 
-    scroll-behavior: smooth; 
+/* Apply Bricolage Grotesque font globally */
+body {
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbars */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -11,13 +20,8 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+
+/* Ripple animation */
 @keyframes ripple {
   from {
     transform: scale(0);
@@ -34,6 +38,4 @@ html {
   position: absolute;
   pointer-events: none;
   transform: scale(0);
-}
-
 }

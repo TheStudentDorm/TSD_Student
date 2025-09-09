@@ -44,19 +44,18 @@ export default function Home({ overlay = "light" }: HomeProps) {
   };
 
   // ======================== Overlay Classes ========================
-  const overlayClasses =
-    overlay === "ultraLight"
-      ? "absolute inset-0 bg-gradient-to-t from-black/25 via-indigo-900/15 to-transparent"
-      : "absolute inset-0 bg-gradient-to-t from-black/40 via-indigo-900/30 to-transparent";
-
+const overlayClasses = (overlay: "ultraLight" | "medium") =>
+  overlay === "ultraLight"
+    ? "absolute inset-0 bg-gradient-to-t from-black/25 via-[#02066f]/15 to-transparent"
+    : "absolute inset-0 bg-gradient-to-t from-black/40 via-[#02066f]/30 to-transparent";
   // ======================== Parallax Scroll ========================
-  const handleScroll = () => {
+  function handleScroll() {
     const section = document.getElementById("student-resources");
     if (section) {
       const rect = section.getBoundingClientRect();
       setOffsetY(-rect.top * 0.3);
     }
-  };
+  }
   useEffect(() => {
   const timer = setTimeout(() => setShowContent(true), 9000);
   return () => clearTimeout(timer);
@@ -155,37 +154,37 @@ export default function Home({ overlay = "light" }: HomeProps) {
   return (
     <div className="relative w-full">
      {/* ======================== HERO SECTION ======================== */}
-<div className="relative w-full h-screen overflow-hidden">
-  {/* ======================== Background Video / Mobile Lighter Video ======================== */}
-  {!isMobile ? (
-    <video
-      className="absolute top-0 left-0 w-full h-full object-cover"
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-    >
-      <source src="/home-bg.mp4" type="video/mp4" />
-    </video>
-  ) : (
-    <video
-      className="absolute top-0 left-0 w-full h-full object-cover"
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-    >
-      <source src="/home-bg-mobile.mp4" type="video/mp4" />
-    </video>
-  )}
+<div className="relative w-full h-screen sm:h-screen min-h-[500px] overflow-hidden">
+  {/* ======================== Animated Gradient Background ======================== */}
+  <div
+    className="absolute inset-0 z-0"
+    style={{
+      background: "linear-gradient(to bottom, #02066f, white, #ff6d34)",
+      backgroundSize: "100% 300%",
+      animation: "gradientMove 20s linear infinite",
+    }}
+  ></div>
 
-  {/* Overlay */}
-  <div className={overlayClasses}></div>
+  {/* ======================== Background Video ======================== */}
+  <video
+    className="absolute top-0 left-0 w-full h-full object-cover z-10"
+    autoPlay
+    muted
+    playsInline
+    preload="auto"
+    onEnded={(e) => e.currentTarget.pause()}
+  >
+    <source
+      src={isMobile ? "/home-bg-mobile.mp4" : "/home-bg.mp4"}
+      type="video/mp4"
+    />
+  </video>
+
+  {/* White Overlay */}
+  <div className="absolute inset-0 bg-white/10 z-20"></div>
 
   {/* Logo */}
-  <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+  <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
     <img
       src="/logo.png"
       alt="The Student Dorm Logo"
@@ -195,22 +194,32 @@ export default function Home({ overlay = "light" }: HomeProps) {
 
   {/* Hero Content */}
   <div
-    className={`relative z-10 flex flex-col items-center justify-end h-full text-center text-white px-4 pb-12 sm:pb-16 transition-opacity duration-1000 ${
+    className={`relative z-30 flex flex-col items-center justify-end h-full text-center px-4 pb-12 sm:pb-16 transition-opacity duration-1000 ${
       showContent ? "opacity-100" : "opacity-0"
     }`}
-  ><br/>
-    <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg">
+  >
+    <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg text-[#02066f]">
       Your Student Life, Simplified
     </h1>
-    <p className="max-w-md sm:max-w-2xl text-xsm sm:text-base md:text-lg text-gray-100 drop-shadow">
+    <p className="max-w-md sm:max-w-2xl text-xs sm:text-base md:text-lg text-[#02066f] drop-shadow mb-6">
       All-in-one platform for students in the UAE. From finding accommodation
       to exploring career opportunities, staying informed, and making the most
       of your journey.
     </p>
+    
   </div>
+
+  {/* Gradient Animation Keyframes */}
+  <style>
+    {`
+      @keyframes gradientMove {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 0% 100%; }
+        100% { background-position: 0% 0%; }
+      }
+    `}
+  </style>
 </div>
-
-
       {/* ======================== STUDENT RESOURCES ======================== */}
       <section
         id="student-resources"
@@ -224,7 +233,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
       >
         <div className="absolute inset-0 bg-black/40 z-0"></div>
         <div className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-[#02066f]">
             STUDENT RESOURCES
           </h2>
 
@@ -239,16 +248,16 @@ export default function Home({ overlay = "light" }: HomeProps) {
               >
                 <Link
                   to={res.link}
-                  className="p-6 bg-white bg-opacity-90 shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center"
-                >
+                  className="p-6 bg-white bg-opacity-90 shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center border-t-4 border-[#02066f] hover:border-[#ff6d34]"
+                  >
                   <img
                     src={res.icon}
                     alt={res.title}
                     className="w-10 h-10 sm:w-12 sm:h-12 mb-4"
                   />
-                  <p className="text-sm sm:text-base font-semibold mb-1">
-                    {res.title}
-                  </p>
+                  <p className="text-sm sm:text-base font-semibold mb-1 text-[#02066f]">
+                  {res.title}
+                </p>
                   <p className="text-xs sm:text-sm text-gray-700">{res.desc}</p>
                 </Link>
               </motion.div>
@@ -298,7 +307,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
                 </p>
                 <Link
                   to="/blog/internship-ready"
-                  className="text-indigo-600 font-medium hover:underline text-sm sm:text-base"
+                  className="text-[#02066f] font-medium hover:text-[#ff6d34] text-sm sm:text-base"
                 >
                   Read Full Article →
                 </Link>
@@ -317,7 +326,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
                 </p>
                 <Link
                   to="/blog/great-cv"
-                  className="text-indigo-600 font-medium hover:underline text-sm sm:text-base"
+                  className="text-[#02066f] font-medium hover:text-[#ff6d34] text-sm sm:text-base"
                 >
                   Read Full Article →
                 </Link>
@@ -328,7 +337,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
             <div className="flex justify-start mt-4 sm:mt-6">
               <Link
                 to="blog/index"
-                className="text-indigo-600 font-medium hover:underline text-base sm:text-lg"
+                className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
               >
                 Read More Newsletters →
               </Link>
@@ -391,9 +400,9 @@ export default function Home({ overlay = "light" }: HomeProps) {
         </div>
 
         <div className="flex justify-center mt-6">
-          <Link
+         <Link
             to="students/Events"
-            className="text-indigo-600 font-medium hover:underline text-base sm:text-lg"
+            className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
           >
             See All Events →
           </Link>
@@ -418,24 +427,20 @@ export default function Home({ overlay = "light" }: HomeProps) {
             thousands of students every month.
           </p>
           <Link
-            to="/providers#subscription-plans"
-            className="relative inline-flex items-center justify-center px-5 sm:px-6 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 transition-all duration-300 shadow-lg hover:shadow-xl group"
-          >
-            View Pricing Plans
-            <svg
-              className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
+              to="/providers#subscription-plans"
+              className="relative inline-flex items-center justify-center px-5 sm:px-6 py-3 rounded-full font-semibold  bg-[#02066f] text-white rounded-lg hover:bg-[#ff6d34] transition-all duration-300 shadow-lg hover:shadow-xl group"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              ></path>
-            </svg>
-          </Link>
+              View Pricing Plans
+              <svg
+                className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </Link>
         </div>
       </section>
 
@@ -476,7 +481,7 @@ export default function Home({ overlay = "light" }: HomeProps) {
           ></textarea>
           <button
             type="submit"
-            className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+            className="px-6 py-3 bg-[#02066f] text-white rounded-lg hover:bg-[#ff6d34] transform hover:scale-105 transition-all duration-300 text-sm sm:text-base"
           >
             Send Message
           </button>

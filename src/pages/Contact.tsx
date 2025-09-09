@@ -39,10 +39,15 @@ export default function Contact() {
 
   return (
     <main className="pb-20">
-      {/* HEADER with Gradient Background */}
-      <section className="relative bg-gradient-to-r from-green-700 via-green-500 to-green-400 text-white py-20 px-6 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-100">Contact Us</h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 text-gray-200">
+  {/* HEADER with Orange Gradient Background */}
+     <section className="relative bg-gradient-to-r from-white via-white to-white text-center py-20 px-6">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 
+            bg-gradient-to-r from-orange-400 via-blue-600 to-white 
+            bg-clip-text text-transparent transition-all duration-500 hover:from-orange-500 hover:via-blue-700 hover:to-white">
+          Contact Us
+        </h1>
+        <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 
+                       text-#ff6d34  transition-all duration-500 hover:from-orange-400 hover:via-blue-600 hover:to-white">
           We’d love to hear from you. Reach out for inquiries, partnerships, or support.
         </p>
       </section>
