@@ -186,14 +186,13 @@ useEffect(() => {
 
   {/* Hero Video */}
   <video
-    className={`absolute top-0 left-0 w-full h-full object-cover z-10 ${
-      isMobile ? "scale-[1.2]" : "scale-100"
-    }`}
+    className="absolute top-0 left-0 w-full h-full object-cover z-10"
     autoPlay
     muted
+    loop
     playsInline
     preload="auto"
-    onEnded={(e) => e.currentTarget.pause()}
+    poster={isMobile ? "/home-bg-mobile.jpg" : "/home-bg.jpg"} // fallback image
     style={{
       transform: `translateY(${heroOffsetY}px)`,
       transition: "transform 0.1s linear",
@@ -247,6 +246,7 @@ useEffect(() => {
     `}
   </style>
 </div>
+
 
       {/* ======================== STUDENT RESOURCES ======================== */}
       <section
