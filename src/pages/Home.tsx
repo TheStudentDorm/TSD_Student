@@ -186,23 +186,23 @@ useEffect(() => {
 
   {/* Hero Video */}
   <video
-    className="absolute top-0 left-0 w-full h-full object-cover z-10"
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="auto"
-    poster={isMobile ? "/home-bg-mobile.jpg" : "/home-bg.jpg"} // fallback image
-    style={{
-      transform: `translateY(${heroOffsetY}px)`,
-      transition: "transform 0.1s linear",
-    }}
-  >
-    <source
-      src={isMobile ? "/home-bg-mobile.mp4" : "/home-bg.mp4"}
-      type="video/mp4"
-    />
-  </video>
+  className="absolute top-0 left-0 w-full h-full object-cover z-10"
+  autoPlay
+  muted
+  playsInline
+  preload="auto"
+  poster={isMobile ? "/home-bg-mobile.jpg" : "/home-bg.jpg"} // fallback image
+  style={{
+    transform: `translateY(${heroOffsetY}px)`,
+    transition: "transform 0.1s linear",
+  }}
+>
+  <source
+    src={isMobile ? "/home-bg-mobile.mp4" : "/home-bg.mp4"}
+    type="video/mp4"
+  />
+</video>
+
 
   {/* Overlay with fade effect */}
   <div

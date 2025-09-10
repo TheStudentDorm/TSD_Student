@@ -112,7 +112,7 @@ const HorizontalImageSection: React.FC<HorizontalImageSectionProps> = ({
       <div className="sticky top-0 bg-white z-20 pb-4 mb-4">
         <div className="text-center">
           <h2 className="text-3xl font-bold">{sectionTitle}</h2>
-          {sectionCaption && <p className="text-gray-600 mt-2">{sectionCaption}</p>}
+          {sectionCaption && <p className="text-[#02066f] mt-2">{sectionCaption}</p>}
         </div>
       </div>
 
@@ -163,9 +163,9 @@ const HorizontalImageSection: React.FC<HorizontalImageSectionProps> = ({
               <img src={img.image} alt={img.title} className="w-full h-44 object-cover" />
               <div className="p-4">
                 <h3 className="font-semibold text-lg">{img.title}</h3>
-                <p className="text-gray-500 text-sm">{img.caption}</p>
-                <p className="text-gray-400 text-xs mt-1">{img.date}</p>
-                <p className="mt-2 text-gray-700 text-sm">{img.content}</p>
+                <p className="text-[#02066f] text-sm">{img.caption}</p>
+                <p className="text-[#02066f] text-xs mt-1">{img.date}</p>
+                <p className="mt-2 text-[#02066f] text-sm">{img.content}</p>
               </div>
             </motion.div>
           ))}
