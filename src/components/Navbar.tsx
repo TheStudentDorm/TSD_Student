@@ -61,7 +61,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`bg-[#002060] text-white fixed top-0 w-full z-50 shadow-lg transform transition-transform duration-300 ${
+      className={`bg-[#012060] text-white fixed top-0 w-full z-50 shadow-lg transform transition-transform duration-300 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >

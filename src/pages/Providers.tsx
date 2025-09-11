@@ -68,7 +68,7 @@ const ProvidersPage = () => {
 
         <div className="relative z-10 max-w-4xl px-6">
           <h1
-            className="mt-2 text-xl sm:text-3xl md:text-5xl font-bold leading-tight whitespace-nowrap bg-gradient-to-r from-[#004AAD] to-[#F9943B] bg-clip-text text-transparent"
+            className="mt-2 text-xl sm:text-3xl md:text-5xl font-bold leading-tight whitespace-nowrap bg-gradient-to-r text-white bg-clip-text text-transparent"
             style={{ fontFamily: "Times New Roman, sans-serif" }}
           >
             List Your Accommodation with TSD<br/><br/>
