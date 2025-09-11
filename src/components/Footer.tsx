@@ -4,7 +4,7 @@ import Logo from "../../public/logo_footer.png"; // Adjust path to your logo
 export default function Footer() {
   return (
      
-    <footer className="bg-[#02066f] text-gray-200 py-10 mt-12">
+    <footer className="bg-[#002060] text-gray-200 py-10 mt-12">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
         {/* Brand */}
         <div className="flex items-center md:items-start gap-4">
