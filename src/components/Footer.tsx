@@ -1,10 +1,28 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Logo from "../../public/logo_footer.png"; // Adjust path to your logo
+import ColorThief from "color-thief";
+import Logo from "../../public/logo_footer.png"; // Adjust path if needed
 
 export default function Footer() {
+  const [bgColor, setBgColor] = useState("#012060"); // fallback color
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = Logo;
+    img.crossOrigin = "anonymous"; // Needed for color extraction
+    img.onload = () => {
+      try {
+        const colorThief = new ColorThief();
+        const color = colorThief.getColor(img);
+        setBgColor(`rgb(${color[0]}, ${color[1]}, ${color[2]})`);
+      } catch (error) {
+        console.error("Color extraction failed:", error);
+      }
+    };
+  }, []);
+
   return (
-     
-    <footer className="bg-[#012060] text-gray-200 py-10 mt-12">
+    <footer style={{ backgroundColor: bgColor }} className="text-gray-200 py-10 mt-12">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
         {/* Brand */}
         <div className="flex items-center md:items-start gap-4">

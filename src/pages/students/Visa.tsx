@@ -24,11 +24,11 @@ const beforeArrivalSteps = [
   {
     icon: BookOpen,
     title: "Get Accepted to a UAE University",
-    description: "Visa process starts once you receive your official admission letter.",
-    details: "Ensure your chosen university is licensed to sponsor student visas in the UAE.",
+    description: "Your visa process starts once you receive your official admission letter. ",
+    details: "Make sure your university is licensed to sponsor student visas..",
      tips: [
-      "Confirm the university’s eligibility for visa sponsorship before paying any fees.",
-      "Check if there are specific departments handling international students."
+      "Visa processing can take up to 3–6 weeks, especially during peak seasons.",
+      "Don’t wait for your final grades; once you’re accepted, start gathering documents."
     ],
   },
   {
@@ -223,7 +223,7 @@ export default function Visa() {
       </div>
 
       {/* Pro Tips as List */}
-      <section className="mt-16 p-6 bg-[#004AAD]/10 border-l-4 border-[#F9943B] rounded-lg max-w-3xl mx-auto">
+      {/* <section className="mt-16 p-6 bg-[#004AAD]/10 border-l-4 border-[#F9943B] rounded-lg max-w-3xl mx-auto">
         <h3 className="font-bold mb-2 text-[#004AAD]">💡 TSD Pro Tips</h3>
         <ul className="list-disc pl-5 text-gray-800 space-y-1">
           {VisaTips.map((tip, index) => (
@@ -232,7 +232,7 @@ export default function Visa() {
             </li>
           ))}
         </ul>
-      </section>
+      </section> */}
 
       <NavigationButtons />
     </main>

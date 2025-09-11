@@ -263,7 +263,7 @@ useEffect(() => {
 >
   <div className="absolute inset-0 bg-black/40 z-0"></div>
   <div className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
-    <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-[#02066f]">
+    <h2 className="text-4xl sm:text-3xl font-bold mb-8 text-[#02066f]">
       STUDENT RESOURCES
     </h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
