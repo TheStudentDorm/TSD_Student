@@ -17,7 +17,7 @@ export default function About() {
       image: "/images/journey1.png",
       title: "GITEX YouthX Unipreneur",
       caption: "Winner!",
-      date: "October 2024",
+      date: "2024",
       content:
         "TSD was crowned one of the top student-led startups in the UAE, winning recognition for solving real challenges faced by university students.",
       alt: "TSD winning at GITEX YouthX Unipreneur 2024",
@@ -27,7 +27,7 @@ export default function About() {
       image: "/images/journey2.png",
       title: "Du Pitch Competition",
       caption: "Winner!",
-      date: "October 2024",
+      date: "2024",
       content:
         "Our business model stood out for its student-focused value and innovative approach to connecting students with the right resources.",
       alt: "TSD wins Du Pitch Competition 2024",
@@ -37,7 +37,7 @@ export default function About() {
       image: "/images/journey3.png",
       title: "Dubai Municipality",
       caption: "Sustainability in Education and Living",
-      date: "2024",
+      date: "2025",
       content:
         "Invited to present TSD as part of initiatives supporting students and sustainable living in Dubai, strengthening our position in the student ecosystem.",
       alt: "TSD presenting at Dubai Municipality",
@@ -103,8 +103,8 @@ export default function About() {
         ]}
         images={aboutImages}
       />
-
-     <section id="why-choose-tsd" className="bg-[#f2f3f4] py-16">
+    <section id="our-values" className=" py-16 mt-10"/>
+     <section id="why-choose-tsd" className="bg-[#f2f3f4] py-24 mt-12">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#02066f]">
           Why Choose TSD
@@ -118,7 +118,7 @@ export default function About() {
           viewport={{ once: true }}
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } },
+            visible: { transition: { staggerChildren: 0.4 } },
           }}
         >
           <InfoCard
@@ -127,7 +127,7 @@ export default function About() {
             dark
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.9 ,ease: "easeOut" } },
             }}
             whileHover={{ scale: 1.05 }}
           />
@@ -137,7 +137,7 @@ export default function About() {
             textColor="#ff6d34"
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.9 ,ease: "easeOut"} },
             }}
             whileHover={{ scale: 1.05 }}
           />
@@ -147,7 +147,7 @@ export default function About() {
             dark
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.9,ease: "easeOut"} },
             }}
             whileHover={{ scale: 1.05 }}
           />
@@ -159,7 +159,7 @@ export default function About() {
       {/* Mission & Vision Section */}
       <section id="mission-vision" className="bg-[#f2f3f4] py-16 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-          <h2 className="text-3xl font-bold mb-12 text-[#02066f]">Our Mission & Vision</h2>
+          {/* <h2 className="text-3xl font-bold mb-12 text-[#02066f]">Our Mission & Vision</h2> */}
           <MissionVision />
         </div>
       </section>

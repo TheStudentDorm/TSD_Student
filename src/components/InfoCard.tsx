@@ -17,7 +17,8 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, text, dark, textColor, ...mo
       style={{ color: textColor || undefined }}
       {...motionProps}
     >
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <h3 className="text-xl font-semibold mb-4">{title}</h3>
+      
       <p>{text}</p>
     </motion.div>
   );

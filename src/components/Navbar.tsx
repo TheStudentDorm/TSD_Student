@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
@@ -53,7 +52,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, mobileOpen]);
 
-  // ✅ helper class for animated underline
+  // ✅ underline animation helper
   const underlineClass = (active: boolean) =>
     `relative pb-1 hover:text-[#ff6d34] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#ff6d34] after:transition-all after:duration-300 after:ease-in-out ${
       active ? "text-[#ff6d34] font-semibold after:w-full" : "after:w-0 hover:after:w-full"
@@ -61,7 +60,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`bg-[#012060] text-white fixed top-0 w-full z-50 shadow-lg transform transition-transform duration-300 ${
+      className={`bg-[#002060] text-white fixed top-0 w-full z-50 shadow-lg transform transition-transform duration-300 ${
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -88,28 +87,25 @@ export default function Navbar() {
               hideTimeout = setTimeout(() => setStudentsDropdown(false), 150);
             }}
           >
-            <button className={underlineClass(isStudentsActive)}>
-              Students 
-            </button>
+            <button className={underlineClass(isStudentsActive)}>Students</button>
             <div
-              className={`absolute left-0 mt-1 bg-[#02066f] text-white shadow-lg rounded-md min-w-[200px] transition-all duration-200 ${
+              className={`absolute left-0 mt-1 bg-[#002060] text-white shadow-lg rounded-md min-w-[200px] transition-all duration-200 ${
                 studentsDropdown ? "block" : "hidden"
               }`}
             >
-              {/* Students Dropdown submenu items */}
-                {studentLinks.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`block px-4 py-2 rounded transition-colors duration-200 ${
-                      isActive(item.path)
-                        ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                        : "hover:bg-[#ff6d34]/10 hover:text-[#ff6d34]"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+              {studentLinks.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`block px-4 py-2 rounded transition-colors duration-200 ${
+                    isActive(item.path)
+                      ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
+                      : "hover:bg-[#ff6d34]/10 hover:text-[#ff6d34]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -124,13 +120,13 @@ export default function Navbar() {
             onMouseLeave={() => setDesktopHover(false)}
           >
             <button
-              className="text-white px-3 py-2 bg-[#02066f]/80 rounded-md hover:bg-[#ff6d34]/80"
+              className="text-white px-3 py-2 bg-[#002060]/80 rounded-md hover:bg-[#ff6d34]/80"
               onClick={() => setDesktopClick((prev) => !prev)}
             >
               ☰
             </button>
             {(desktopHover || desktopClick) && (
-              <div className="absolute right-0 mt-2 w-48 bg-[#02066f] text-white shadow-lg rounded-md z-50">
+              <div className="absolute right-0 mt-2 w-48 bg-[#002060] text-white shadow-lg rounded-md z-50">
                 {extraLinks.map((link) => (
                   <Link
                     key={link.path}
@@ -151,23 +147,18 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden text-white" onClick={() => setMobileOpen(!mobileOpen)}>
           ☰
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#02066f] text-white shadow-md">
+        <div className="md:hidden bg-[#002060] text-white shadow-md">
           <Link
             to="/about"
             className={`block px-4 py-2 hover:bg-[#ff6d34]/20 ${
-              isActive("/about")
-                ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                : ""
+              isActive("/about") ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold" : ""
             }`}
             onClick={() => setMobileOpen(false)}
           >
@@ -178,9 +169,7 @@ export default function Navbar() {
           <button
             onClick={() => setStudentsOpen(!studentsOpen)}
             className={`w-full text-left px-4 py-2 hover:bg-[#ff6d34]/20 flex justify-between items-center ${
-              isStudentsActive
-                ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                : ""
+              isStudentsActive ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold" : ""
             }`}
           >
             Students ▾
@@ -227,9 +216,7 @@ export default function Navbar() {
           <Link
             to="/providers"
             className={`block px-4 py-2 hover:bg-[#ff6d34]/20 ${
-              isActive("/providers")
-                ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                : ""
+              isActive("/providers") ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold" : ""
             }`}
             onClick={() => setMobileOpen(false)}
           >
