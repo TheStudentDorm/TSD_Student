@@ -1,20 +1,17 @@
-// src/components/HeroSection.tsx
 import React from "react";
 import { motion } from "framer-motion";
 
 interface HeroSectionProps {
   id: string;
   title: string;
-  image: string;
   children: React.ReactNode;
   reverse?: boolean;
-  background?: boolean;
+  background?: boolean; // use gradient if true
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
   id,
   title,
-  image,
   children,
   reverse = false,
   background = false,
@@ -24,53 +21,33 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       id={id}
       className={`relative py-16 px-6 ${
         background ? "text-white" : "text-gray-900"
-      }`}
+      } flex items-center justify-center`}
       style={
         background
           ? {
-              backgroundImage: `linear-gradient(rgba(2, 6, 111, 0.8), rgba(2, 6, 111, 0.8)), url(${image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              background: "linear-gradient(135deg, #004AAD, #F9943B)",
+              minHeight: "400px",
             }
           : {}
       }
     >
-      <div
-        className={`max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 ${
-          reverse ? "md:flex-row-reverse" : ""
-        }`}
+      {/* Centered container */}
+      <motion.div
+        className="relative z-10 max-w-3xl text-center flex flex-col items-center justify-center space-y-2"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
       >
-        {/* Text */}
-        <motion.div
-          className="flex-1 space-y-4"
-          initial={{ opacity: 0, x: reverse ? 100 : -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#ff6d34]">
-            {title}
-          </h2>
-          <div className="text-lg">{children}</div>
-        </motion.div>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
 
-        {/* Image */}
-        {!background && (
-          <motion.div
-            className="flex-1"
-            initial={{ opacity: 0, x: reverse ? -100 : 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <img
-              src={image}
-              alt={title}
-              className="rounded-xl shadow-lg w-full object-cover"
-            />
-          </motion.div>
-        )}
-      </div>
+        {/* Each paragraph in one line */}
+        <div className="text-lg flex flex-col items-center space-y-2">
+          {React.Children.map(children, (child) => (
+            <span className="whitespace-nowrap">{child}</span>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };

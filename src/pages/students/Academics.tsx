@@ -97,10 +97,15 @@ const UAEUniversities: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with custom skyline image */}
-      <div className="relative h-64 md:h-96 bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: 'url(/images/skyline.jpg)' }}>
+      {/* Hero Section */}
+      <div
+        className="relative h-64 md:h-96 bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: 'url(/images/skyline.jpg)' }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <h1 className="relative text-4xl md:text-5xl font-bold text-white text-center px-4">Major Universities in the UAE</h1>
+        <h1 className="relative text-4xl md:text-5xl font-bold text-white text-center px-4">
+          Major Universities in the UAE
+        </h1>
       </div>
 
       <div className="p-6">
@@ -110,7 +115,12 @@ const UAEUniversities: React.FC = () => {
 
         {uaeUniversities.map((em) => (
           <section key={em.name} id={em.name.replace(/\s+/g, "")} className="mb-16">
-            <h2 className="text-3xl font-semibold mb-10 text-center">{em.name}</h2>
+            {/* Emirate Heading with Blue + Orange Accent */}
+            <h2 className="text-3xl font-semibold mb-10 text-center text-[#004AAD] relative inline-block">
+              {em.name}
+              <span className="block w-24 h-1 bg-[#F9943B] mx-auto mt-2 rounded-full"></span>
+            </h2>
+
             {em.universities.map((uni) => {
               const globalIndex = allUniversities.findIndex(
                 (u) => u.name === uni.name && u.emirate === em.name
@@ -119,7 +129,7 @@ const UAEUniversities: React.FC = () => {
                 <div
                   key={uni.name}
                   ref={(el) => (cardRefs.current[globalIndex] = el)}
-                  className={`relative flex flex-col md:flex-row items-center mb-16 transform transition-all duration-700 ease-out opacity-0 ${
+                  className={`relative flex flex-col md:flex-row items-center mb-16 transform transition-all duration-700 ease-out opacity-0 hover:scale-105 hover:shadow-xl ${
                     globalIndex % 2 === 0
                       ? "-translate-x-40 md:translate-x-0"
                       : "translate-x-40 md:translate-x-0 md:flex-row-reverse"
@@ -130,15 +140,15 @@ const UAEUniversities: React.FC = () => {
                     alt={uni.name}
                     className="w-full md:w-1/2 h-64 object-contain rounded-lg shadow-lg p-4 bg-white"
                   />
-                  <div className="md:w-1/2 md:px-8 mt-5 md:mt-0 bg-white p-4 rounded shadow-lg">
-                    <h3 className="text-2xl font-bold mb-2">{uni.name}</h3>
+                  <div className="md:w-1/2 md:px-8 mt-5 md:mt-0 bg-white p-6 rounded-lg shadow-lg">
+                    <h3 className="text-2xl font-bold mb-3 text-[#004AAD]">{uni.name}</h3>
                     <p className="mb-2 text-gray-700">{uni.description}</p>
                     {uni.website && (
                       <a
                         href={uni.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline mt-2 block"
+                        className="text-[#004AAD] hover:text-[#F9943B] hover:underline mt-2 block font-semibold"
                       >
                         Visit Website
                       </a>

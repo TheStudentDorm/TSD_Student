@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import HeroSectionSmall from "../../components/HeroSectionSmall";
-import TipsCarousel from "../../components/TipsCarousel";
 import { motion, AnimatePresence } from "framer-motion";
+import TimelineItem from "../../components/TimelineItem";
 import {
   BookOpen,
   FileText,
@@ -26,18 +26,25 @@ const beforeArrivalSteps = [
     title: "Get Accepted to a UAE University",
     description: "Visa process starts once you receive your official admission letter.",
     details: "Ensure your chosen university is licensed to sponsor student visas in the UAE.",
+     tips: [
+      "Confirm the university’s eligibility for visa sponsorship before paying any fees.",
+      "Check if there are specific departments handling international students."
+    ],
   },
   {
     icon: FileText,
     title: "Submit Visa Application Documents",
     description: "Universities usually request your passport, photos, visa form, offer letter, and proof of accommodation.",
     details: "Some universities may also ask for a refundable deposit. Double-check requirements.",
+    tips: ["Some universities also require a refundable visa deposit at this stage."],
   },
   {
     icon: Mail,
     title: "Receive the Entry Permit",
     description: "Issued within 1–3 weeks. Valid for 60 days, needed to legally enter UAE.",
     details: "Book your flight only after receiving the entry permit. Keep multiple copies for safety.",
+    tips:["Once you enter the UAE on a student entry permit, you usually have 60 days to complete all steps, including medical, ID, and visa stamping. ",
+          "Overstaying leads to fines (AED 50+ per day)!"],
   },
 ];
 
@@ -47,18 +54,29 @@ const afterArrivalSteps = [
     title: "Complete Medical Fitness Test",
     description: "Within 7–10 days, complete X-ray & blood test at an approved clinic.",
     details: "Usually arranged by your university’s visa office. Required for Emirates ID & visa stamping.",
+    tips:[
+      "Usually organised by your university or visa officer."
+    ]
   },
   {
     icon: IdCard,
     title: "Apply for Emirates ID",
     description: "Biometric scanning for fingerprints & photo. Required for banking, housing, SIM cards.",
     details: "Submit Emirates ID application together with visa docs. It typically arrives within 7–10 days.",
+    tips:[
+      "Keep digital & printed copies of all your documents every step of the way. Immigration may ask for originals."
+    ]
   },
   {
     icon: Stamp,
     title: "Visa Stamping on Passport",
     description: "Your student visa (valid 1 year, renewable) is stamped. Passport may be held a few days.",
     details: "Your residence visa allows you to stay legally in UAE. Keep track of renewal deadlines.",
+    tips:[
+      "Your residence visa allows you to stay legally in the UAE for the visa duration (usually 1 year).",
+      "Keep track of your visa renewal deadlines to avoid fines.",
+      "Late renewals can block you from accessing services or travelling."
+    ]
   },
 ];
 
@@ -76,10 +94,8 @@ export default function Visa() {
   const [openStep, setOpenStep] = useState<number | null>(null);
   const [expandAll, setExpandAll] = useState(false);
 
-  const totalSteps = beforeArrivalSteps.length + afterArrivalSteps.length;
-
   const toggleStep = (index: number) => {
-    if (expandAll) return; // when "Expand All" is active, individual clicks do nothing
+    if (expandAll) return;
     setOpenStep(openStep === index ? null : index);
   };
 
@@ -89,7 +105,7 @@ export default function Visa() {
       setOpenStep(null);
     } else {
       setExpandAll(true);
-      setOpenStep(null); // disable single open
+      setOpenStep(null);
     }
   };
 
@@ -98,15 +114,18 @@ export default function Visa() {
       {/* Hero Section */}
       <HeroSectionSmall
         title="Student Visa Guide"
-        subtitle="Step-by-step guide to applying for your student visa in the UAE. From documentation to arrival, we’ve got you covered."
-        icon="/icons/visa.svg"
-        image="/images/student_visa.jpg"
+        subtitle="Everything you need to know to study legally and stress-free."
+        caption="Whether you’re joining university from outside the UAE or shifting your visa from a parent or sponsor, here’s your complete guide to obtaining a UAE student visa."
+        image="/images/student_visa.png"
+         fixedBackground
       />
 
       <div className="py-16 px-6 space-y-16">
         {/* Documents Checklist */}
-        <section className="p-6 rounded-2xl bg-gradient-to-r from-indigo-50 to-purple-50 shadow">
-          <h2 className="text-2xl font-semibold mb-4 text-indigo-700">Documents You’ll Need</h2>
+        <section className="p-6 rounded-2xl bg-gradient-to-r from-[#F2F3F4] to-[#F2F3F4]/60 shadow">
+          <h2 className="text-2xl font-semibold mb-4 text-[#004AAD]">
+            Documents You’ll Need
+          </h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
             <li>A valid passport (with at least 6 months validity)</li>
             <li>Admission letter or enrolment certificate</li>
@@ -123,7 +142,7 @@ export default function Visa() {
         <div className="flex justify-end">
           <button
             onClick={handleExpandCollapse}
-            className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition"
+            className="px-4 py-2 bg-[#004AAD] text-white rounded-lg shadow hover:bg-[#003580] transition"
           >
             {expandAll ? "Collapse All" : "Expand All"}
           </button>
@@ -131,116 +150,91 @@ export default function Visa() {
 
         {/* Timeline */}
         <section>
-          <h2 className="text-2xl font-semibold mb-10 text-indigo-700">Visa Timeline</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Before Arrival */}
-            <div className="relative">
-              <h3 className="text-xl font-bold mb-6 text-green-700">Before Arrival</h3>
-              <div className="relative pl-6 space-y-12">
-                <motion.div
-                  className="absolute top-0 left-2 w-1 bg-green-300"
-                  style={{ height: "100%" }}
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  transformOrigin="top"
-                />
-                {beforeArrivalSteps.map((step, index) => (
-                  <motion.div key={index} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} custom={index} variants={timelineItemVariant}>
-                    <div
-                      onClick={() => toggleStep(index)}
-                      className="flex items-start gap-3 p-4 rounded-lg transition-all duration-200 group-hover:bg-green-50 group-hover:shadow-md cursor-pointer"
-                    >
-                      <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white shadow">
-                        <step.icon size={16} />
-                      </span>
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-green-800 flex justify-between items-center">
-                          {step.title}
-                          <ChevronDown
-                            className={`transition-transform duration-300 ${expandAll || openStep === index ? "rotate-180" : ""}`}
-                          />
-                        </h4>
-                        <p className="text-gray-600">{step.description}</p>
-                        <AnimatePresence>
-                          {(expandAll || openStep === index) && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="mt-2 text-gray-700 text-sm bg-green-50 p-3 rounded-lg"
-                            >
-                              {step.details}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+          <h2 className="text-2xl font-semibold mb-10 text-[#004AAD]">Visa Timeline</h2>
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
+  {/* Before Arrival */}
+  <div className="relative">
+    <h3 className="text-xl font-bold mb-6 text-[#F9943B]">Before Arrival</h3>
+    <div className="relative pl-6 space-y-12">
+      <motion.div
+        className="absolute top-0 left-2 w-1 bg-[#F9943B]/50"
+        style={{ height: "100%" }}
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        transformOrigin="top"
+      />
+      {beforeArrivalSteps.map((step, index) => (
+        <TimelineItem
+  icon={step.icon}
+  title={step.title}
+  description={step.description}
+  details={step.details}
+  tips={step.tips} // array here
+  isOpen={expandAll || openStep === index}
+  onToggle={() => toggleStep(index)}
+  bgColor="#F9943B"
+  textColor="text-[#004AAD]"
+  index={index}
+  lineColor="#F9943B/50"
+  isLast={index === beforeArrivalSteps.length - 1}
+/>
+      ))}
+    </div>
+  </div>
 
-            {/* After Arrival */}
-            <div className="relative">
-              <h3 className="text-xl font-bold mb-6 text-indigo-700">After Arrival</h3>
-              <div className="relative pl-6 space-y-12">
-                <motion.div
-                  className="absolute top-0 left-2 w-1 bg-indigo-300"
-                  style={{ height: "100%" }}
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  transformOrigin="top"
-                />
-                {afterArrivalSteps.map((step, index) => {
-                  const realIndex = index + beforeArrivalSteps.length;
-                  return (
-                    <motion.div key={realIndex} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} custom={index} variants={timelineItemVariant}>
-                      <div
-                        onClick={() => toggleStep(realIndex)}
-                        className="flex items-start gap-3 p-4 rounded-lg transition-all duration-200 group-hover:bg-indigo-50 group-hover:shadow-md cursor-pointer"
-                      >
-                        <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white shadow">
-                          <step.icon size={16} />
-                        </span>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-indigo-800 flex justify-between items-center">
-                            {step.title}
-                            <ChevronDown
-                              className={`transition-transform duration-300 ${expandAll || openStep === realIndex ? "rotate-180" : ""}`}
-                            />
-                          </h4>
-                          <p className="text-gray-600">{step.description}</p>
-                          <AnimatePresence>
-                            {(expandAll || openStep === realIndex) && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="mt-2 text-gray-700 text-sm bg-indigo-50 p-3 rounded-lg"
-                              >
-                                {step.details}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+  {/* After Arrival */}
+  <div className="relative">
+    <h3 className="text-xl font-bold mb-6 text-[#004AAD]">After Arrival</h3>
+    <div className="relative pl-6 space-y-12">
+      <motion.div
+        className="absolute top-0 left-2 w-1 bg-[#004AAD]/40"
+        style={{ height: "100%" }}
+        initial={{ scaleY: 0 }}
+        whileInView={{ scaleY: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        transformOrigin="top"
+      />
+      {afterArrivalSteps.map((step, index) => {
+        const realIndex = index + beforeArrivalSteps.length;
+        return (
+          <TimelineItem
+  icon={step.icon}
+  title={step.title}
+  description={step.description}
+  details={step.details}
+  tips={step.tips} // array now
+  isOpen={expandAll || openStep === realIndex}
+  onToggle={() => toggleStep(realIndex)}
+  bgColor="#004AAD"
+  textColor="text-[#004AAD]"
+  index={realIndex}
+  lineColor="#004AAD/40"
+  isLast={index === afterArrivalSteps.length - 1}
+/>
+        );
+      })}
+    </div>
+  </div>
+</div>  
         </section>
       </div>
-      <h2 className="text-2xl font-semibold mb-4">TSD Pro Tip!</h2>
-              <TipsCarousel tips={VisaTips} duration={30}/>
-      <NavigationButtons/>
+
+      {/* Pro Tips as List */}
+      <section className="mt-16 p-6 bg-[#004AAD]/10 border-l-4 border-[#F9943B] rounded-lg max-w-3xl mx-auto">
+        <h3 className="font-bold mb-2 text-[#004AAD]">💡 TSD Pro Tips</h3>
+        <ul className="list-disc pl-5 text-gray-800 space-y-1">
+          {VisaTips.map((tip, index) => (
+            <li key={index}>
+              <span className="font-semibold text-[#004AAD]">{tip.title}:</span> {tip.description}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <NavigationButtons />
     </main>
   );
 }

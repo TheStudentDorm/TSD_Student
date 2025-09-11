@@ -1,38 +1,56 @@
 import React from "react";
 import { motion } from "framer-motion";
-import NavigationButtons from "./NavigationButtons";
 
 interface HeroSectionSmallProps {
   title: string;
   subtitle?: string;
-  icon?: string;
+  caption?: string;
   image: string;
+  fixedBackground?: boolean;
 }
 
-export default function HeroSectionSmall({ title, subtitle, icon, image }: HeroSectionSmallProps) {
+export default function HeroSectionSmall({
+  title,
+  subtitle,
+  caption,
+  image,
+  fixedBackground = false,
+}: HeroSectionSmallProps) {
   return (
     <section
-      className="relative w-full h-64 md:h-80 flex items-center justify-center text-center"
+      className={`relative w-full flex items-center justify-center text-center bg-cover bg-center ${
+        fixedBackground ? "bg-fixed" : ""
+      }`}
       style={{
         backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        minHeight: "60vh", // minimum height for small screens
+        height: "100vh",   // full viewport height
       }}
     >
-      {/* Overlay */}
+      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/50"></div>
 
+      {/* Content */}
       <motion.div
-        className="relative z-10 px-6 text-white flex flex-col items-center justify-center"
+        className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 text-white text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {icon && <img src={icon} alt={title} className="w-16 h-16 mb-4" />}
-        <h1 className="text-2xl md:text-4xl font-bold mb-2">{title}</h1>
-        {subtitle && <p className="text-sm md:text-base max-w-xl">{subtitle}</p>}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl max-w-xl">
+            {subtitle}
+          </p>
+        )}
+        {caption && (
+          <p className="mt-4 text-xs sm:text-sm md:text-base lg:text-lg max-w-3xl">
+            {caption}
+          </p>
+        )}
       </motion.div>
-      
     </section>
   );
 }

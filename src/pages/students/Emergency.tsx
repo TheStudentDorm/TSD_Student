@@ -131,8 +131,9 @@ export default function Emergency() {
         <HeroSectionSmall
           title="Emergency & Essential Contacts"
           subtitle="Important contacts for medical emergencies, police, embassies, and student support services."
-          icon="/icons/emergency.svg"
-          image="/images/student-hero-emergency.jpg"
+          
+          image="/images/student-hero-emergency.png"
+           fixedBackground
         />
 
         <div className="py-16 px-6 space-y-16">

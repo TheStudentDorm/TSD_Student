@@ -1,16 +1,22 @@
 import { NavLink } from "react-router-dom";
+import Logo from "../../public/logo_footer.png"; // Adjust path to your logo
 
 export default function Footer() {
   return (
+     
     <footer className="bg-[#02066f] text-gray-200 py-10 mt-12">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8">
         {/* Brand */}
-        <div>
-          <h2 className="text-white text-lg font-bold mb-3">The Student Dorm</h2>
-          <p className="text-sm">
-            Your Student Life, Simplified.<br />
-            Connecting students across the UAE with resources, housing, and opportunities.
-          </p>
+        <div className="flex items-center md:items-start gap-4">
+          {/* Logo */}
+          <img src={Logo} alt="TSD Logo" className="w-32 h-auto" />
+          <div className="flex flex-col">
+            <h2 className="text-white text-xl md:text-2xl font-bold">The Student Dorm</h2>
+            <p className="text-sm text-left mt-1">
+              Your Student Life, Simplified.<br />
+              Connecting students across the UAE with resources, housing, and opportunities.
+            </p>
+          </div>
         </div>
 
         {/* Quick Links */}

@@ -228,11 +228,10 @@ useEffect(() => {
     <h1 className="text-xl sm:text-2xl md:text-4xl font-bold mb-3 drop-shadow-lg text-[#02066f]">
       Your Student Life, Simplified
     </h1>
-    <p className="max-w-md sm:max-w-2xl text-xs sm:text-base md:text-lg text-[#02066f] drop-shadow mb-6">
-      All-in-one platform for students in the UAE. From finding accommodation
-      to exploring career opportunities, staying informed, and making the most
-      of your journey.
-    </p>
+    <div className="max-w-md sm:max-w-2xl text-xs sm:text-base md:text-lg text-[#02066f] drop-shadow mb-6">
+      <p>All-in-one platform for students in the UAE. </p>
+    <p>From finding accommodation to exploring career opportunities, staying informed, and making the most of your journey.</p>
+    </div>
   </div>
 
   {/* Gradient Animation Keyframes */}
@@ -318,7 +317,7 @@ useEffect(() => {
             viewport={{ once: true }}
             className="space-y-6 sm:space-y-8"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[#02066f]">
               TSD Blog
             </h2>
 
@@ -379,7 +378,7 @@ useEffect(() => {
 
       {/* ======================== EVENTS ======================== */}
       <section className="py-12 sm:py-16 bg-gray-50 text-center px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-2">TOP EVENTS</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-[#02066f]">TOP EVENTS</h2>
         <p className="text-gray-600 mb-8 text-sm sm:text-base">
           Discover upcoming student events, workshops, and opportunities.
         </p>
@@ -458,7 +457,7 @@ useEffect(() => {
             thousands of students every month.
           </p>
           <Link
-              to="/providers#subscription-plans"
+              to="/providers"
               className="relative inline-flex items-center justify-center px-5 sm:px-6 py-3 rounded-full font-semibold  bg-[#02066f] text-white rounded-lg hover:bg-[#ff6d34] transition-all duration-300 shadow-lg hover:shadow-xl group"
             >
               View Pricing Plans
@@ -477,7 +476,7 @@ useEffect(() => {
 
       {/* ======================== CONTACT FORM ======================== */}
       <section className="py-12 sm:py-16 bg-gray-50 text-center px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-[#02066f]">
           HAVE QUESTIONS? SUGGESTIONS?
         </h2>
         <p className="text-sm sm:text-lg text-gray-700 mb-6">
