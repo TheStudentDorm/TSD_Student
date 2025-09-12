@@ -177,15 +177,15 @@ useEffect(() => {
      {/* ======================== HERO SECTION ======================== */}
 {/* ======================== HERO SECTION ======================== */}
 <div className="relative w-full h-screen sm:h-screen min-h-[500px] overflow-hidden">
-  {/* Animated Gradient Background */}
-  <div
+  {/* {/* Animated Gradient Background */}
+  {/* <div
     className="absolute inset-0 z-0"
     style={{
       background: "linear-gradient(to bottom, #02066f, white, #ff6d34)",
       backgroundSize: "100% 300%",
       animation: "gradientMove 20s linear infinite",
     }}
-  ></div>
+  ></div>  */}
 
   {/* Hero Video */}
   <video
@@ -214,13 +214,13 @@ useEffect(() => {
   ></div>
 
   {/* Logo */}
-  <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
+{/*   <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
     <img
       src="/logo.png"
       alt="The Student Dorm Logo"
       className="w-24 sm:w-28 md:w-32"
     />
-  </div>
+  </div> */}
 
   {/* Hero Content */}
   <div
@@ -251,34 +251,25 @@ useEffect(() => {
 
 
       {/* ======================== STUDENT RESOURCES ======================== */}
-      <section
+<section
   id="student-resources"
   className="py-12 sm:py-16 text-center relative overflow-hidden"
   style={{
     backgroundImage: "url('/images/student-bg.jpg')",
-    backgroundAttachment: "scroll",
-    backgroundSize: "cover",
-    backgroundPosition: `center ${offsetY}px`,
-    transform: `scale(${1 + offsetY * 0.0005})`, // subtle zoom
-    opacity: `${1 - offsetY * 0.001}`, // subtle fade
-    transition: "transform 0.1s linear, opacity 0.1s linear"
+    backgroundRepeat: "no-repeat",   // ✅ prevents tiling
+    backgroundSize: "cover",       // ✅ keeps full image visible (no stretch/fill)
+    backgroundPosition: "center top",// ✅ keeps it fixed in place
+    backgroundAttachment: "scroll",  // ✅ moves normally with the page
   }}
 >
- <div className="absolute inset-0 bg-black/40 z-0"></div>
-<div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12">
-  <h2 className="text-4xl sm:text-3xl font-bold mb-6 text-[#02066f]">
-
+  <div className="absolute inset-0 bg-black/40 z-0"></div>
+  <div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12">
+    <h2 className="text-4xl sm:text-3xl font-bold mb-6 text-[#02066f]">
       STUDENT RESOURCES
     </h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
       {resources.map((res, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: idx * 0.1 }}
-        >
+        <div key={idx}>
           <Link
             to={res.link}
             className="p-6 bg-white bg-opacity-90 shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center border-t-4 border-[#02066f] hover:border-[#ff6d34]"
@@ -293,12 +284,11 @@ useEffect(() => {
             </p>
             <p className="text-xs sm:text-sm text-gray-700">{res.desc}</p>
           </Link>
-        </motion.div>
+        </div>
       ))}
     </div>
   </div>
 </section>
-
 
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
   <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-start">

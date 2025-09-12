@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import TimelineItem from "../../components/TimelineItem";
+import { CheckCircle } from "lucide-react";
 import {
   BookOpen,
   FileText,
@@ -32,15 +33,10 @@ const beforeArrivalSteps = [
     icon: FileText,
     title: "Submit Visa Application Documents",
     description:
-      "Send your documents to your university or the visa department. Most universities will request:",
-    details: [
-      "Scanned passport (valid 6+ months)",
-      "Passport-size photos (white background)",
-      "Signed visa application form",
-      "Offer letter / enrolment confirmation",
-      "Proof of accommodation (university housing or off-campus housing)",
+      "Send your documents to your university or the visa department. Most universities will request documents as listed above.",
+    details: [     
     ],
-    tips: [],
+    tips: ["*Some unis also require a refundable visa deposit at this stage."],
   },
   {
     icon: Mail,
@@ -233,7 +229,7 @@ const handleDownloadPDF = () => {
                   {beforeArrivalSteps.map((step, index) => (
                     <TimelineItem
                       key={index}
-                      icon={step.icon}
+                       icon={CheckCircle}
                       title={step.title}
                       description={step.description}
                       details={step.details}
@@ -268,7 +264,7 @@ const handleDownloadPDF = () => {
                     return (
                       <TimelineItem
                         key={realIndex}
-                        icon={step.icon}
+                        icon={CheckCircle}
                         title={step.title}
                         description={step.description}
                         details={step.details}

@@ -21,6 +21,7 @@ interface Emirate {
 const uaeAttractions: Emirate[] = [
   {
     name: "Abu Dhabi",
+    tip:"Attractions are quieter, cheaper, and way less crowded on weekdays, especially Monday to Wednesday. You'll get better photos and shorter queues…",
     attractions: [
       {
         name: "Sheikh Zayed Grand Mosque",
@@ -57,6 +58,7 @@ const uaeAttractions: Emirate[] = [
   },
   {
     name: "Dubai",
+    tip:"Most attractions in Dubai and Abu Dhabi are accessible via Metro or public buses. It’s cheap, air-conditioned, and Nol Card–friendly. Save the taxi money for snacks!",
     attractions: [
       {
         name: "Burj Khalifa & Dubai Mall",
@@ -89,6 +91,7 @@ const uaeAttractions: Emirate[] = [
   },
   {
     name: "Sharjah",
+    tip:"Some of the best spots, like Jebel Jais, Sharjah Corniche, or Alserkal Avenue, are completely free. Great for chill hangouts, BBQ’s or low-budget weekends.",
     attractions: [
       {
         name: "Sharjah Art Museum",
@@ -123,6 +126,7 @@ const uaeAttractions: Emirate[] = [
   },
   {
     name: "Ajman",
+    tip:"If you’re out all day, whether hiking, shopping or museum hopping, your phone will die. And when it does, so will Google Maps, Uber, and your camera roll.",
     attractions: [
       {
         name: "Ajman Corniche",
@@ -146,6 +150,7 @@ const uaeAttractions: Emirate[] = [
   },
   {
     name: "Umm Al Quwain",
+    tip:"",
     attractions: [
       {
         name: "Mangrove Kayaking",
@@ -169,6 +174,7 @@ const uaeAttractions: Emirate[] = [
   },
   {
     name: "Ras Al Khaimah",
+    tip:"Yes, this is the UAE. Yes, it can rain (or get dusty). If you’re heading to outdoor spots like Mangroves, Al Noor Island, or Desert Safari, check the RTA or AccuWeather app first.",
     attractions: [
       {
         name: "Jebel Jais",
@@ -192,6 +198,7 @@ const uaeAttractions: Emirate[] = [
   },
   {
     name: "Fujairah",
+    tip:"Whether you're in a city, desert, or mountain, the UAE sun does not play. Hydrate, protect your skin, and don’t forget sunglasses.",
     attractions: [
       {
         name: "Snoopy Island",
@@ -230,14 +237,28 @@ const [modalImage, setModalImage] = useState<string | null>(null);
     .filter((emirate) => emirate.attractions.length > 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 scroll-smooth">
-      <h1 className="text-4xl font-bold text-center mb-6">
-        Must-Visit Places Across the UAE
-      </h1>
+    
+    <div>
+      {/* Hero Section with Overlay */}
+      {/* Hero Section with reduced height */}
+<section className="relative h-[60vh] flex flex-col items-center justify-center text-center bg-gradient-to-r from-[#004AAD] to-[#F9943B]">
+  {/* Optional overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+
+  {/* Content */}
+  <div className="relative z-10 px-4">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+      Must-Visit Places Across the UAE
+    </h1>
+          <p className="text-lg sm:text-xl text-gray-200 mx-auto">
+            Whether you're new to the UAE or just looking to explore beyond your university campus, here's a roundup of the country’s top attractions, from natural wonders and cultural landmarks to thrilling theme parks.
+          </p>
+        </div>
+      </section>
 
       {/* Sticky Navigation Bar */}
       <nav className="sticky top-0 z-20 bg-white shadow-md mb-6 py-3 flex flex-wrap gap-4">
-  {uaeAttractions.map((emirate) => (
+       {uaeAttractions.map((emirate) => (
     <a
       key={emirate.name}
       href={`#${emirate.name.replace(/\s+/g, "")}`}
@@ -271,7 +292,7 @@ const [modalImage, setModalImage] = useState<string | null>(null);
           id={emirate.name.replace(/\s+/g, "")}
           className="mb-16"
         >
-          <h2 className="text-3xl font-semibold mb-10 text-center">
+          <h2 className="text-3xl font-semibold uppercase mb-10 text-center">
             {emirate.name}
           </h2>
           <div className="relative">
@@ -326,13 +347,21 @@ const [modalImage, setModalImage] = useState<string | null>(null);
               </div>
             ))}
           </div>
+          {/* Unique tip for this Emirate */}
+    {emirate.tip && (
+      <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto">
+        <p className="text-gray-800 text-center text-base sm:text-lg">
+          💡 <span className="font-semibold"> TSD Pro Tip !</span><p> {emirate.tip}</p>
+        </p>
+      </div>
+    )}
           {modalImage && (
   <ImageModal
     src={modalImage}
     alt="Attraction Image"
     onClose={() => setModalImage(null)}
   />
-)}
+)}  
 <NavigationButtons />
         </section>
       ))}

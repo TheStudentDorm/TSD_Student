@@ -31,6 +31,25 @@ html {
     transform: scale(4);
     opacity: 0;
   }
+  svg.lucide {
+    stroke: currentColor !important;
+    fill: none !important;
+    color: #000 !important; /* you can change to #004AAD or brand color */
+    width: 16px !important;
+    height: 16px !important;
+    visibility: visible !important;
+    display: inline-block !important;
+  }
+
+  /* Keep buttons, backgrounds, and layout clean */
+  button {
+    display: none !important; /* hides print/export buttons */
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
 
 .animate-ripple {

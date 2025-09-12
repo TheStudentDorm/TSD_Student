@@ -59,22 +59,32 @@ export default function TimelineItem({
 
       <div
         onClick={onToggle}
-        className={`flex items-start gap-3 p-4 rounded-lg transition-all duration-200 cursor-pointer hover:shadow-md hover:bg-opacity-20`}
+        className="flex items-start gap-3 p-4 rounded-lg transition-all duration-200 cursor-pointer hover:shadow-md hover:bg-opacity-20"
         style={{ backgroundColor: `${bgColor}/10` }}
       >
-        {/* Icon */}
+        {/* Icon (always Lucide-friendly) */}
         <span
           className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full text-white shadow"
           style={{ backgroundColor: bgColor }}
         >
-          <Icon size={16} />
+          <Icon
+            size={16}
+            strokeWidth={2}
+            color="currentColor"
+            className="lucide"
+            aria-hidden="true"
+          />
         </span>
 
         <div className="flex-1">
           <h4 className={`font-semibold flex justify-between items-center ${textColor}`}>
             {title}
             <ChevronDown
-              className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+              className={`lucide transition-transform duration-300 ${
+                isOpen ? "rotate-180" : ""
+              }`}
+              strokeWidth={2}
+              color="currentColor"
             />
           </h4>
           <p className="text-gray-600">{description}</p>
@@ -102,12 +112,17 @@ export default function TimelineItem({
                 {/* Tips with single heading */}
                 {tips && tips.length > 0 && (
                   <div className="mt-2 space-y-1">
-                    <p className="text-[#004AAD]/90 font-semibold italic">💡 TSD Pro Tips:</p>
-                    <ul className="list-disc list-inside text-gray-700">
-                      {tips.map((tip, idx) => (
-                        <li key={idx} className="italic">{tip}</li>
-                      ))}
-                    </ul>
+                    <p className="text-[#004AAD]/90 font-semibold italic">
+                      💡 TSD Pro Tip:
+                    </p>
+                    {tips.map((tip, idx) => (
+                      <p
+                        key={idx}
+                        className="italic font-semibold text-tsd-orange"
+                      >
+                        {tip}
+                      </p>
+                    ))}
                   </div>
                 )}
               </motion.div>

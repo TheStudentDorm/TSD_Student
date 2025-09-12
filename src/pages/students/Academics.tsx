@@ -112,14 +112,14 @@ const UAEUniversities: React.FC = () => {
         <p className="text-center text-lg text-gray-700 mb-10 max-w-3xl mx-auto">
           Planning your academic journey? Here's a guide to some of the top universities in each emirate, from world-renowned research hubs to creative arts powerhouses.
         </p>
-        <p>💡TSD Pro Tip</p><p>
+        <p >💡TSD Pro Tip</p><p>
         Some unis are big and buzzy, others are focused and quiet. Think about your learning style, lifestyle, and future goals. A good fit beats a big name every time.
           </p>
 
         {uaeUniversities.map((em) => (
           <section key={em.name} id={em.name.replace(/\s+/g, "")} className="mb-16">
             {/* Emirate Heading with Blue + Orange Accent */}
-            <h2 className="text-3xl font-semibold mb-10 text-center text-[#004AAD] relative inline-block">
+            <h2 className="text-3xl font-semibold mt-10 mb-10 text-center text-[#004AAD] relative inline-block">
               {em.name}
               <span className="block w-24 h-1 bg-[#F9943B] mx-auto mt-2 rounded-full"></span>
             </h2>

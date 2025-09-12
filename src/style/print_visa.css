@@ -156,4 +156,24 @@
 .download-mode .no-print {
   display: none !important;
 }
+svg.lucide {
+    stroke: currentColor !important;
+    fill: none !important;
+    color: brand color !important; /* you can change to #004AAD or brand color */
+    width: 16px !important;
+    height: 16px !important;
+    visibility: visible !important;
+    display: inline-block !important;
+  }
+    /* Keep buttons, backgrounds, and layout clean */
+  button {
+    display: none !important; /* hides print/export buttons */
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
 }
+

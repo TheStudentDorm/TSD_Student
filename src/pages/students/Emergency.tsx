@@ -8,12 +8,12 @@ import { Download, Printer } from "lucide-react";
 import "../../style/print.css";
 import NavigationButtons from "../../components/NavigationButtons";
 
-const emergencyTips = [
+/* const emergencyTips = [
   { title: "Know Numbers", description: "Keep emergency numbers handy at all times." },
   { title: "Health Services", description: "Familiarize yourself with nearby hospitals and clinics." },
   { title: "Embassy Contacts", description: "Know your embassy’s contact for urgent assistance." },
   { title: "Student Support", description: "Reach out to university support for emergencies." },
-];
+]; */
 
 // PDF Generation
 const generatePDF = async () => {
@@ -205,6 +205,13 @@ export default function Emergency() {
               </tbody>
             </table>
           </div>
+          <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto">
+        <p className="text-gray-800 text-center text-base sm:text-md">
+          💡 <span className="font-semibold"> TSD Pro Tip !</span><p> Keep a physical card or note on your fridge with key contacts in case your phone dies. And don’t worry, emergency services here are efficient and multilingual. 
+If you’re ever unsure, call 999, they’ll direct you to the right department.
+</p>
+        </p>
+      </div>
         </section>
         {/* Health & Medical Support */}
         <section>
@@ -222,12 +229,18 @@ export default function Emergency() {
                 <tr><td className="px-4 py-2">Abu Dhabi SEHA Hotline</td>
                   <td className="px-4 py-2">800 50</td></tr>
                 <tr><td className="px-4 py-2">NMC / Aster / Mediclinic Clinics</td>
-                  <td className="px-4 py-2">NMC: 800 6624<br />Aster: <a href="https://www.asterdmhealthcare.com/" target="_blank" className="text-blue-600 underline">Website</a>
+                  <td className="px-4 py-2">NMC: 800 6624<br />Aster: <a href="https://www.asterdmhealthcare.com/" target="_blank" className="text-blue-600 underline">Website</a>/+971 4 4400500
                     <br />Mediclinic: 800 2000</td></tr>
                 <tr><td className="px-4 py-2">Mental Health Support (Dubai)</td>
                   <td className="px-4 py-2">04 519 2519 (Rashid Hospital Psychiatry Dept., 24/7)</td></tr>
               </tbody> </table>
           </div>
+ <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto">
+        <p className="text-gray-800 text-center text-base sm:text-md">
+          💡 <span className="font-semibold"> Heads up!</span><p>  Check with your university's student affairs or admin team for on-campus emergency procedures and 24/7 contacts. Most universities in the UAE have dedicated wellbeing and campus safety units.
+</p>
+        </p>
+      </div>
         </section>
         {/* Embassy & Consulate Assistance */}
         <section>
@@ -264,7 +277,7 @@ export default function Emergency() {
             <TipsCarousel tips={emergencyTips} duration={30} />
           </div>
         </section> */}
-       <section className="mt-16 p-6 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg max-w-3xl mx-auto">
+      {/*  <section className="mt-16 p-6 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg max-w-3xl mx-auto">
   <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
   <ul className="list-disc pl-5 text-gray-800 space-y-2">
     {emergencyTips.map((tip, index) => (
@@ -273,7 +286,7 @@ export default function Emergency() {
       </li>
     ))}
   </ul>
-</section>
+</section> */}
       </div>
      <div className="print:hidden">
         <NavigationButtons />

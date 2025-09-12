@@ -91,20 +91,20 @@ export default function Discounts() {
         </Accordion>
 
 
-{/* TSD Pro Tips Section */}
-<section className="mt-16 p-6 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg max-w-3xl mx-auto">
-  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
-  <ul className="list-disc pl-5 text-gray-800 space-y-2">
-    {discountTips.map((tip, index) => (
-      <li key={index}>
-        <span className="font-semibold text-tsd-blue">{tip.title}:</span> {tip.description}
-      </li>
-    ))}
-  </ul>
-</section>
+          {/* TSD Pro Tips Section */}
+          
+
+
         {/* <h2 className="text-2xl font-semibold mt-12 mb-4">TSD Pro Tips!</h2>
         <TipsCarousel tips={discountTips} duration={30} /> */}
       </div>
+      <section>
+            <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto">
+                  <p className="text-gray-800 text-center text-base sm:text-md">
+                     <span className="font-semibold">💡TSD Pro Tip !</span></p><p>  Always carry your student ID (physical or digital), and ask at the counter.</p><p> You’d be surprised how many places offer unlisted discounts!
+                  </p></div>
+
+          </section>
       <NavigationButtons/>
     </main>
   );

@@ -27,6 +27,7 @@ export default function HeroSectionSmall({
         backgroundImage: `url(${image})`,
         minHeight: "60vh", // minimum height for small screens
         height: "100vh",   // full viewport height
+         width: "100%",// full width
       }}
     >
       {/* Dark Overlay */}

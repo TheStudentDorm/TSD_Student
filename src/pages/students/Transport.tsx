@@ -1,7 +1,7 @@
 // src/pages/Transport.tsx
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Bus, Train, CreditCard, Smartphone } from "lucide-react";
+import { Bus, Train, CreditCard, Smartphone, Italic } from "lucide-react";
 import NavigationButtons from "../../components/NavigationButtons";
 
 const sectionVariant = {
@@ -74,15 +74,30 @@ export default function Transport() {
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
             <li>
-              <span className="font-medium">Red Line:</span> Along Sheikh Zayed Road — BurJuman, Dubai Mall, Business Bay, JLT, Internet City, Expo 2020.
+              <span className="font-medium">Red Line:  </span> Runs along E11 Sheikh Zayed Road, stopping at key locations like BurJuman, Dubai Mall, Business Bay, JLT, Dubai Internet City, and ending at Expo 2020.
             </li>
             <li>
-              <span className="font-medium">Green Line:</span> Older areas — Deira, Al Rigga, Union, Al Fahidi, Creek.
+              <span className="font-medium">Green Line:  </span> Covers older parts of the city including Deira, Al Rigga, Union, Al Fahidi, and Creek.
             </li>
+            <li>
+              <span className="font-medium"> Metro Timings: ⏰ </span>
+                                         Metro runs daily, starting around 5:00 AM, with final departures at midnight. Sundays see a late opening at 8:00 AM. Peak hours may see more frequent departures. 
+</li>
           </ul>
+          
           <p className="mt-3 text-sm text-gray-600">
-            ⏰ Metro runs daily ~5:00 AM–midnight (Sundays open later at 8:00 AM). Always check RTA app.
-          </p>
+                Refer{" "}
+                <a
+                  href="https://www.rta.ae/wps/portal/rta/ae/public-transport/metro-stations-map"                 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-tsd-blue underline hover:text-tsd-orange"
+                >
+                  here
+                </a>{" "}
+                for latest stations and routes.
+                <p>* Timings may vary on public holidays. Always check the RTA app for the latest updates.</p>
+              </p>
         </motion.div>
 
         {/* Student Nol Card */}

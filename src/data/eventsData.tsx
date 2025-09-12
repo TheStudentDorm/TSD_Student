@@ -78,7 +78,7 @@ export const events: Event[] = [
     image: "/images/events/events_6.jpg",
     links: [
       { label: "Website", url: "https://harrypotterinconcert.com" },
-      { label: "Etihad Arena", url: "https://etihadarena.ae/event-booking" },
+      { label: "Etihad Arena", url: "https://www.etihadarena.ae/en/event-booking/harry-potter-film-concert-series" },
     ],
   },
   {
