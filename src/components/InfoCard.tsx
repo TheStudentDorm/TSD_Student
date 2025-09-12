@@ -11,13 +11,13 @@ interface InfoCardProps extends MotionProps {
 const InfoCard: React.FC<InfoCardProps> = ({ title, text, dark, textColor, ...motionProps }) => {
   return (
     <motion.div
-      className={`p-6 rounded-lg shadow-md cursor-pointer ${
-        dark ? "bg-[#002060] text-white" : "bg-white text-[#02066f]"
+      className={`p-6 rounded-lg  cursor-pointer ${
+        dark ? "bg-tsd-blue text-white" : "bg-white text-[#F9943B  ]"
       }`}
       style={{ color: textColor || undefined }}
       {...motionProps}
     >
-      <h3 className="text-xl font-semibold mb-4">{title}</h3>
+      <h3 className="text-xl font-semibold mb-10">{title}</h3>
       
       <p>{text}</p>
     </motion.div>

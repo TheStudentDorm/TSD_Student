@@ -264,9 +264,10 @@ useEffect(() => {
     transition: "transform 0.1s linear, opacity 0.1s linear"
   }}
 >
-  <div className="absolute inset-0 bg-black/40 z-0"></div>
-  <div className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
-    <h2 className="text-4xl sm:text-3xl font-bold mb-8 text-[#02066f]">
+ <div className="absolute inset-0 bg-black/40 z-0"></div>
+<div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12">
+  <h2 className="text-4xl sm:text-3xl font-bold mb-6 text-[#02066f]">
+
       STUDENT RESOURCES
     </h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
@@ -348,7 +349,7 @@ useEffect(() => {
   <div className="pt-1">
     <Link
       to="/blog/index"
-      className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
+      className="text-tsd-blue font-medium hover:text-[#ff6d34] text-base sm:text-lg"
     >
       Read More Newsletters →
     </Link>
@@ -405,14 +406,14 @@ useEffect(() => {
       </div>
 
       {/* Read More under Testimonials */}
-      <div className="pt-4">
+      {/* <div className="pt-4">
         <Link
           to="/testimonials"
           className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
         >
           Read More Testimonials →
         </Link>
-      </div>
+      </div> */}
     </motion.div>
   </div>
 </section>

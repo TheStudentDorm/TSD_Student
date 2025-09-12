@@ -197,8 +197,8 @@ const handleDownloadPDF = () => {
             <li>Proof of accommodation (e.g. student housing contract)</li>
             <li>Visa fee payment receipt</li>
           </ul>
-          <div className="text-[#004AAD] pt-6 mb-4 italic">
-            Heads up! Your university's student services or visa office is your go-to source for updates, timelines, and application support.
+          <div className="text-[#004AAD] pt-6 mb-4 ">
+            <b>Heads up!</b> Your university's student services or visa office is your go-to source for updates, timelines, and application support.
           </div>
         </section>
 

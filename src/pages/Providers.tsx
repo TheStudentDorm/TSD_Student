@@ -87,20 +87,21 @@ const ProvidersPage = () => {
 
         <div className="relative z-10 max-w-4xl px-6">
           <h1
-            className="mt-2 text-xl sm:text-3xl md:text-5xl font-bold leading-tight whitespace-nowrap bg-gradient-to-r text-white bg-clip-text text-transparent"
+            className="mt-2 text-xl sm:text-3xl md:text-4xl font-bold leading-tight whitespace-nowrap bg-gradient-to-r text-white bg-clip-text text-transparent"
             style={{ fontFamily: "Times New Roman, sans-serif" }}
           >
-            List Your Accommodation with TSD<br/><br/>
+            LIST YOUR ACCOMMODATION WITH TSD<br/><br/>
           </h1>
 
-          <p className="uppercase tracking-wide text-sm sm:text-base md:text-lg text-gray-200">
+          <p className=" tracking-wide text-sm sm:text-base md:text-lg text-gray-200">
             Connect with Thousands of Students Across the UAE
           </p>
 
-          <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-100 italic">
-            TSD (The Student Dorm) is the UAE’s fastest-growing student lifestyle and information
+          <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-100 ">
+            The Student Dorm is the UAE’s fastest-growing student lifestyle and information
             platform, helping university students find verified, comfortable, and affordable living
-            options. By listing your property with us, you gain direct access to a highly targeted
+            options. </p>
+            <p>By listing your property with us, you gain direct access to a highly targeted
             student audience actively looking for accommodation.
           </p>
         </div>
@@ -109,7 +110,7 @@ const ProvidersPage = () => {
       {/* HOW IT WORKS / STEPS */}
       <section className="relative py-16 bg-gray-50 overflow-hidden">
         <div className="relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 underline decoration-[#F9943B]">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-10  decoration-[#F9943B]">
             How It Works
           </h2>
 
@@ -122,9 +123,9 @@ const ProvidersPage = () => {
                 <img src={item.icon} alt="" className="mx-auto mb-3 h-12 w-12" />
 
                 <h3 className="font-bold text-[#F9943B] text-lg">{item.step}</h3>
-                <h4 className="mt-2 font-semibold text-xl text-[#004AAD]">{item.title}</h4>
+                <h4 className="mt-2 font-semibold text-2xl text-[#004AAD]">{item.title}</h4>
 
-                <p className="text-sm text-gray-500 mt-2">{item.caption}</p>
+                <p className="text-md text-gray-500 mt-2">{item.caption}</p>
                 <p className="text-sm text-gray-600 mt-1">{item.desc}</p>
               </div>
             ))}
@@ -164,6 +165,11 @@ const ProvidersPage = () => {
               )}
 
               <button
+              onClick={() => {
+                 document.getElementById("cta")?.scrollIntoView({ 
+                            behavior: "smooth" 
+                          });
+                        }}
                 className={`mt-4 px-6 py-3 rounded-lg font-semibold transition 
                            bg-[#004AAD] text-white hover:bg-[#003580] 
                            group-hover:shadow-lg group-hover:shadow-[#F9943B]/50 group-hover:scale-105`}
@@ -190,7 +196,7 @@ const ProvidersPage = () => {
       <div className="p-5 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">📸</span>
-          <h3 className="font-semibold text-left text-[#F9943B]">Photography & Content</h3>
+          <h3 className="font-semibold text-center text-left text-black">Photography & Content</h3>
         </div>
         <p className="text-[#004AAD] text-sm italic">Professional photos, videos and descriptions that make your listing stand out and attract more students.</p>
         <p className="text-gray-800 mt-3">AED 300 / listing</p>
@@ -199,7 +205,7 @@ const ProvidersPage = () => {
       <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">✨</span>
-          <h3 className="font-semibold text-[#F9943B]">Highlight in Search</h3>
+          <h3 className="font-semibold text-black">Highlight in Search</h3>
         </div>
         <p className="text-[#004AAD] text-sm italic">Get priority visibility in student search results to boost clicks and inquiries</p>
         <p className="text-gray-800 mt-3">AED 100 / 7 days</p>
@@ -208,7 +214,7 @@ const ProvidersPage = () => {
       <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">🏠</span>
-          <h3 className="font-semibold text-[#F9943B]">Homepage Banners</h3>
+          <h3 className="font-semibold text-black">Homepage Banners</h3>
         </div>
         <p className="text-[#004AAD] text-sm italic">Feature your brand front and centre on the TSD homepage for maximum exposure</p>
         <p className="text-gray-800 mt-3">AED 200 / week</p>
@@ -218,7 +224,7 @@ const ProvidersPage = () => {
       <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">📢</span>
-          <h3 className="font-semibold text-[#F9943B]">Social Media Feature</h3>
+          <h3 className="font-semibold text-black">Social Media Feature</h3>
         </div>
         <p className="font-semibold text-gray-700 text-md">(Instagram & LinkedIn)</p>
         <p className="text-[#004AAD] text-sm italic mt-2">Reach thousands of students with a spotlight, co-branded post on our active social media channels.</p>
@@ -243,7 +249,7 @@ const ProvidersPage = () => {
               Email Us
             </Link>
             <Link
-              to="/provider-interest-form"
+              to="/pages/ProviderInterestForm"
               className="px-6 py-3 rounded-lg font-semibold bg-[#004AAD] hover:bg-[#003580]"
             >
               Fill Out Interest Form

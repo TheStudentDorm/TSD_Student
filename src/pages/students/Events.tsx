@@ -18,10 +18,17 @@ export default function EventsPage() {
 
   return (
     <section className="py-16 px-6 bg-gray-50">
-      <h1 className="text-4xl font-bold text-center mb-8">🎉 Student Events 2025</h1>
+<section className="relative py-12 px-6 bg-cover bg-center w-full h-[300px]"
+  style={{ backgroundImage: "url('/images/student_events.jpg')" }}
+>
+  <div className="absolute inset-0 bg-black/40 z-0"></div> {/* Dark overlay */}
+  <h1 className="relative z-10 text-4xl font-bold text-center mb-6 text-white">
+     Student Events
+  </h1></section>
+      
 
       {/* Category Filter */}
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
+      <div className="flex flex-wrap justify-center gap-3 mb-12 mt-12">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -91,7 +98,7 @@ export default function EventsPage() {
               {/* TSD Pro Tips (conditional) */}
               {event.proTips && event.proTips.length > 0 && (
                 <div className="mt-6 p-4 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg">
-                  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
+                  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tip</h3>
                   <ul className="list-disc pl-5 text-gray-800 space-y-1 text-sm">
                     {event.proTips.map((tip, i) => (
                       <li key={i}>{tip}</li>

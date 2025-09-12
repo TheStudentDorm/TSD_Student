@@ -112,7 +112,7 @@ export default function About() {
 
         {/* Cards container with staggered animation */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -156,13 +156,90 @@ export default function About() {
     </section>
 
 
-      {/* Mission & Vision Section */}
-      <section id="mission-vision" className="bg-[#f2f3f4] py-16 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-          {/* <h2 className="text-3xl font-bold mb-12 text-[#02066f]">Our Mission & Vision</h2> */}
-          <MissionVision />
+      {/* Mission & Vision Section with Abstract Blobs */}
+<section id="mission-vision" className="bg-gray-50 py-16 relative overflow-hidden">
+  <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
+    <h2 className="text-3xl font-bold mb-12 text-[#004AAD]">Our Mission & Vision</h2>
+    
+    <div className="grid md:grid-cols-2 gap-8 relative z-10">
+      {/* Mission */}
+      <motion.div
+        className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center relative overflow-hidden"
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Abstract Blob Background */}
+        <svg
+          aria-hidden="true"
+          className="absolute -top-16 -left-16 w-32 h-32 sm:w-48 sm:h-48 opacity-20 z-0"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#004AAD"
+            d="M45.1,-55.5C57.3,-45.6,64.2,-28.6,62.3,-13.3C60.4,2,49.6,14.9,38.5,25.8C27.5,36.7,16.2,45.7,2.7,47.7C-10.8,49.7,-21.6,44.7,-32.7,37.9C-43.8,31,-55.3,22.3,-59.1,10.7C-62.9,-0.8,-58.9,-15.4,-50.3,-27.2C-41.7,-39,-28.5,-48,-14.5,-55.2C-0.5,-62.5,14.3,-68,28.8,-65.8C43.4,-63.7,57.9,-54.4,45.1,-55.5Z"
+            transform="translate(100 100)"
+          />
+        </svg>
+
+        {/* Icon */}
+        <div className="bg-[#004AAD] text-white p-4 rounded-full mb-4 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2a7 7 0 00-7 7c0 3.866 3 7 7 7s7-3.134 7-7a7 7 0 00-7-7z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 21v-4" />
+          </svg>
         </div>
-      </section>
+
+        <h3 className="text-xl font-semibold mb-2 z-10 text-[#004AAD]">Our Mission</h3>
+        <p className="text-gray-700 z-10 leading-relaxed">
+          To empower students with verified, accessible, and student-focused information so they can navigate life in the UAE confidently and independently.
+        </p>
+      </motion.div>
+
+      {/* Vision */}
+      <motion.div
+        className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center relative overflow-hidden"
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        {/* Abstract Blob Background */}
+        <svg
+          aria-hidden="true"
+          className="absolute -top-16 -right-16 w-32 h-32 sm:w-48 sm:h-48 opacity-20 z-0"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="#F9943B"
+            d="M38.7,-53.4C50.8,-44.4,57.9,-28.7,58.2,-14.6C58.6,-0.5,52.2,11.5,44.8,23.3C37.4,35.1,29,46.7,16.8,51.1C4.6,55.5,-11.4,52.7,-24.7,46.3C-38,39.9,-48.5,29,-53.3,16.5C-58.1,4,-57.2,-10.1,-50.5,-21.8C-43.7,-33.5,-31.1,-42.7,-18.1,-51.1C-5.1,-59.5,8.6,-67.2,20.9,-64.7C33.1,-62.1,44.9,-49.9,38.7,-53.4Z"
+            transform="translate(100 100)"
+          />
+        </svg>
+
+        {/* Icon */}
+        <div className="bg-[#F9943B] text-white p-4 rounded-full mb-4 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+        </div>
+
+        <h3 className="text-xl font-semibold mb-2 z-10 text-[#F9943B]">Our Vision</h3>
+        <p className="text-gray-700 z-10 leading-relaxed">
+          To become the go-to platform for students across the UAE, making it easier for them to study, live, and grow, all in one place.
+        </p>
+      </motion.div>
+    </div>
+  </div>
+  
+</section>
+
 
       <NavigationButtons />
     </main>

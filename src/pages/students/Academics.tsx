@@ -103,7 +103,7 @@ const UAEUniversities: React.FC = () => {
         style={{ backgroundImage: 'url(/images/skyline.jpg)' }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <h1 className="relative text-4xl md:text-5xl font-bold text-white text-center px-4">
+        <h1 className="relative uppercase text-4xl md:text-5xl font-bold text-white text-center px-4">
           Major Universities in the UAE
         </h1>
       </div>

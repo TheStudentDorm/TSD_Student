@@ -47,10 +47,10 @@ export default function Transport() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold">
+          <h1 className="text-3xl uppercase sm:text-4xl font-bold">
             Getting Around Dubai & Beyond
           </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-gray-200">
+          <p className="mt-4 max-w-2xl mx-auto text-black">
             Whether you're commuting to class or planning a weekend trip across the UAE, 
             Dubai offers affordable and reliable public transport options for students.
           </p>

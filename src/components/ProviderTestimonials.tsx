@@ -58,7 +58,7 @@ export default function ProviderTestimonials() {
   };
 
   return (
-    <section className ="relative py-16 bg-gradient-to-r from-[#004AAD] via-[#F9943B] to-[#004AAD] text-white     " 
+    <section className ="relative py-16 bg-gradient-to-r from-tsd-blue]-400 via-tsd-orange to-tsd-blue text-white     " 
     >
       {/* Overlay for readability */}
       <div className="absolute inset-0 bg-black bg-opacity-10"></div>

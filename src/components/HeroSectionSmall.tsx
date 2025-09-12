@@ -39,7 +39,7 @@ export default function HeroSectionSmall({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
+        <h1 className="text-3xl uppercase sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
           {title}
         </h1>
         {subtitle && (

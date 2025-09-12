@@ -25,7 +25,7 @@ export default function Discounts() {
         image="/images/student-hero-discounts.jpg"
       />
       <div>      
-        <h2 className="text-lg font-semibold text-tsd-blue text-center mt-12 mb-6">Heads up! Your university may already have special partnerships with brands, gyms, or tech providers. Before paying full price, check with your university; you could be eligible for extra discounts or offers just for your campus!</h2>
+        <h2 className="text-lg  text-tsd-blue text-center mt-12 mb-6"><b>Heads up!</b> Your university may already have special partnerships with brands, gyms, or tech providers. Before paying full price, check with your university; you could be eligible for extra discounts or offers just for your campus!</h2>
       </div>
 
       <div className="py-16 px-6">
