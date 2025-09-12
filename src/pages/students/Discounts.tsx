@@ -6,7 +6,7 @@ import NavigationButtons from "../../components/NavigationButtons";
 import { Underline } from "lucide-react";
 
 const discountTips = [
-  { title: "Student Cards", description: "Carry your student ID to claim discounts." },
+  { title: "Student Cards", description: "Always carry your student ID (physical or digital), and ask at the counter.  You’d be surprised how many places offer unlisted discounts!" },
   { title: "Food & Dining", description: "Many restaurants offer student meals or discounts." },
   { title: "Events & Entertainment", description: "Check for student pricing at events, cinemas, and exhibitions." },
   { title: "Online Deals", description: "Look for online coupon codes and promotions." },
@@ -19,17 +19,21 @@ export default function Discounts() {
     <main className="max-w-6xl mx-auto">
       <HeroSectionSmall
         title="Student Discounts & Perks"
-        subtitle="Save money with exclusive student deals, discounts, and offers across Dubai and the UAE."
+        subtitle="Take advantage of your student status!"
+        caption="Being a student in the UAE comes with more than just assignments and exams, it also means access to some great deals across travel, food, entertainment, and more! Here's how you can save smartly as a student"
         icon="/icons/discount.svg"
         image="/images/student-hero-discounts.jpg"
       />
+      <div>      
+        <h2 className="text-lg font-semibold text-tsd-blue text-center mt-12 mb-6">Heads up! Your university may already have special partnerships with brands, gyms, or tech providers. Before paying full price, check with your university; you could be eligible for extra discounts or offers just for your campus!</h2>
+      </div>
 
       <div className="py-16 px-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Student Discounts</h2>
           <button
             onClick={() => setExpandAll(!expandAll)}
-            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow"
+            className="px-4 py-2 text-sm font-medium text-white bg-tsd-blue hover:bg-tsd-orange rounded-lg shadow"
           >
             {expandAll ? "Collapse All" : "Expand All"}
           </button>
@@ -74,7 +78,7 @@ export default function Discounts() {
       href="https://edi-uae.com/en/Youth-Driving-Course" 
       target="_blank" 
       rel="noopener noreferrer"
-      className="text-blue-600 underline hover:text-blue-800"
+      className="text-tsd-blue underline hover:bg-tsd-orange/50"
     >
       here
     </a>{" "}to learn more about subsidised fees, document requirements, procedure and more.
@@ -86,8 +90,20 @@ export default function Discounts() {
            </AccordionItem>
         </Accordion>
 
-        <h2 className="text-2xl font-semibold mt-12 mb-4">TSD Pro Tips!</h2>
-        <TipsCarousel tips={discountTips} duration={30} />
+
+{/* TSD Pro Tips Section */}
+<section className="mt-16 p-6 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg max-w-3xl mx-auto">
+  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
+  <ul className="list-disc pl-5 text-gray-800 space-y-2">
+    {discountTips.map((tip, index) => (
+      <li key={index}>
+        <span className="font-semibold text-tsd-blue">{tip.title}:</span> {tip.description}
+      </li>
+    ))}
+  </ul>
+</section>
+        {/* <h2 className="text-2xl font-semibold mt-12 mb-4">TSD Pro Tips!</h2>
+        <TipsCarousel tips={discountTips} duration={30} /> */}
       </div>
       <NavigationButtons/>
     </main>

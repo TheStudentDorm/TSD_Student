@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Ticket } from "lucide-react";
 import emailjs from "@emailjs/browser";
-
+import ProviderTestimonials from "../components/ProviderTestimonials";
 import ParallaxBanner from "../components/Parallel";
 import NavigationButtons from "../components/NavigationButtons";
 
@@ -147,16 +147,7 @@ useEffect(() => {
   ];
 
   const events = [
-    {
-      title: "Meet The Top Students 2025",
-      description:
-        "Mentoring successful student applications abroad, including personal statements, profile building and more!",
-      admission: "Free Admission",
-      date: "31 August, 2025, 10:00 AM - 7 PM",
-      location: "Millennium Plaza Downtown Hotel, Dubai",
-      link: "https://eventbrite.com",
-      image: "/images/event1.jpg",
-    },
+    
     {
       title: "GCC Exhibition for Education & Training 2025",
       description: "Explore universities and education opportunities in the UAE!",
@@ -164,7 +155,19 @@ useEffect(() => {
       date: "22 - 24 September, 2025",
       location: "Etihad Arena, Abu Dhabi",
       link: "https://gccexhibition.com",
-      image: "/images/event2.jpg",
+      image: "/images/events/events_2.jpg",
+    },
+    {
+      title: "Najah Expo 2025",
+      description:[
+      "100+ universities from 20+ countries",
+      "Explore undergrad & postgrad opportunities",
+    ],
+      admission: "Free Admission",
+      date: "5–7 Oct, 2025",
+      location: "Dubai World Trade Centre",
+      link: "https://najahexpo/dubai",
+      image: "/images/events/events_3.jpg",
     },
   ];
 
@@ -296,85 +299,124 @@ useEffect(() => {
 </section>
 
 
-      {/* ======================== NEWSLETTER ======================== */}
       <section className="py-12 sm:py-16 px-4 bg-gray-50">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <ParallaxBanner image="/images/newsletter.jpg" title="" />
-          </motion.div>
+  <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-start">
+    
+    {/* ================= BLOG ================= */}
+<motion.div
+  initial={{ opacity: 0, x: -50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.6 }}
+  viewport={{ once: true }}
+  className="space-y-6 sm:space-y-8"
+>
+  <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[#02066f]">BLOG</h2>
 
-          {/* Right */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-6 sm:space-y-8"
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[#02066f]">
-              TSD Blog
-            </h2>
-
-            {/* Newsletter Articles */}
-            <div className="space-y-4">
-              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition duration-300">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">
-                  How to Get Internship-Ready in 2 Weeks
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base mb-2">
-                  Quick tips to land your first internship
-                </p>
-                <p className="text-xs sm:text-sm text-gray-500 mb-4">
-                  From polishing your LinkedIn to acing interview prep, this
-                  guide covers everything you need to become internship-ready
-                  fast.
-                </p>
-                <Link
-                  to="/blog/internship-ready"
-                  className="text-[#02066f] font-medium hover:text-[#ff6d34] text-sm sm:text-base"
-                >
-                  Read Full Article →
-                </Link>
-              </div>
-
-              <div className="p-5 sm:p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition duration-300">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">
-                  Do’s and Don’ts for a Great CV
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base mb-2">
-                  Your roadmap to a standout resume
-                </p>
-                <p className="text-xs sm:text-sm text-gray-500 mb-4">
-                  Learn the essential tips to craft a CV that gets noticed and
-                  the common mistakes to avoid.
-                </p>
-                <Link
-                  to="/blog/great-cv"
-                  className="text-[#02066f] font-medium hover:text-[#ff6d34] text-sm sm:text-base"
-                >
-                  Read Full Article →
-                </Link>
-              </div>
-            </div>
-
-            {/* Read More Link */}
-            <div className="flex justify-start mt-4 sm:mt-6">
-              <Link
-                to="blog/index"
-                className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
-              >
-                Read More Newsletters →
-              </Link>
-            </div>
-          </motion.div>
+  <div className="space-y-6">
+    {/* Blog Card 1 */}
+    <div className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition h-full">
+      <img src="/images/blog/internship.jpg" alt="Blog thumbnail - Internship Tips" className="w-24 h-20 object-cover rounded-lg" />
+      <div className="flex flex-col justify-between h-full">
+        <div>
+          <h3 className="text-md font-semibold text-gray-800">How to Get Internship-Ready in 2 Week</h3>
+          <p className="text-sm text-[#004AAD ] mt-1">Quick tips to land your first internship</p>
+          <p className="text-xs text-[#004AAD ] mt-1">
+            From polishing your LinkedIn to acing interview prep, this guide covers everything you need to become internship-ready fast.
+          </p>
         </div>
-      </section>
+        <Link to="/blog/internship-ready" className="text-orange-500 text-xs mt-2">Read more →</Link>
+      </div>
+    </div>
+
+    {/* Blog Card 2 */}
+    <div className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition h-full">
+      <img src="/images/blog/dos-and-donts.jpg" alt="Blog thumbnail - CV Tips" className="w-24 h-20 object-cover rounded-lg" />
+      <div className="flex flex-col justify-between h-full">
+        <div>
+          <h3 className="text-md font-semibold text-gray-800">Do’s and Don’ts for a Great CV</h3>
+          <p className="text-sm text-[#004AAD ] mt-1">Your roadmap to a standout resume</p>
+          <p className="text-xs text-[#004AAD ] mt-1">
+            Learn the essential tips to craft a CV that gets noticed and the common mistakes to avoid.
+          </p>
+        </div>
+        <Link to="/blog/great-cv" className="text-orange-500 text-xs mt-2">Read more →</Link>
+      </div>
+    </div>
+  </div>
+
+  {/* Read More under Blog */}
+  <div className="pt-1">
+    <Link
+      to="/blog/index"
+      className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
+    >
+      Read More Newsletters →
+    </Link>
+  </div>
+</motion.div>
+
+
+    {/* ================= TESTIMONIALS ================= */}
+    <motion.div
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="space-y-6 sm:space-y-8"
+    >
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[#02066f]">TESTIMONIALS</h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Testimonial 1 */}
+        <div className="flex flex-col justify-between h-full p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+          <div>
+            <div className="text-[#004AAD] text-3xl text-center leading-none mb-2">“</div>
+            <p className="text-sm text-grey-900 italic mb-4">
+              TSD helped me find the perfect accommodation quickly. The platform was intuitive and support was amazing!
+            </p>
+            <p className="text-[#004AAD] text-3xl text-center leading-none mb-2">"</p>
+          </div>
+          <div className="flex items-center gap-3 mt-2">
+            <img src="/path/to/avatar1.jpg" alt="Janna Doe" className="w-10 h-10 rounded-full" />
+            <div>
+              <p className="font-semibold text-sm">ABC</p>
+              <p className="text-xs text-gray-500">Student</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Testimonial 2 */}
+        <div className="flex flex-col justify-between h-full p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+          <div>
+            <div className="text-[#004AAD] text-3xl text-center leading-none mb-2">“</div>
+            <p className="text-sm text-grey-900 italic mb-4">
+              Partnering with TSD boosted our bookings and connected us with genuine students. Highly recommended!
+            </p>
+            < p className="text-[#004AAD] text-3xl text-center leading-none mb-2"> "</p> 
+          </div>
+          <div className="flex items-center gap-3 mt-2">
+            <img src="/path/to/avatar2.jpg" alt="Janna Doe" className="w-10 h-10 rounded-full" />
+            <div>
+              <p className="font-semibold text-sm">PQR</p>
+              <p className="text-xs text-gray-600">Provider</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Read More under Testimonials */}
+      <div className="pt-4">
+        <Link
+          to="/testimonials"
+          className="text-[#02066f] font-medium hover:text-[#ff6d34] text-base sm:text-lg"
+        >
+          Read More Testimonials →
+        </Link>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* ======================== EVENTS ======================== */}
       <section className="py-12 sm:py-16 bg-gray-50 text-center px-4">
@@ -392,7 +434,7 @@ useEffect(() => {
               <img
                 src={event.image}
                 alt={event.title}
-                className="w-full h-40 sm:h-48 object-cover rounded-t-lg"
+                className="w-full h-40 sm:h-48 object-contain rounded-t-lg"
                 loading="lazy"
               />
               <div className="p-4 flex flex-col flex-grow">
@@ -418,7 +460,7 @@ useEffect(() => {
                   href={event.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 font-medium hover:underline text-sm sm:text-base"
+                  className="text-[#004AAD] font-medium hover:text-[#ff6d34] text-sm sm:text-base"
                 >
                   {event.link.includes("eventbrite")
                     ? "Register on Eventbrite"

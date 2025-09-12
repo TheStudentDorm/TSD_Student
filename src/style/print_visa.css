@@ -1,0 +1,159 @@
+/* styles/print_visa.css */
+@media print {
+  /* Hide navigation, footer, interactive elements */
+  header,
+  footer,
+  nav,
+  .no-print,
+  .print\:hidden {
+    display: none !important;
+  }
+  @media print {
+  .hero-section {
+    background: none !important; /* remove any bg image/color */
+    background-image: none !important;
+    background-attachment: scroll !important; /* no fixed bg */
+    
+    page-break-inside: avoid !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+
+    break-inside: avoid !important;
+    break-before: avoid !important;
+    break-after: avoid !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+}
+
+
+  /* Show print-only elements */
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:flex {
+    display: flex !important;
+  }
+
+  /* Show logo at top in print */
+  .print-logo {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 24px !important;
+  }
+
+  .print-logo img {
+    max-height: 60px !important;
+    margin: 0 auto 12px auto !important;
+  }
+
+  /* Main layout: remove padding/margin */
+  main,
+  .print-section {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* One-column layout override for grid */
+  .print-section .grid {
+    display: block !important;
+  }
+
+  .print-section .grid > div {
+    width: 100% !important;
+    margin-bottom: 24px !important;
+  }
+
+  /* Remove Tailwind vertical spacing (space-y) */
+  .space-y-16 > * + * {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .space-y-12 > * + * {
+    margin-top: 8px !important;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 4px !important;
+  }
+
+  /* Reduce section padding/margin */
+  .py-16, .pt-16, .pb-16,
+  .py-12, .pt-12, .pb-12,
+  .py-6, .pt-6, .pb-6,
+  .mb-4, .mt-4 {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  section,
+  .timeline-section,
+  .timeline-item,
+  .timeline-step{ display: block !important;
+    max-height: none !important;
+    overflow: visible !important;}
+  .print-block {
+    page-break-inside: avoid !important;
+    padding: 0 !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Typography spacing cleanup */
+  h1, h2, h3, h4 {
+    color: #000 !important;
+    margin: 0 0 8px 0 !important;
+    page-break-after: avoid !important;
+  }
+
+  p,
+  li {
+    margin: 0 0 6px 0 !important;
+    color: #000 !important;
+  }
+
+  /* Table formatting */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 12pt;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #000 !important;
+    padding: 6px !important;
+    text-align: left !important;
+  }
+
+  /* Prevent column gap issues */
+  .gap-12,
+  .gap-6,
+  .gap-y-12,
+  .gap-y-6 {
+    gap: 0 !important;
+  }
+
+  /* Prevent automatic page breaks */
+  .page-break {
+    page-break-before: always !important;
+  }
+  .download-mode .hero-section {
+  background: none !important;
+  background-image: none !important;
+}
+
+.download-mode .print\:hidden,
+.download-mode .no-print {
+  display: none !important;
+}
+}

@@ -110,8 +110,11 @@ const UAEUniversities: React.FC = () => {
 
       <div className="p-6">
         <p className="text-center text-lg text-gray-700 mb-10 max-w-3xl mx-auto">
-          Planning your academic journey? Here's a guide to some of the top universities in each emirate.
+          Planning your academic journey? Here's a guide to some of the top universities in each emirate, from world-renowned research hubs to creative arts powerhouses.
         </p>
+        <p>💡TSD Pro Tip</p><p>
+        Some unis are big and buzzy, others are focused and quiet. Think about your learning style, lifestyle, and future goals. A good fit beats a big name every time.
+          </p>
 
         {uaeUniversities.map((em) => (
           <section key={em.name} id={em.name.replace(/\s+/g, "")} className="mb-16">

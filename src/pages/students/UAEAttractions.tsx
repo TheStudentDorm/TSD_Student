@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import NavigationButtons from "../../components/NavigationButtons";
-
+import ImageModal from "../../components/ImageModal";
 interface Attraction {
   name: string;
   description: string;
@@ -215,6 +215,7 @@ const uaeAttractions: Emirate[] = [
 ];
 
 const UAEAttractionsTimeline: React.FC = () => {
+const [modalImage, setModalImage] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const filteredEmirates = uaeAttractions
@@ -235,20 +236,20 @@ const UAEAttractionsTimeline: React.FC = () => {
       </h1>
 
       {/* Sticky Navigation Bar */}
-      <nav className="sticky top-0 z-20 bg-white shadow-md mb-6 py-3 flex flex-wrap justify-center gap-4">
-        {uaeAttractions.map((emirate) => (
-          <a
-            key={emirate.name}
-            href={`#${emirate.name.replace(/\s+/g, "")}`}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
-            {emirate.name}
-          </a>
-        ))}
-      </nav>
+      <nav className="sticky top-0 z-20 bg-white shadow-md mb-6 py-3 flex flex-wrap gap-4">
+  {uaeAttractions.map((emirate) => (
+    <a
+      key={emirate.name}
+      href={`#${emirate.name.replace(/\s+/g, "")}`}
+      className="flex-1 min-w-[120px] px-4 py-2 bg-tsd-blue text-white rounded hover:bg-tsd-orange transition text-center"
+    >
+      {emirate.name}
+    </a>
+  ))}
+</nav>
 
       {/* Search Bar */}
-      <div className="sticky top-16 z-10 bg-gray-50 max-w-xl mx-auto mb-8">
+      {/* <div className="sticky top-16 z-10 bg-gray-50 max-w-xl mx-auto mb-8">
         <input
           type="text"
           placeholder="Search by emirate or attraction..."
@@ -256,7 +257,7 @@ const UAEAttractionsTimeline: React.FC = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
+      </div> */}
 
       {filteredEmirates.length === 0 && (
         <p className="text-center text-gray-500">
@@ -282,11 +283,16 @@ const UAEAttractionsTimeline: React.FC = () => {
                 }`}
               >
                 {attr.image && (
-                  <img
-                    src={attr.image}
-                    alt={attr.name}
-                    className="w-full md:w-1/2 h-64 object-cover rounded-lg shadow-lg"
-                  />
+                  <div
+                    className="w-full md:w-1/2 h-64 cursor-zoom-in"
+                    onClick={() => setModalImage(attr.image!)}
+                  >
+                    <img
+                      src={attr.image}
+                      alt={attr.name}
+                      className="w-full h-full object-cover rounded-lg shadow-lg hover:scale-105 transition-transform"
+                    />
+                  </div>
                 )}
                 <div className="md:w-1/2 md:px-8 mt-5 md:mt-0">
                   <h3 className="text-2xl font-bold mb-2">{attr.name}</h3>
@@ -311,7 +317,7 @@ const UAEAttractionsTimeline: React.FC = () => {
                       href={attr.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline mt-2 block"
+                      className="text-tsd-blue hover:underline hover:text-tsd-orange mt-2 block"
                     >
                       Visit Website
                     </a>
@@ -320,9 +326,18 @@ const UAEAttractionsTimeline: React.FC = () => {
               </div>
             ))}
           </div>
+          {modalImage && (
+  <ImageModal
+    src={modalImage}
+    alt="Attraction Image"
+    onClose={() => setModalImage(null)}
+  />
+)}
+<NavigationButtons />
         </section>
       ))}
-      <NavigationButtons />
+      
+      
     </div>
     
   );

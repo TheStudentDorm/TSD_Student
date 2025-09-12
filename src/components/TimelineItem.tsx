@@ -6,8 +6,8 @@ interface TimelineItemProps {
   icon: React.ElementType;
   title: string;
   description: string;
-  details: string;
-  tips?: string[]; // now accepts multiple tips
+  details?: string[];
+  tips?: string[];
   isOpen: boolean;
   onToggle: () => void;
   bgColor: string;
@@ -62,6 +62,7 @@ export default function TimelineItem({
         className={`flex items-start gap-3 p-4 rounded-lg transition-all duration-200 cursor-pointer hover:shadow-md hover:bg-opacity-20`}
         style={{ backgroundColor: `${bgColor}/10` }}
       >
+        {/* Icon */}
         <span
           className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full text-white shadow"
           style={{ backgroundColor: bgColor }}
@@ -78,6 +79,7 @@ export default function TimelineItem({
           </h4>
           <p className="text-gray-600">{description}</p>
 
+          {/* Expanded Content */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -88,15 +90,25 @@ export default function TimelineItem({
                 className="mt-2 text-gray-700 text-sm p-3 rounded-lg"
                 style={{ backgroundColor: `${bgColor}/20` }}
               >
-                {details}
-                {tips && tips.length > 0 && (
-                  <ul className="mt-2 space-y-1">
-                    {tips.map((tip, idx) => (
-                      <li key={idx} className="text-[#004AAD]/90 font-semibold italic">
-                        💡 TSD Pro Tip: {tip}
-                      </li>
+                {/* Details List */}
+                {details && details.length > 0 && (
+                  <ul className="list-disc list-inside space-y-1 mb-2">
+                    {details.map((detail, idx) => (
+                      <li key={idx}>{detail}</li>
                     ))}
                   </ul>
+                )}
+
+                {/* Tips with single heading */}
+                {tips && tips.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    <p className="text-[#004AAD]/90 font-semibold italic">💡 TSD Pro Tips:</p>
+                    <ul className="list-disc list-inside text-gray-700">
+                      {tips.map((tip, idx) => (
+                        <li key={idx} className="italic">{tip}</li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
               </motion.div>
             )}

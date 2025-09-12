@@ -8,9 +8,9 @@ export default function Footer() {
         {/* Brand */}
         <div className="flex items-center md:items-start gap-4">
           {/* Logo */}
-          <img src={Logo} alt="TSD Logo" className="w-32 h-auto" />
+          <img src={Logo} alt="TSD Logo" className="w-24 h-auto" />
           <div className="flex flex-col">
-            <h2 className="text-white text-xl md:text-2xl font-bold">The Student Dorm</h2>
+            <h2 className="text-white text-lg md:text-xl font-bold">The Student Dorm</h2>
             <p className="text-sm text-left mt-1">
               Your Student Life, Simplified.<br />
               Connecting students across the UAE with resources, housing, and opportunities.

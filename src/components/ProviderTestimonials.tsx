@@ -58,9 +58,7 @@ export default function ProviderTestimonials() {
   };
 
   return (
-    <section
-      className="relative py-20 bg-cover bg-center"
-      style={{ backgroundImage: "url('images/background/bg5.jpg')" }} // 🔥 background image
+    <section className ="relative py-16 bg-gradient-to-r from-[#004AAD] via-[#F9943B] to-[#004AAD] text-white     " 
     >
       {/* Overlay for readability */}
       <div className="absolute inset-0 bg-black bg-opacity-10"></div>

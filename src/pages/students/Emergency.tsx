@@ -134,6 +134,7 @@ export default function Emergency() {
           
           image="/images/student-hero-emergency.png"
            fixedBackground
+           className="hero-section print:hidden"
         />
 
         <div className="py-16 px-6 space-y-16">
@@ -257,12 +258,22 @@ export default function Emergency() {
         </section>
 
         {/* Tips Carousel */}
-        <section>
+        {/* <section>
           <div className="print:hidden">
             <h2 className="text-2xl font-semibold mb-4">TSD Pro Tips!</h2>
             <TipsCarousel tips={emergencyTips} duration={30} />
           </div>
-        </section>
+        </section> */}
+       <section className="mt-16 p-6 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg max-w-3xl mx-auto">
+  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
+  <ul className="list-disc pl-5 text-gray-800 space-y-2">
+    {emergencyTips.map((tip, index) => (
+      <li key={index}>
+        <span className="font-semibold text-tsd-blue">{tip.title}:</span> {tip.description}
+      </li>
+    ))}
+  </ul>
+</section>
       </div>
      <div className="print:hidden">
         <NavigationButtons />

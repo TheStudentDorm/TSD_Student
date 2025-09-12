@@ -1,25 +1,48 @@
 /* styles/print.css */
-@media print {
-/* Hide navigation, footer, buttons */
-header,
-footer,
-nav,
-.no-print {
-  display: none !important;
-}
 
-  /* Expand main content full width */
-  main {
+@media print {
+  /* Hide navigation, footer, buttons */
+  header,
+  footer,
+  nav,
+  .no-print,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Expand content to full width, remove spacing */
+  main, body {
     max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Remove spacing utilities like space-y-16 */
+  .space-y-16 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+
+  /* Remove padding from containers */
+  .py-16,
+  .px-6,
+  .p-6,
+  section {
     padding: 0 !important;
     margin: 0 !important;
   }
 
-  /* Table improvements for print */
+  /* Remove margins from text elements */
+  h1, h2, h3, p {
+    margin: 0 !important;
+  }
+
+  /* Tables: full width and clean borders */
   table {
-    border-collapse: collapse !important;
     width: 100% !important;
+    border-collapse: collapse !important;
     font-size: 12pt;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 
   table th,
@@ -29,16 +52,48 @@ nav,
     text-align: left !important;
   }
 
+  /* Force black headings */
   h1, h2, h3 {
-    color: #000 !important; /* Force black text */
-  }
-  @media print {
-  .print\:hidden {
-    display: none !important;
+    color: #000 !important;
   }
 
+  /* Optional: Ensure logo prints in full width if used */
+  .print-logo img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Show elements explicitly for print */
   .print\:flex {
     display: flex !important;
   }
+
+  .print\:block {
+    display: block !important;
   }
+  /* Remove spacing between hero and content */
+.hero-section {
+    height: auto !important;
+    min-height: auto !important;
+    background: none !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+ .hero-section * {
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+/* Ensure content section starts immediately after hero */
+.print-section,
+.space-y-16 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.hero-section + div {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 }

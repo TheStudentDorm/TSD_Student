@@ -1,207 +1,165 @@
-import React from "react";
-import HeroSectionSmall from "../../components/HeroSectionSmall";
-import TipsCarousel from "../../components/TipsCarousel";
-import { Train, Bus, Car, Map, CreditCard, ChevronDown } from "lucide-react";
+// src/pages/Transport.tsx
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Bus, Train, CreditCard, Smartphone } from "lucide-react";
 import NavigationButtons from "../../components/NavigationButtons";
 
-const transportTips = [
-  { title: "Use Metro", description: "Dubai Metro is fast, safe, and budget-friendly for students." },
-  { title: "Ride-Hailing Apps", description: "Apps like Careem and Uber make getting around easy." },
-  { title: "Student Cards", description: "Check if you are eligible for student transport discounts." },
-  { title: "Plan Routes", description: "Always check schedules and routes before traveling." },
-];
-
-const faqs = [
-  {
-    question: "Can I get a monthly pass with the Nol Student Card?",
-    answer:
-      "Yes, RTA offers discounted monthly and weekly passes for students holding a valid Nol Student Card.",
-  },
-  {
-    question: "How do I apply for a Nol Student Card?",
-    answer:
-      "You can apply online through the RTA website by submitting your Emirates ID, a photo, and a valid student ID or university enrollment letter.",
-  },
-  {
-    question: "Are student discounts available on taxis?",
-    answer:
-      "Currently, student discounts are not available for taxis or ride-hailing apps like Uber and Careem.",
-  },
-  {
-    question: "Do international student cards (ISIC) work in Dubai?",
-    answer:
-      "The ISIC card is not directly linked to RTA, but it is accepted by some private transport providers and can be useful abroad.",
-  },
-];
-
-type FAQAccordionProps = {
-  faqs: { question: string; answer: string }[];
+const sectionVariant = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
 };
 
-function FAQAccordion({ faqs }: FAQAccordionProps) {
-  const [openIndex, setOpenIndex] = React.useState<number | null>(null);
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  return (
-    <div className="space-y-4">
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className="border border-gray-200 rounded-lg shadow-sm overflow-hidden"
-        >
-          <button
-            className="w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition"
-            onClick={() => toggleFAQ(index)}
-          >
-            <span className="font-medium text-gray-800">{faq.question}</span>
-            <ChevronDown
-              className={`w-5 h-5 text-gray-600 transition-transform ${
-                openIndex === index ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-          {openIndex === index && (
-            <div className="p-4 text-gray-700 bg-white">{faq.answer}</div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export default function Transport() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  // Parallax effect: move bg slower than scroll
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <main className="max-w-7xl mx-auto">
-      {/* Hero */}
-      <HeroSectionSmall
-        title="Transport Made Simple"
-        subtitle="Learn how to navigate the UAE efficiently with public transport, taxis, ride-hailing apps, and student-friendly options."
-        icon="/icons/transport.svg"
-        image="/images/student_trans.jpg"
-      />
+    <section ref={ref} className="relative py-16 px-6 overflow-hidden">
+      {/* 🔹 Parallax Background */}
+      <motion.div
+        style={{ y }}
+        className="absolute inset-0"
+      >
+        <img
+          src="/images/student_trans.jpg" // replace with your bg
+          alt="Dubai transport background"
+          className="w-full h-full "
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </motion.div>
 
-      {/* Info Blocks */}
-      <section className="py-16 px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
-          Getting Around the UAE
-        </h2>
+      {/* 🔹 Foreground Content */}
+      <div className="relative max-w-5xl mx-auto space-y-16 text-white">
+        {/* Page Title */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <h1 className="text-3xl sm:text-4xl font-bold">
+            Getting Around Dubai & Beyond
+          </h1>
+          <p className="mt-4 max-w-2xl mx-auto text-gray-200">
+            Whether you're commuting to class or planning a weekend trip across the UAE, 
+            Dubai offers affordable and reliable public transport options for students.
+          </p>
+        </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Metro */}
-          <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow hover:shadow-lg transition">
-            <Train className="w-10 h-10 text-blue-600 mb-4" />
-            <h3 className="font-semibold text-lg mb-2">Metro</h3>
-            <p className="text-gray-700 text-sm">
-              Dubai Metro is the fastest and most affordable way for students to travel across the city.
-            </p>
+        {/* Metro */}
+        <motion.div
+          custom={0}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-md text-gray-800"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <Train className="text-[#004AAD]" size={28} />
+            <h2 className="text-2xl font-semibold text-[#004AAD]">Dubai Metro</h2>
           </div>
+          <p>
+            Dubai’s Metro system is clean, fast, and connects most major areas of the city.
+          </p>
+          <ul className="list-disc list-inside mt-2 space-y-1">
+            <li>
+              <span className="font-medium">Red Line:</span> Along Sheikh Zayed Road — BurJuman, Dubai Mall, Business Bay, JLT, Internet City, Expo 2020.
+            </li>
+            <li>
+              <span className="font-medium">Green Line:</span> Older areas — Deira, Al Rigga, Union, Al Fahidi, Creek.
+            </li>
+          </ul>
+          <p className="mt-3 text-sm text-gray-600">
+            ⏰ Metro runs daily ~5:00 AM–midnight (Sundays open later at 8:00 AM). Always check RTA app.
+          </p>
+        </motion.div>
 
-          {/* Bus */}
-          <div className="p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow hover:shadow-lg transition">
-            <Bus className="w-10 h-10 text-green-600 mb-4" />
-            <h3 className="font-semibold text-lg mb-2">Bus</h3>
-            <p className="text-gray-700 text-sm">
-              RTA buses cover a wide network and are budget-friendly with student cards.
-            </p>
+        {/* Student Nol Card */}
+        <motion.div
+          custom={1}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-md text-gray-800"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <CreditCard className="text-[#F9943B]" size={28} />
+            <h2 className="text-2xl font-semibold text-[#F9943B]">Student Nol Card</h2>
           </div>
+          <p>
+            Students can get a <span className="font-medium">Blue Nol Card</span> 
+            with 50% discounts on Metro, Tram, and local bus rides.
+          </p>
+          <ul className="list-decimal list-inside mt-2 space-y-1">
+            <li>Apply online at rta.ae/nol/apply</li>
+            <li>Submit student ID & passport photo</li>
+            <li>Pay AED 70</li>
+            <li>Tap in/out to travel at discounted rates</li>
+          </ul>
+          <p className="mt-3 text-sm text-gray-600">
+            ⚠️ Local travel only. Annual renewal required.
+          </p>
+        </motion.div>
 
-          {/* Taxi */}
-          <div className="p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl shadow hover:shadow-lg transition">
-            <Car className="w-10 h-10 text-yellow-600 mb-4" />
-            <h3 className="font-semibold text-lg mb-2">Taxi / Ride Apps</h3>
-            <p className="text-gray-700 text-sm">
-              Use Careem, Uber, or RTA taxis for flexible and safe travel anytime.
-            </p>
+        {/* Intercity Buses */}
+        <motion.div
+          custom={2}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-md text-gray-800"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <Bus className="text-green-600" size={28} />
+            <h2 className="text-2xl font-semibold text-green-700">Intercity Buses</h2>
           </div>
+          <p>
+            Long-distance RTA buses connect Dubai with other emirates. Comfortable, air-conditioned, and budget-friendly.
+          </p>
+          <p className="mt-3 font-medium">Popular Routes:</p>
+          <ul className="list-disc list-inside mt-1 space-y-1">
+            <li>E100/E101 → Abu Dhabi</li>
+            <li>E303/E304/E306/E307 → Sharjah</li>
+            <li>E400 → Ajman</li>
+            <li>E601 → Ras Al Khaimah</li>
+            <li>E700 → Fujairah</li>
+          </ul>
+        </motion.div>
 
-          {/* Route Planning */}
-          <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl shadow hover:shadow-lg transition">
-            <Map className="w-10 h-10 text-purple-600 mb-4" />
-            <h3 className="font-semibold text-lg mb-2">Route Planning</h3>
-            <p className="text-gray-700 text-sm">
-              Plan ahead using RTA apps or Google Maps to avoid delays and save time.
-            </p>
+        {/* RTA App */}
+        <motion.div
+          custom={3}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariant}
+          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-md text-gray-800"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <Smartphone className="text-[#02066f]" size={28} />
+            <h2 className="text-2xl font-semibold text-[#02066f]">RTA App</h2>
           </div>
-        </div>
-      </section>
+          <p>
+            Must-have for students — real-time schedules, route maps, fare estimates, Nol top-up, and live service updates.
+          </p>
+        </motion.div>
 
-      {/* Tips Carousel */}
-      <section className="py-16 px-6 bg-gray-50">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-          TSD Pro Tips!
-        </h2>
-        <TipsCarousel tips={transportTips} duration={30} />
-      </section>
-
-      {/* Student Transport Cards */}
-      <section className="py-16 px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
-          Student Transport Cards
-        </h2>
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Nol Card */}
-          <div className="p-6 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl shadow hover:shadow-lg transition text-center">
-            <CreditCard className="w-10 h-10 text-indigo-600 mb-4 mx-auto" />
-            <h3 className="font-semibold text-lg mb-2">Student Nol Card</h3>
-            <p className="text-gray-700 text-sm mb-3">
-              Special discounted fares for Metro, Bus, and Tram. Apply via RTA website with student ID.
-            </p>
-            <a
-              href="https://www.rta.ae/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-indigo-600 hover:underline font-medium"
-            >
-              Apply Now
-            </a>
-          </div>
-
-          {/* University ID */}
-          <div className="p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl shadow hover:shadow-lg transition text-center">
-            <CreditCard className="w-10 h-10 text-pink-600 mb-4 mx-auto" />
-            <h3 className="font-semibold text-lg mb-2">University ID</h3>
-            <p className="text-gray-700 text-sm mb-3">
-              Many universities partner with RTA and private transport providers for special rates.
-            </p>
-            <a
-              href="#"
-              className="text-pink-600 hover:underline font-medium"
-            >
-              Check with your University
-            </a>
-          </div>
-
-          {/* International Student Cards */}
-          <div className="p-6 bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl shadow hover:shadow-lg transition text-center">
-            <CreditCard className="w-10 h-10 text-teal-600 mb-4 mx-auto" />
-            <h3 className="font-semibold text-lg mb-2">ISIC Card</h3>
-            <p className="text-gray-700 text-sm mb-3">
-              The International Student Identity Card (ISIC) is accepted worldwide for discounts, including some transport services.
-            </p>
-            <a
-              href="https://www.isic.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-teal-600 hover:underline font-medium"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 px-6 bg-gray-50">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
-          Frequently Asked Questions
-        </h2>
-        <FAQAccordion faqs={faqs} />
-      </section>
-      <NavigationButtons />
-    </main>
+        {/* Navigation */}
+        <NavigationButtons back="/student-life" next="/housing" />
+      </div>
+    </section>
   );
 }

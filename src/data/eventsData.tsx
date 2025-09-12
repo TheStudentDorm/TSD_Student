@@ -8,26 +8,11 @@ export interface Event {
   description: string[];
   image: string;
   links?: { label: string; url: string }[];
+   proTips?: string[];
 }
 
 export const events: Event[] = [
-  {
-    category: "Academic & Career",
-    title: "Meet the Top Students",
-    date: "31 Aug, 2025 (10 AM – 6 PM)",
-    location: "Millennium Plaza Downtown Hotel, Dubai",
-    entry: "Free entry",
-    description: [
-      "Free counselling with top global university students",
-      "Tips on applications & profile building",
-    ],
-    image: "/images/events/events_1.jpg",
-    links: [
-      { label: "Instagram", url: "https://instagram.com/uniplus" },
-      { label: "Eventbrite", url: "https://eventbrite.com" },
-    ],
-  },
-  {
+    {
     category: "Academic & Career",
     title: "GCC Exhibition for Training & Education",
     date: "22–24 Sep, 2025",
@@ -39,6 +24,7 @@ export const events: Event[] = [
       { label: "Instagram", url: "https://instagram.com/gcc_exhibition" },
       { label: "Website", url: "https://gccexhibition.com" },
     ],
+    proTips: ["If you collected contact details or company info at a fair, send a short thank-you or LinkedIn connection request the next day. It sets you apart and shows you’re serious."],
   },
   {
     category: "Academic & Career",
@@ -52,6 +38,8 @@ export const events: Event[] = [
     ],
     image: "/images/events/events_3.jpg",
     links: [{ label: "Website", url: "https://najahexpo/dubai" }],
+    proTips: ["Dress one notch smarter than you think. You don’t need a suit for every event but if it’s semi-formal, go slightly polished.",
+      "Smart casual with confidence = always a win."],
   },
   {
     category: "Tech & Innovation",
@@ -62,6 +50,8 @@ export const events: Event[] = [
     description: ["Explore future tech & professional networking"],
     image: "/images/events/events_4.jpg",
     links: [{ label: "Website", url: "https://gitex.com" }],
+    proTips: ["Popular student events (especially career fairs, competitions, or industry mixers) fill up quickly. Register as soon as the event drops, even if you’re not 100% sure you’ll attend.",
+      "You can always cancel later."],
   },
   {
     category: "Music & Lifestyle",
@@ -116,5 +106,6 @@ export const events: Event[] = [
     ],
     image: "/images/events/events_8.jpg",
     links: [{ label: "Website", url: "https://alserkal.online" }],
+    proTips: ["If the event is free, it’ll likely be packed. Arrive early to grab good seats, food, merch, or a proper networking opportunity before the crowd builds."],
   },
 ];

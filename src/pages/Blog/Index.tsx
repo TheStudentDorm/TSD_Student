@@ -23,27 +23,25 @@ const blogPosts = [
 
 export default function BlogIndex() {
   return (
-    <div className="pt-0">
-      {/* Parallax Banner */}
-      <div
-        className="h-[60vh] bg-fixed bg-center bg-cover flex items-center justify-center"
-        style={{
-          backgroundImage: "url('/images/blog/blog-banner.jpg')",
-        }}
-      >
-        <div className="pt-20 px-6 max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl font-bold mb-4 text-white">
-            TSD BLOG
-          </h1>
-          <p className="text-xl sm:text-2xl text-white italic">
-            Insights, tips, and guides to help students navigate their personal and
-            professional lives in the UAE. <br />
-            <span className="block text-lg sm:text-xl text-gray-200 italic mt-3">
-              Keep checking back for fresh updates!
-            </span>
-          </p>
-        </div>
-      </div>
+   <section>
+    <div
+  className="h-[60vh] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center text-white text-center px-6"
+  style={{
+    backgroundImage: "url('/images/blog/blog-banner.jpg')",
+  }}
+>
+  <div className="bg-black/50 p-6 rounded-lg">
+    <h1 className="text-4xl font-bold mb-4">TSD BLOG</h1>
+    <p className="text-xl sm:text-2xl italic">
+      Insights, tips, and guides to help students navigate their personal and
+      professional lives in the UAE.
+      <br />
+      <span className="block text-lg sm:text-xl text-gray-200 italic mt-3">
+        Keep checking back for fresh updates!
+      </span>
+    </p>
+  </div>
+</div>
 
       {/* Blog List */}
       <div className="px-6 py-16 max-w-4xl mx-auto space-y-10">
@@ -52,14 +50,11 @@ export default function BlogIndex() {
             key={post.id}
             className="flex flex-col md:flex-row gap-6 border-b pb-8"
           >
-            {/* Thumbnail Image */}
             <img
               src={post.image}
               alt={post.title}
               className="w-full md:w-56 h-40 object-cover rounded-lg"
             />
-
-            {/* Content */}
             <div className="flex-1">
               <h2 className="text-2xl font-semibold mb-1">{post.title}</h2>
               <p className="text-gray-500 mb-2 italic">{post.subtitle}</p>
@@ -79,6 +74,5 @@ export default function BlogIndex() {
           <NavigationButtons />
         </div>
       </div>
-    </div>
-  );
+   </section>);
 }

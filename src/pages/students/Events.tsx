@@ -1,13 +1,15 @@
 // src/pages/Events.tsx
 import { useState } from "react";
-import { Calendar, MapPin, Ticket, ExternalLink, Navigation2OffIcon } from "lucide-react";
+import { Calendar, MapPin, Ticket, ExternalLink } from "lucide-react";
 import { events } from "../../data/eventsData";
 import NavigationButtons from "../../components/NavigationButtons";
+import ImageModal from "../../components/ImageModal";
 
 const categories = ["All", "Academic & Career", "Tech & Innovation", "Music & Lifestyle", "Art & Culture"];
 
 export default function EventsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   const filteredEvents =
     selectedCategory === "All"
@@ -26,7 +28,7 @@ export default function EventsPage() {
             onClick={() => setSelectedCategory(cat)}
             className={`px-4 py-2 rounded-full border text-sm font-medium transition ${
               selectedCategory === cat
-                ? "bg-blue-600 text-white border-blue-600"
+                ? "bg-tsd-blue text-white border-tsd-blue"
                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
             }`}
           >
@@ -38,22 +40,22 @@ export default function EventsPage() {
       {/* Event Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredEvents.map((event, idx) => (
-          <div
-            key={idx}
-            className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden"
-          >
-            {/* Event Image */}
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-40 object-cover"
-            />
+          <div key={idx} className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
+            {/* Image Wrapper */}
+            <div
+              className="h-48 flex items-center justify-center bg-tsd-blue/5 cursor-zoom-in"
+              onClick={() => setModalImage(event.image)}
+            >
+              <img
+                src={event.image}
+                alt={event.title}
+                className="max-h-full max-w-full object-contain transition hover:scale-105"
+              />
+            </div>
 
             {/* Event Info */}
             <div className="p-6">
-              <span className="text-sm font-semibold text-blue-600">
-                {event.category}
-              </span>
+              <span className="text-sm font-semibold text-tsd-blue">{event.category}</span>
               <h2 className="text-xl font-bold mt-2">{event.title}</h2>
               <div className="flex items-center gap-2 text-gray-600 mt-3">
                 <Calendar size={16} /> <span>{event.date}</span>
@@ -79,11 +81,22 @@ export default function EventsPage() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-blue-600 hover:underline text-sm"
+                      className="flex items-center gap-1 text-tsd-blue hover:underline hover:text-tsd-orange text-sm"
                     >
                       {link.label} <ExternalLink size={14} />
                     </a>
                   ))}
+                </div>
+              )}
+              {/* TSD Pro Tips (conditional) */}
+              {event.proTips && event.proTips.length > 0 && (
+                <div className="mt-6 p-4 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg">
+                  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
+                  <ul className="list-disc pl-5 text-gray-800 space-y-1 text-sm">
+                    {event.proTips.map((tip, i) => (
+                      <li key={i}>{tip}</li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </div>
@@ -91,18 +104,16 @@ export default function EventsPage() {
         ))}
       </div>
 
-      {/* Pro Tips */}
-      <div className="mt-16 p-6 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg max-w-3xl mx-auto">
-        <h3 className="font-bold mb-2">💡 TSD Pro Tips</h3>
-        <ul className="list-disc pl-5 text-gray-700 space-y-1">
-          <li>Follow up with contacts from fairs — thank-you or LinkedIn.</li>
-          <li>Dress one notch smarter than expected (smart casual works).</li>
-          <li>Register early, popular events fill fast.</li>
-          <li>Arrive early to free events for best seats & networking.</li>
-        </ul>
-      </div>
-        <NavigationButtons />
+      
+      {modalImage && (
+        <ImageModal
+          src={modalImage}
+          alt="Event full image"
+          onClose={() => setModalImage(null)}
+        />
+      )}
+
+      <NavigationButtons />
     </section>
-    
   );
 }

@@ -31,7 +31,7 @@ const MissionVision: React.FC = () => {
     className="relative bg-[#002060] text-white p-10 md:p-16 flex-1 flex flex-col justify-center text-center shadow-2xl"
     style={{
       // angled on left to fit mission shard
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 10% 50%)",
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 10 % 50%)",
       borderRight: "8px solid #ff6d34",
       minHeight: "280px",
     }}

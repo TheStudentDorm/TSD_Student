@@ -7,6 +7,7 @@ interface HeroSectionSmallProps {
   caption?: string;
   image: string;
   fixedBackground?: boolean;
+  className?: string;
 }
 
 export default function HeroSectionSmall({
@@ -14,11 +15,12 @@ export default function HeroSectionSmall({
   subtitle,
   caption,
   image,
-  fixedBackground = false,
+  fixedBackground,
+  className=" "
 }: HeroSectionSmallProps) {
   return (
     <section
-      className={`relative w-full flex items-center justify-center text-center bg-cover bg-center ${
+      className={`relative w-full flex items-center justify-center text-center bg-cover bg-center ${className} {
         fixedBackground ? "bg-fixed" : ""
       }`}
       style={{

@@ -19,23 +19,43 @@ const plans = [
     title: "BASIC",
     price: "Free",
     caption:"",
-    features: ["Minimal listing and photos ","List up to 2 units/room types with a single photo per unit","Listing on TSD for 30 days","Display of contact info (email & phone)","Visible in student searches (default order)","Provider dashboard for managing your listings"],
+    features: [
+      "Minimal listing and photos", 
+      "List up to 2 units/room types with a single photo per unit",
+      "Listing on TSD for 30 days",
+      "Display of contact info (email & phone)",
+      "Visible in student searches (default order)",
+      "Provider dashboard for managing your listings"
+    ],
     additionalinfo:"",
   },
   {
     title: "STANDARD",
     price: "AED 300/month",
     caption:"Everything in Basic, plus:",
-    features: ["Profile page with photos, amenities","Maximum 5 units/room types","Add custom photos and videos","Appear above Basic listings in search results","Priority support for listing edits"],
+    features: [
+      "Profile page with photos, amenities",
+      "Maximum 5 units/room types",
+      "Add custom photos and videos",
+      "Appear above Basic listings in search results",
+      "Priority support for listing edits"
+    ],
     additionalinfo:"*Enjoy up to 25% off premium add-ons including social media features, homepage banners, and content creation.",
+    highlighted: true, // Highlighted for standard plan
   },
   {
     title: "FEATURED",
     price: "AED 550/month",
     caption:"Everything in Standard, plus:",
-    features: ["Priority placement on search results, photos, amenities ","Highlighted listing with coloured border & priority tag","Appear in top results ","One Social media feature (worth AED 499)","One banner ad on homepage for 14 days (worth AED 400)","Custom content creation (copy + layout assistance)"],
+    features: [
+      "Priority placement on search results, photos, amenities",
+      "Highlighted listing with coloured border & priority tag",
+      "Appear in top results",
+      "One Social media feature (worth AED 499)",
+      "One banner ad on homepage for 14 days (worth AED 400)",
+      "Custom content creation (copy + layout assistance)"
+    ],
     additionalinfo:"*Need more visibility? Featured partners can purchase extra social features, content packages, and banners at special rates",
-    featured: true,
   },
 ];
 
@@ -56,14 +76,13 @@ const ProvidersPage = () => {
 
   return (
     <div className="w-full">
-
       {/* HERO SECTION */}
       <section className="relative h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: "url('/images/list_your_prop.jpg')", transform: "translateZ(0)" }}
+          style={{ backgroundImage: "url('/images/property.png')", transform: "translateZ(0)" }}
         >
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-black/10"></div>
         </div>
 
         <div className="relative z-10 max-w-4xl px-6">
@@ -113,8 +132,11 @@ const ProvidersPage = () => {
         </div>
       </section>
 
-      <ProviderTestimonials />
+      
+    {/* You can add your testimonial components here, for example */}
+    <ProviderTestimonials />
 
+ 
       {/* SUBSCRIPTION PLANS */}
       <section id="subscription-plans" className="py-16 bg-gray-50">
         <h2 className="text-3xl font-bold text-center mb-10 text-[#004AAD]">Subscription Plans</h2>
@@ -124,18 +146,16 @@ const ProvidersPage = () => {
             <div
               key={i}
               className={`group p-6 bg-white shadow-md rounded-2xl border flex flex-col 
-                          transition duration-300 transform hover:scale-105 hover:shadow-2xl ${item.featured ? 'border-[#F9943B]' : 'border-gray-200'}`}
+                          transition duration-300 transform hover:scale-105 hover:shadow-2xl 
+                          ${item.highlighted ? 'border-[#F9943B] border-4' : 'border-gray-200'}`}
             >
               <h3 className="font-bold text-[#004AAD] text-lg">{item.title}</h3>
               <h4 className="mt-2 font-semibold text-xl">{item.price}</h4>
               <div className="mt-2 font-semibold">{item.caption}</div>
 
-              <ul className="space-y-3 text-gray-700 mt-4 flex-1">
+              <ul className="space-y-3 text-gray-700 mt-4 flex-1 list-disc pl-6">
                 {item.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <span className="w-6 h-6 flex items-center justify-center bg-[#004AAD] text-white rounded-full">✓</span>
-                    {feature}
-                  </li>
+                  <li key={idx}>{feature}</li>
                 ))}
               </ul>
 
@@ -153,110 +173,82 @@ const ProvidersPage = () => {
             </div>
           ))}
         </div>
-
         <p className="mt-10 text-center text-gray-900 italic text-md">
           *Receive full list of plans and discounts upon enquiry only
         </p>
       </section>
 
+      
       {/* ADD-ON SERVICES */}
-      <section className="relative py-16 bg-gray-50 overflow-hidden">
-        <div className="mt-16 max-w-6xl mx-auto px-6 text-center"
-          style={{ backgroundImage: "url('/images/background/bg1.jpg')", transform: "translateZ(0)" }}
-        >
-          <h2 className="text-4xl font-bold mb-8 text-[#004AAD]">Add-On Services</h2>
+<section className="relative py-16 bg-gray-50 overflow-hidden">
+  <div className="mt-16 max-w-6xl mx-auto px-6 text-center"
+    style={{ backgroundImage: "url('/images/background/bg1.jpg')", transform: "translateZ(0)" }}
+  >
+    <h2 className="text-4xl font-bold mb-8 text-[#004AAD]">Add-On Services</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-white rounded-xl shadow-sm overflow-hidden">
-            <div className="p-5 border border-gray-100">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">📸</span>
-                <h3 className="font-semibold text-left text-[#F9943B]">Photography & Content</h3>
-              </div>
-              <p className="text-[#004AAD] text-sm italic">Professional photos, videos and descriptions that make your listing stand out and attract more students.</p>
-              <p className="text-gray-800 mt-3">AED 300 / listing</p>
-            </div>
-
-            <div className="p-6 border border-gray-100">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">✨</span>
-                <h3 className="font-semibold text-[#F9943B]">Highlight in Search</h3>
-              </div>
-              <p className="text-[#004AAD] text-sm italic">Get priority visibility in student search results to boost clicks and inquiries</p>
-              <p className="text-gray-800 mt-3">AED 100 / 7 days</p>
-            </div>
-
-            <div className="p-6 border border-gray-100">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">🏠</span>
-                <h3 className="font-semibold text-[#F9943B]">Homepage Banners</h3>
-              </div>
-              <p className="text-[#004AAD] text-sm italic">Feature your brand front and centre on the TSD homepage for maximum exposure</p>
-              <p className="text-gray-800 mt-3">AED 200 / week</p>
-              <p className="text-gray-700 text-sm">(AED 700 / month)</p>
-            </div>
-
-            <div className="p-6 border border-gray-100">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-3xl">📢</span>
-                <h3 className="font-semibold text-[#F9943B]">Social Media Feature</h3>
-              </div>
-              <p className="font-semibold text-gray-700 text-md">(Instagram & LinkedIn)</p>
-              <p className="text-[#004AAD] text-sm italic mt-2">Reach thousands of students with a spotlight, co-branded post on our active social media channels.</p>
-              <p className="text-gray-800 mt-3">AED 499 for 3 posts</p>
-            </div>
-          </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-white rounded-xl shadow-sm overflow-hidden">
+      <div className="p-5 border border-gray-100">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-3xl">📸</span>
+          <h3 className="font-semibold text-left text-[#F9943B]">Photography & Content</h3>
         </div>
-      </section>
+        <p className="text-[#004AAD] text-sm italic">Professional photos, videos and descriptions that make your listing stand out and attract more students.</p>
+        <p className="text-gray-800 mt-3">AED 300 / listing</p>
+      </div>
+
+      <div className="p-6 border border-gray-100">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-3xl">✨</span>
+          <h3 className="font-semibold text-[#F9943B]">Highlight in Search</h3>
+        </div>
+        <p className="text-[#004AAD] text-sm italic">Get priority visibility in student search results to boost clicks and inquiries</p>
+        <p className="text-gray-800 mt-3">AED 100 / 7 days</p>
+      </div>
+
+      <div className="p-6 border border-gray-100">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-3xl">🏠</span>
+          <h3 className="font-semibold text-[#F9943B]">Homepage Banners</h3>
+        </div>
+        <p className="text-[#004AAD] text-sm italic">Feature your brand front and centre on the TSD homepage for maximum exposure</p>
+        <p className="text-gray-800 mt-3">AED 200 / week</p>
+        <p className="text-gray-700 text-sm">(AED 700 / month)</p>
+      </div>
+
+      <div className="p-6 border border-gray-100">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-3xl">📢</span>
+          <h3 className="font-semibold text-[#F9943B]">Social Media Feature</h3>
+        </div>
+        <p className="font-semibold text-gray-700 text-md">(Instagram & LinkedIn)</p>
+        <p className="text-[#004AAD] text-sm italic mt-2">Reach thousands of students with a spotlight, co-branded post on our active social media channels.</p>
+        <p className="text-gray-800 mt-3">AED 499 for 3 posts</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CALL TO ACTION */}
-      <section
-        className="relative py-20 text-white text-center overflow-hidden"
-        style={{ backgroundImage: "url('/images/cta-bg.jpg')", backgroundAttachment: "fixed", backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#004AAD]/80 via-[#F9943B]/70 to-[#004AAD]/80"></div>
-
-        <div className="relative max-w-3xl mx-auto px-6">
-          <motion.h2
-            className="text-3xl sm:text-5xl font-extrabold mb-6"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Ready to List Your Property?
-          </motion.h2>
-
-          <motion.p
-            className="text-lg sm:text-xl mb-10 text-gray-100"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Reach thousands of students actively searching for accommodation across the UAE.
-          </motion.p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row justify-center items-center gap-4"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <a
-              href="mailto:thestudentdorm@gmail.com"
-              className="px-6 py-3 bg-[#004AAD] text-white font-semibold rounded-lg shadow-md hover:bg-[#003580] transition transform hover:scale-105"
-            >
-              📧 Email Us
-            </a>
-
+      <section id="cta" className="relative py-16 bg-gradient-to-r from-[#004AAD] to-[#F9943B]">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
+          <h2 className="text-3xl font-bold mb-4">Start Your Listing Today!</h2>
+          <p className="mb-6 text-lg">Our team is here to assist you every step of the way.</p>
+          <div className="flex justify-center gap-6">
             <Link
-              to="/pages/ProviderInterestForm"
-              className="px-6 py-3 bg-gradient-to-r from-[#F9943B] via-[#004AAD] to-[#F9943B] text-white font-semibold rounded-lg shadow-md hover:opacity-90 transition transform hover:scale-105"
+              to="mailto:support@tsd.com"
+              className="px-6 py-3 rounded-lg font-semibold bg-[#F9943B] hover:bg-[#F38D32]"
             >
-              📝 Provider Interest Form
+              Email Us
             </Link>
-          </motion.div>
+            <Link
+              to="/provider-interest-form"
+              className="px-6 py-3 rounded-lg font-semibold bg-[#004AAD] hover:bg-[#003580]"
+            >
+              Fill Out Interest Form
+            </Link>
+          </div>
         </div>
       </section>
 
