@@ -60,8 +60,8 @@ const afterArrivalSteps = [
     icon: Stethoscope,
     title: "Complete Medical Fitness Test",
     description:
-      "Within the first 7–10 days after arrival, you must undergo a mandatory medical test at a government-approved clinic.",
-    details: ["Tests include:", "Chest X-ray", "Blood test (for infectious diseases)"],
+      "Within the first 7–10 days after arrival, you must undergo a mandatory medical test at a government-approved clinic. Tests include:",
+    details: [ "Chest X-ray", "Blood test (for infectious diseases)"],
     tips: ["Usually organised by your university or visa officer."],
   },
   {

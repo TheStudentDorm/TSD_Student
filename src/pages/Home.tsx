@@ -253,7 +253,7 @@ useEffect(() => {
       {/* ======================== STUDENT RESOURCES ======================== */}
 <section
   id="student-resources"
-  className="py-12 sm:py-16 text-center relative overflow-hidden"
+  className="pt-6 sm:pt-8 pb-12 sm:pb-16 text-center relative overflow-hidden"
   style={{
     backgroundImage: "url('/images/student-bg.jpg')",
     backgroundRepeat: "no-repeat",   // ✅ prevents tiling
@@ -262,12 +262,13 @@ useEffect(() => {
     backgroundAttachment: "scroll",  // ✅ moves normally with the page
   }}
 >
-  <div className="absolute inset-0 bg-black/40 z-0"></div>
-  <div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12">
-    <h2 className="text-4xl sm:text-3xl font-bold mb-6 text-[#02066f]">
+  <div className="absolute inset-0 bg-black/10 z-0"></div>
+  <div  className="text-4xl sm:text-5xl font-bold mb-10 sm:mb-16 text-white">
+  
+    <h2 className="text-5xl  font-bold mb-6 text-white">
       STUDENT RESOURCES
     </h2>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 sm:gap-6 max-w-5xl mx-auto">
       {resources.map((res, idx) => (
         <div key={idx}>
           <Link
@@ -339,9 +340,9 @@ useEffect(() => {
   <div className="pt-1">
     <Link
       to="/blog/index"
-      className="text-tsd-blue font-medium hover:text-[#ff6d34] text-base sm:text-lg"
+      className="text-tsd-blue font-medium hover:text-[#ff6d34] text-base text-sm"
     >
-      Read More Newsletters →
+      Read More Blog →
     </Link>
   </div>
 </motion.div>
@@ -357,9 +358,9 @@ useEffect(() => {
     >
       <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[#02066f]">TESTIMONIALS</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6  h-[300px] flex flex-col">
         {/* Testimonial 1 */}
-        <div className="flex flex-col justify-between h-full p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+        <div className="flex flex-col justify-center h-full p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition">
           <div>
             <div className="text-[#004AAD] text-3xl text-center leading-none mb-2">“</div>
             <p className="text-sm text-grey-900 italic mb-4">
@@ -377,7 +378,7 @@ useEffect(() => {
         </div>
 
         {/* Testimonial 2 */}
-        <div className="flex flex-col justify-between h-full p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition">
+        <div className="flex flex-col justify-center h-full p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition">
           <div>
             <div className="text-[#004AAD] text-3xl text-center leading-none mb-2">“</div>
             <p className="text-sm text-grey-900 italic mb-4">

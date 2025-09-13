@@ -6,6 +6,7 @@ interface HeroSectionProps {
   title: string;
   children: React.ReactNode;
   reverse?: boolean;
+  image?: string; // optional image URL
   background?: boolean; // use gradient if true
 }
 
@@ -15,15 +16,24 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   children,
   reverse = false,
   background = false,
+  image,
 }) => {
   return (
     <section
       id={id}
-      className={`relative py-16 px-6 ${
-        background ? "text-white" : "text-gray-900"
-      } flex items-center justify-center`}
+      className={`relative py-16 px-6 flex items-center justify-center ${
+        background || image ? "text-white" : "text-gray-900"
+      }`}
       style={
-        background
+        image
+          ? {
+              backgroundImage: `url(${image})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              minHeight: "400px",
+            }
+          : background
           ? {
               background: "linear-gradient(135deg, #004AAD, #F9943B)",
               minHeight: "400px",
@@ -31,6 +41,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           : {}
       }
     >
+      {/* Optional overlay for readability */}
+      {(image || background) && <div className="absolute inset-0 bg-black/10 bg-opacity-40"></div>}
+
       {/* Centered container */}
       <motion.div
         className="relative z-10 max-w-3xl text-center flex flex-col items-center justify-center space-y-2"
@@ -41,7 +54,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
 
-        {/* Each paragraph in one line */}
         <div className="text-lg flex flex-col items-center space-y-2">
           {React.Children.map(children, (child) => (
             <span className="whitespace-nowrap">{child}</span>

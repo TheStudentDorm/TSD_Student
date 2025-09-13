@@ -80,7 +80,7 @@ const ProvidersPage = () => {
       <section className="relative h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: "url('/images/property.png')", transform: "translateZ(0)" }}
+          style={{ backgroundImage: "url('/images/property.jpg')", transform: "translateZ(0)" }}
         >
           <div className="absolute inset-0 bg-black/10"></div>
         </div>
@@ -185,49 +185,68 @@ const ProvidersPage = () => {
       </section>
 
       
-      {/* ADD-ON SERVICES */}
-<section className="relative py-16 bg-gray-50 overflow-hidden">
-  <div className="mt-16 max-w-6xl mx-auto px-6 text-center"
-    style={{ backgroundImage: "url('/images/background/bg1.jpg')", transform: "translateZ(0)" }}
-  >
-    <h2 className="text-4xl font-bold mb-8 text-[#004AAD]">Add-On Services</h2>
+     {/* ADD-ON SERVICES */}
+<section
+  className="relative py-16 bg-gray-50 overflow-hidden bg-cover bg-center"
+  style={{
+    backgroundImage: "url('/images/background/bg1.jpg')",
+    transform: "translateZ(0)"
+  }}
+>
+  {/* Optional overlay for contrast */}
+  <div className="absolute inset-0 bg-white bg-opacity-80 pointer-events-none"></div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-white rounded-xl shadow-sm overflow-hidden">
-      <div className="p-5 border border-gray-100">
+  <div className="relative w-full px-6 text-center">
+    <h2 className="text-4xl font-bold mb-12 text-[#004AAD]">Add-On Services</h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-white bg-opacity-90 rounded-xl shadow-lg overflow-hidden max-w-screen-xl mx-auto">
+      {/* Card 1 */}
+      <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">📸</span>
-          <h3 className="font-semibold text-center text-left text-black">Photography & Content</h3>
+          <h3 className="font-semibold text-black text-left">Photography & Content</h3>
         </div>
-        <p className="text-[#004AAD] text-sm italic">Professional photos, videos and descriptions that make your listing stand out and attract more students.</p>
+        <p className="text-[#004AAD] text-sm italic">
+          Professional photos, videos and descriptions that make your listing stand out and attract more students.
+        </p>
         <p className="text-gray-800 mt-3">AED 300 / listing</p>
       </div>
 
+      {/* Card 2 */}
       <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">✨</span>
           <h3 className="font-semibold text-black">Highlight in Search</h3>
         </div>
-        <p className="text-[#004AAD] text-sm italic">Get priority visibility in student search results to boost clicks and inquiries</p>
+        <p className="text-[#004AAD] text-sm italic">
+          Get priority visibility in student search results to boost clicks and inquiries.
+        </p>
         <p className="text-gray-800 mt-3">AED 100 / 7 days</p>
       </div>
 
+      {/* Card 3 */}
       <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">🏠</span>
           <h3 className="font-semibold text-black">Homepage Banners</h3>
         </div>
-        <p className="text-[#004AAD] text-sm italic">Feature your brand front and centre on the TSD homepage for maximum exposure</p>
+        <p className="text-[#004AAD] text-sm italic">
+          Feature your brand front and centre on the TSD homepage for maximum exposure.
+        </p>
         <p className="text-gray-800 mt-3">AED 200 / week</p>
         <p className="text-gray-700 text-sm">(AED 700 / month)</p>
       </div>
 
+      {/* Card 4 */}
       <div className="p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">📢</span>
           <h3 className="font-semibold text-black">Social Media Feature</h3>
         </div>
         <p className="font-semibold text-gray-700 text-md">(Instagram & LinkedIn)</p>
-        <p className="text-[#004AAD] text-sm italic mt-2">Reach thousands of students with a spotlight, co-branded post on our active social media channels.</p>
+        <p className="text-[#004AAD] text-sm italic mt-2">
+          Reach thousands of students with a spotlight, co-branded post on our active social media channels.
+        </p>
         <p className="text-gray-800 mt-3">AED 499 for 3 posts</p>
       </div>
     </div>
@@ -236,7 +255,7 @@ const ProvidersPage = () => {
 
 
       {/* CALL TO ACTION */}
-      <section id="cta" className="relative py-16 bg-gradient-to-r from-[#004AAD] to-[#F9943B]">
+      <section id="cta" className="relative py-16 bg-gradient-to-r from-tsd-blue via-tsd-orange to-tsd-blue">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Start Your Listing Today!</h2>
@@ -244,13 +263,13 @@ const ProvidersPage = () => {
           <div className="flex justify-center gap-6">
             <Link
               to="mailto:support@tsd.com"
-              className="px-6 py-3 rounded-lg font-semibold bg-[#F9943B] hover:bg-[#F38D32]"
+              className="px-6 py-3 rounded-lg font-semibold bg-tsd-blue hover:bg-tsd-orange"
             >
               Email Us
             </Link>
             <Link
               to="/pages/ProviderInterestForm"
-              className="px-6 py-3 rounded-lg font-semibold bg-[#004AAD] hover:bg-[#003580]"
+              className="px-6 py-3 rounded-lg font-semibold bg-[#004AAD] hover:bg-tsd-orange"
             >
               Fill Out Interest Form
             </Link>

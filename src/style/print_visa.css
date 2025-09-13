@@ -8,29 +8,28 @@
   .print\:hidden {
     display: none !important;
   }
-  @media print {
+
+  /* Hero Section */
   .hero-section {
-    background: none !important; /* remove any bg image/color */
+    background: none !important;
     background-image: none !important;
-    background-attachment: scroll !important; /* no fixed bg */
-    
-    page-break-inside: avoid !important;
-    page-break-before: avoid !important;
-    page-break-after: avoid !important;
+    background-attachment: scroll !important;
 
-    break-inside: avoid !important;
-    break-before: avoid !important;
-    break-after: avoid !important;
+    /* allow content to flow naturally */
+    page-break-inside: auto !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    break-inside: auto !important;
+    break-before: auto !important;
+    break-after: auto !important;
 
-    margin: 0 !important;
+    margin: 0 0 16px 0 !important; /* small spacing below hero */
     padding: 0 !important;
 
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
   }
-}
-
 
   /* Show print-only elements */
   .print\:block {
@@ -96,16 +95,39 @@
     margin: 0 !important;
   }
 
+  /* Remove background colors but keep icons */
+  body,
+  header,
+  footer,
+  nav,
   section,
+  .print-section,
   .timeline-section,
   .timeline-item,
-  .timeline-step{ display: block !important;
+  .timeline-step {
+    background: none !important;
+    background-color: transparent !important;
+  }
+
+  /* Layout sections */
+  section,
+  .print-section,
+  .timeline-section,
+  .timeline-item,
+  .timeline-step {
+    display: block !important;
     max-height: none !important;
-    overflow: visible !important;}
+    overflow: visible !important;
+    margin-bottom: 64px !important;  /* spacing between sections */
+    padding-bottom: 16px !important;
+    page-break-inside: auto !important; /* allow splitting if needed */
+  }
+
+  /* Only avoid breaking inside very small blocks (optional) */
   .print-block {
     page-break-inside: avoid !important;
     padding: 0 !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 32px !important;
   }
 
   /* Typography spacing cleanup */
@@ -143,37 +165,39 @@
     gap: 0 !important;
   }
 
-  /* Prevent automatic page breaks */
-  .page-break {
-    page-break-before: always !important;
-  }
-  .download-mode .hero-section {
-  background: none !important;
-  background-image: none !important;
-}
-
-.download-mode .print\:hidden,
-.download-mode .no-print {
-  display: none !important;
-}
-svg.lucide {
-    stroke: currentColor !important;
+  /* Force Lucide icons to print */
+  svg.lucide {
+    stroke: #000 !important; /* fallback to black */
     fill: none !important;
-    color: brand color !important; /* you can change to #004AAD or brand color */
     width: 16px !important;
     height: 16px !important;
     visibility: visible !important;
     display: inline-block !important;
   }
-    /* Keep buttons, backgrounds, and layout clean */
+
+  /* Prevent automatic page breaks */
+  .page-break {
+    page-break-before: always !important;
+  }
+
+  .download-mode .hero-section {
+    background: none !important;
+    background-image: none !important;
+  }
+
+  .download-mode .print\:hidden,
+  .download-mode .no-print {
+    display: none !important;
+  }
+
+  /* Keep buttons, backgrounds, and layout clean */
   button {
     display: none !important; /* hides print/export buttons */
   }
 
   body {
+    background: #fff !important; /* force white page */
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-
 }
-

@@ -22,7 +22,7 @@ export default function EventsPage() {
   style={{ backgroundImage: "url('/images/student_events.jpg')" }}
 >
   <div className="absolute inset-0 bg-black/40 z-0"></div> {/* Dark overlay */}
-  <h1 className="relative z-10 text-4xl font-bold text-center mb-6 text-white">
+  <h1 className="relative z-10 text-4xl uppercase font-bold text-center mb-6 text-white">
      Student Events
   </h1></section>
       

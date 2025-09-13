@@ -60,7 +60,7 @@ export default function About() {
       <HeroSection
         id="about-hero"
         title="ABOUT US"
-        image="/images/about-hero.jpg"
+        image="/images/about-us.jpg"
         background
       >
         <div className="text-center">

@@ -31,7 +31,7 @@ export default function HeroSectionSmall({
       }}
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/10"></div>
 
       {/* Content */}
       <motion.div

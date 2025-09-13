@@ -58,22 +58,23 @@ export default function ProviderTestimonials() {
   };
 
   return (
-    <section className ="relative py-16 bg-gradient-to-r from-tsd-blue]-400 via-tsd-orange to-tsd-blue text-white     " 
-    >
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+    <section 
+  className="relative bg-cover bg-center text-white"
+  style={{ backgroundImage: "url('/images/testimonial.jpeg')" }}
+>
+  {/* Overlay for readability */}
+  <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-      <div className="relative max-w-4xl mx-auto px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-black">
-          What Providers & Students Say
-        </h2>
-        <p className="text-lg md:text-xl text-center text-gray-600 mb-10 italic">
-          <br/>
-          Real experiences from our community.
-        </p>
+  <div className="relative max-w-4xl mx-auto px-6 py-12">
+    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-tsd-orange">
+      What Providers & Students Say
+    </h2>
+    <p className="text-lg md:text-xl text-center text-gray-400 mb-10 italic">
+      Real experiences from our community.
+    </p>
 
         <div
-          className="relative bg-white p-8 rounded-xl shadow-lg overflow-hidden bg-gradient-to-r from-orange-100 via-white to-orange-200
+          className="relative bg-white p-8 rounded-xl shadow-lg overflow-hidden bg-gradient-to-r from-[#FD903D]/80 via-white to-[#FD903D]/80
 "
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -82,7 +83,7 @@ export default function ProviderTestimonials() {
           <button
             onClick={prevSlide}
             aria-label="Previous testimonial"
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-900 z-10"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 text-tsd-blue hover:text-gray-900 z-10"
           >
             <ChevronLeft size={30} />
           </button>
@@ -105,9 +106,9 @@ export default function ProviderTestimonials() {
                   alt={t.name}
                   className="mx-auto w-20 h-20 rounded-full mb-4 object-cover shadow"
                 />
-                <p className="text-gray-700 italic mb-2">"{t.feedback}"</p>
+                <p className="text-tsd-blue italic mb-2">"{t.feedback}"</p>
                 <p className="font-semibold">{t.name}</p>
-                <p className="text-sm text-gray-500">{t.role}</p>
+                <p className="text-sm text-tsd-blue">{t.role}</p>
               </div>
             ))}
           </div>
@@ -116,7 +117,7 @@ export default function ProviderTestimonials() {
           <button
             onClick={nextSlide}
             aria-label="Next testimonial"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-900 z-10"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-tsd-blue hover:text-gray-900 z-10"
           >
             <ChevronRight size={30} />
           </button>
@@ -130,7 +131,7 @@ export default function ProviderTestimonials() {
               aria-label={`Go to testimonial ${idx + 1}`}
               onClick={() => goToSlide(idx)}
               className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                current === idx ? "bg-blue-600" : "bg-gray-300 hover:bg-gray-400"
+                current === idx ? "bg-tsd-orange" : "bg-tsd-blue hover:bg-tsd-blue"
               }`}
             ></button>
           ))}
