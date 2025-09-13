@@ -255,27 +255,42 @@ const ProvidersPage = () => {
 
 
       {/* CALL TO ACTION */}
-      <section id="cta" className="relative py-16 bg-gradient-to-r from-tsd-blue via-tsd-orange to-tsd-blue">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative z-10 max-w-6xl mx-auto text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Start Your Listing Today!</h2>
-          <p className="mb-6 text-lg">Our team is here to assist you every step of the way.</p>
-          <div className="flex justify-center gap-6">
-            <Link
-              to="mailto:support@tsd.com"
-              className="px-6 py-3 rounded-lg font-semibold bg-tsd-blue hover:bg-tsd-orange"
-            >
-              Email Us
-            </Link>
-            <Link
-              to="/pages/ProviderInterestForm"
-              className="px-6 py-3 rounded-lg font-semibold bg-[#004AAD] hover:bg-tsd-orange"
-            >
-              Fill Out Interest Form
-            </Link>
-          </div>
-        </div>
-      </section>
+<section
+  id="cta"
+  className="relative py-16 bg-cover bg-center"
+  style={{
+    backgroundImage: "url('/images/TSD_Backgrounds_2.png')",
+    minHeight: "400px", // ensures section has enough height
+  }}
+>
+  {/* Overlay for readability */}
+  <div className="absolute inset-0 bg-black/10"></div>
+
+  <div className="relative z-10 max-w-6xl mx-auto text-center text-white px-6">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      Start Your Listing Today!
+    </h2>
+    <p className="mb-6 text-lg md:text-xl">
+      Our team is here to assist you every step of the way.
+    </p>
+
+    <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+      <a
+        href="mailto:support@tsd.com"
+        className="px-6 py-3 rounded-lg font-semibold bg-tsd-blue hover:bg-tsd-blue/90 transition"
+      >
+        Email Us
+      </a>
+      <Link
+        to="/pages/ProviderInterestForm"
+        className="px-6 py-3 rounded-lg font-semibold bg-tsd-orange hover:bg-tsd-orange/90 transition"
+      >
+        Fill Out Interest Form
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       <NavigationButtons />
     </div>

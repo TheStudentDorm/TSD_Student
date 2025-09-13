@@ -63,7 +63,7 @@ export default function ProviderTestimonials() {
   style={{ backgroundImage: "url('/images/testimonial.jpeg')" }}
 >
   {/* Overlay for readability */}
-  <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+  <div className="absolute inset-0 bg-black/10 bg-opacity-40"></div>
 
   <div className="relative max-w-4xl mx-auto px-6 py-12">
     <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-tsd-orange">
