@@ -12,6 +12,9 @@ export default {
           orange: '#F9943B',
         },
       },
+      fontFamily: {
+        garamond: ['Garamond', 'serif'], // add Garamond
+      },
       animation: {
         fadeIn: "fadeIn 1.5s ease-in forwards",
       },
