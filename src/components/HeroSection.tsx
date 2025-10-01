@@ -21,28 +21,28 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id={id}
-      className={`relative py-16 px-6 flex items-center justify-center ${
+      className={`relative w-screen h-screen py-16 px-6 flex items-center justify-center ${
         background || image ? "text-white" : "text-gray-900"
       }`}
       style={
         image
           ? {
               backgroundImage: `url(${image})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundRepeat: "repeat",
               backgroundPosition: "center",
-              minHeight: "400px",
+              minHeight: "500px",
             }
           : background
           ? {
               background: "linear-gradient(135deg, #004AAD, #F9943B)",
-              minHeight: "400px",
+              minHeight: "500px",
             }
           : {}
       }
     >
       {/* Optional overlay for readability */}
-      {(image || background) && <div className="absolute inset-0 bg-black/10 bg-opacity-40"></div>}
+      {(image || background) && <div className="absolute "></div>}
 
       {/* Centered container */}
       <motion.div
@@ -50,7 +50,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
 

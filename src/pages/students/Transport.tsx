@@ -33,7 +33,7 @@ export default function Transport() {
         <img
           src="/images/student_trans.jpg" // replace with your bg
           alt="Dubai transport background"
-          className="w-full h-full "
+          className="w-full h-full  "
         />
         <div className="absolute inset-0 bg-black/20" />
       </motion.div>
@@ -47,7 +47,7 @@ export default function Transport() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h1 className="text-3xl uppercase sm:text-4xl font-bold">
+          <h1 className="text-3xl uppercase sm:text-4xl mt-14 font-bold">
             Getting Around Dubai & Beyond
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-black">
@@ -407,67 +407,69 @@ export default function Transport() {
 </section>
 
           </motion.div>
+<motion.div
+  custom={3}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.1 }}
+  variants={sectionVariant}
+  className="bg-gray-100 py-16 flex items-center justify-center"
+>
+  {/* RTA Card */}
+  <div className="bg-white/90 backdrop-blur-md p-10 rounded-2xl shadow-md text-gray-800 max-w-3xl w-full">
+    {/* Header */}
+    <div className="flex items-center gap-3 mb-4">
+      <Smartphone className="text-[#02066f]" size={28} />
+      <h2 className="text-2xl font-semibold text-[#02066f]">RTA App</h2>
+    </div>
 
-        {/* RTA App */}
-        <motion.div
-          custom={3}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={sectionVariant}
-          className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-md text-gray-800"
-        >
-          <div className="mt-12 bg-white rounded-lg shadow-md p-6 max-w-screen-md mx-auto">
-  <div className="flex items-center gap-3 mb-4">
-    <Smartphone className="text-[#02066f]" size={28} />
-    <h2 className="text-2xl font-semibold text-[#02066f]">RTA App</h2>
+    {/* Description */}
+    <p className="text-gray-700 text-md leading-relaxed">
+      A must-have for any student on the move, the <strong>RTA Dubai App</strong> provides real-time schedules, route maps, fare estimates, Nol card top-up, and live service updates.
+    </p>
+
+    {/* Learn More Button */}
+    <div className="mt-4">
+      <a
+        href="https://www.rta.ae/wps/portal/rta/ae/home/rta-mobile-app"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block bg-tsd-orange text-white px-6 py-3 rounded hover:bg-tsd-orange/90 transition"
+      >
+        📲 Learn More About the App
+      </a>
+    </div>
+
+    {/* App Store Badges */}
+    <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-center">
+      <a
+        href="https://apps.apple.com/ae/app/rta-dubai/id540616636"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="/images/badges/apple.svg"
+          alt="Download on the App Store"
+          className="h-14"
+          loading="lazy"
+        />
+      </a>
+
+      <a
+        href="https://play.google.com/store/search?q=rta&c=apps&hl=en"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="/images/badges/google.png"
+          alt="Get it on Google Play"
+          className="h-14"
+          loading="lazy"
+        />
+      </a>
+    </div>
   </div>
-
-  <p className="text-gray-700 text-md leading-relaxed">
-    A must-have for any student on the move, the <strong>RTA Dubai App</strong> provides real-time schedules, route maps, fare estimates, Nol card top-up, and live service updates.
-  </p>
-
-  {/* Download Button (Optional) */}
-  <div className="mt-4">
-    <a
-      href="https://www.rta.ae/wps/portal/rta/ae/home/rta-mobile-app"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-block bg-tsd-orange text-white px-4 py-2 rounded hover:bg-tsd-orange/90 transition"
-    >
-      📲 Learn More About the App
-    </a>
-  </div>
-
-  {/* App Store Badges */}
-  <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4">
-    <a
-      href="https://apps.apple.com/ae/app/rta-dubai/id540616636"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        src="/images/badges/apple.svg"
-        alt="Download on the App Store"
-        className="h-12"
-      />
-    </a>
-
-    <a
-      href="https://play.google.com/store/search?q=rta&c=apps&hl=en"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        src="/images/badges/google.png"
-        alt="Get it on Google Play"
-        className="h-12"
-      />
-    </a>
-  </div>
-</div>
-
-        </motion.div>
+</motion.div>
 
         {/* Navigation */}
         <NavigationButtons/>

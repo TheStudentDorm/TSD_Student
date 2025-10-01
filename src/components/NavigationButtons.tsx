@@ -45,7 +45,7 @@ export default function NavigationButtons() {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
             onClick={scrollToNextSection}
-            className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-200 text-gray-700 p-3 rounded-full shadow hover:bg-gray-300 transition z-40"
+            className="fixed bottom-6 right-6 transform -translate-x-1/2 bg-gray-200 text-gray-700 p-3 rounded-full shadow hover:bg-gray-300 transition z-40"
             aria-label="Scroll down"
           >
             <ChevronDown className="w-5 h-5" />

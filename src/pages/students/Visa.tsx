@@ -160,22 +160,45 @@ const handleDownloadPDF = () => {
   };
 
   return (
-    <main className="max-w-6xl mx-auto ">
+    <main className="w-full ">
        {/* ✅ Logo for print only */}
       <div className="print-logo print:block hidden text-center mb-6">
         <img src="/images/tsd-logo.png" alt="University Logo" className="mx-auto w-40" />
       </div>
-      {/* Hero Section */}
-       
-      <HeroSectionSmall
-        title="Student Visa Guide"
-        subtitle="Everything you need to know to study legally and stress-free."
-        caption="Whether you’re joining university from outside the UAE or shifting your visa from a parent or sponsor, here’s your complete guide to obtaining a UAE student visa."
-        image="/images/student_visa.png"
-        fixedBackground={false}
-        className="hero-section"
-      />
-    
+     <section className="hero-section relative h-screen w-screen flex items-center justify-center text-white overflow-hidden">
+  {/* Background for desktop */}
+  <div
+    className="absolute inset-0 hidden md:block bg-cover bg-center bg-fixed print:hidden"
+    style={{ backgroundImage: "url('/images/student_visa.png')" }}
+  >
+    <div className="absolute inset-0 bg-black/20"></div>
+  </div>
+
+  {/* Fallback image for mobile */}
+  <img
+    src="/images/student_visa.png"
+    alt="Student Visa Background"
+    className="absolute inset-0 block md:hidden w-full h-full object-cover print:hidden"
+  />
+  <div className="absolute inset-0 bg-black/30 md:hidden"></div>
+
+
+  {/* Hero Content */}
+  <div className="relative z-10 max-w-3xl px-6 text-center mt-20 md:mt-0">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight uppercase text-white drop-shadow">
+      Student Visa Guide
+    </h1>
+
+    <p className="mt-6 text-lg md:text-xl text-white/90">
+      Everything you need to know to study legally and stress-free.
+    </p>
+    <p className="mt-4 text-base md:text-lg text-white/80">
+      Whether you’re joining university from outside the UAE or shifting your visa from a parent or sponsor,
+      here’s your complete guide to obtaining a UAE student visa.
+    </p>
+  </div>
+</section>
+
 
       <div className="py-16 px-6 space-y-16 print-section">
         {/* Documents Checklist */}

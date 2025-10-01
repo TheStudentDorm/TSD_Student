@@ -1,180 +1,196 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Ticket } from "lucide-react";
 import NavigationButtons from "../components/NavigationButtons";
-import Ripple from "../components/Ripple"; 
-interface Resource {
-  link: string;
-  icon: string;
+
+// Hero background image
+const heroBg = "/images/TSD_Backgrounds_3.png";
+
+// Reusable Card Component
+interface StudentCardProps {
   title: string;
   desc: string;
+  link: string;
+  bgColor: string;
+  btnText?: string;
 }
 
-export default function Students() {
-  const resources: Resource[] = [
+const StudentCard: React.FC<StudentCardProps> = ({ title, desc, link, bgColor, btnText }) => (
+  <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 p-6 flex flex-col justify-between">
+    <div>
+      <h4 className="font-bold text-lg mb-3 text-gray-900 dark:text-white">{title}</h4>
+      <p className="text-gray-600 dark:text-gray-300">{desc}</p>
+    </div>
+    <Link to={link} className="mt-4">
+      <button
+        aria-label={`Navigate to ${title}`}
+        className={`w-full sm:w-auto px-5 py-2 rounded-full text-white font-semibold ${bgColor} hover:brightness-110 transition duration-300`}
+      >
+        {btnText || "Learn More"}
+      </button>
+    </Link>
+  </div>
+);
+
+const Students: React.FC = () => {
+  const mainSections = [
     {
-      link: "accommodation",
-      icon: "/icons/accomodation.svg",
-      title: "Find Student Accommodation",
-      desc: "Your next home, sorted.",
+      title: "Major Universities",
+      desc: "Discover leading universities across Dubai, Abu Dhabi, Sharjah & beyond.",
+      link: "/students/academics",
+      bgColor: "bg-blue-600 hover:bg-blue-700",
+      btnText: "Explore Universities",
     },
     {
-      link: "visa",
-      icon: "/icons/visa.svg",
-      title: "Student Visa Guide",
-      desc: "From application to arrival, stress-free.",
+      title: "Accommodation",
+      desc: "Browse trusted listings for student-friendly rooms, apartments, and co-living spaces near major universities.",
+      link: "/students/accommodation",
+      bgColor: "bg-orange-600 hover:bg-orange-700",
+      btnText: "Find Accommodation",
     },
     {
-      link: "transport",
-      icon: "/icons/transport.svg",
-      title: "Transport Made Simple",
-      desc: "Getting around made easier.",
+      title: "Transport Guide",
+      desc: "Metro, buses, Nol cards, everything you need to move around easily.",
+      link: "/students/transport",
+      bgColor: "bg-green-600 hover:bg-green-700",
+      btnText: "See Transport Options",
     },
     {
-      link: "discounts",
-      icon: "/icons/discount.svg",
-      title: "Student Discounts & Perks",
-      desc: "Stretch your dirhams further.",
+      title: "Visa & Relocation Support",
+      desc: "Step-by-step help to get your student visa and settle in stress-free.",
+      link: "/students/visa",
+      bgColor: "bg-purple-600 hover:bg-purple-700",
+      btnText: "Get Visa Help",
     },
     {
-      link: "careers",
-      icon: "/icons/career.svg",
-      title: "Careers & Internships",
-      desc: "Start building your future today.",
+      title: "Emergency Services",
+      desc: "Quick access to verified emergency numbers and embassy contacts.",
+      link: "/students/emergency",
+      bgColor: "bg-red-600 hover:bg-red-700",
+      btnText: "Emergency Contacts",
     },
     {
-      link: "emergency",
-      icon: "/icons/emergency.svg",
-      title: "Emergency & Essential Contacts",
-      desc: "Help when you need it most.",
-    },
-    {
-      link: "academics",
-      icon: "/icons/academics.svg",
-      title: "Academics & Learning",
-      desc: "Tips, courses, and guidance to excel academically.",
-    },
-    {
-      link: "attractions",
-      icon: "/icons/attractions.svg",
-      title: "Explore UAE Attractions",
-      desc: "Discover cultural and fun spots around the UAE.",
+      title: "Internships & Career Opportunities",
+      desc: "Kickstart your career with curated internships, part-time roles, and job openings across Dubai and the UAE.",
+      link: "/students/careers",
+      bgColor: "bg-indigo-600 hover:bg-indigo-700",
+      btnText: "Explore Careers",
     },
   ];
 
-  const tips = [
-    { title: "Intern Early", description: "Start internships as early as possible to gain experience." },
-    { title: "Update CV", description: "Keep your CV and portfolio up-to-date." },
-    { title: "Networking", description: "Attend events and meet industry professionals." },
+  const lifeCards = [
+    {
+      title: "Student Discounts",
+      desc: "Save big on tech, fashion, gyms, and more!",
+      link: "/students/discounts",
+      bgColor: "bg-yellow-600 hover:bg-yellow-700",
+      btnText: "Get Discounts",
+    },
+    {
+      title: "Student Events",
+      desc: "Never miss workshops, festivals, and student-friendly activities.",
+      link: "/students/events",
+      bgColor: "bg-teal-600 hover:bg-teal-700",
+      btnText: "See Events",
+    },
+    {
+      title: "Local Attractions",
+      desc: "Explore the UAE’s must-visit spots and hidden gems.",
+      link: "/students/attractions",
+      bgColor: "bg-pink-600 hover:bg-pink-700",
+      btnText: "Explore Attractions",
+    },
   ];
 
+  // Animation variants
+  const heroTextVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+const heroDesktopBg = "/images/TSD_Backgrounds_3.png";
+const heroMobileBg = "/images/TSD_Backgrounds_Mobile.png";
   return (
-    <div className="relative w-full min-h-screen bg-gray-50 py-16 px-6">
-      {/* ======================== Page Header ======================== */}
-      <div className="max-w-4xl mx-auto text-center mb-12">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">Student Resources</h1>
-        <p className="text-gray-700 text-lg md:text-xl">
-          Explore essential resources and guidance to make your student life in the UAE smoother, safer, and more productive.
-        </p>
-      </div>
+    <div className="relative">
+      {/* Hero Section */}
+      <section
+  id="hero"
+  className="relative w-full h-auto sm:h-[110vh] flex items-center justify-center text-center sm:text-left overflow-hidden"
+>
+  {/* Responsive Background Image */}
+  <picture>
+    {/* Mobile-first image (shown <640px) */}
+    <source
+      srcSet={heroMobileBg}
+      media="(max-width: 639px)"
+    />
+    {/* Default/desktop image */}
+    <img
+      src={heroDesktopBg}
+      alt="Student lifestyle background"
+      className="absolute inset-0 w-full h-full object-cover object-bottom -z-10"
+      loading="lazy"
+    />
+  </picture>
 
-      {/* ======================== Resources Grid ======================== */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-        {resources.map((res, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: idx * 0.1 }}
-          >
-            <Ripple >
-            <Link
-              to={res.link}
-              className="p-6 bg-white shadow rounded-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex flex-col items-center"
-            >
-              <img src={res.icon} alt={res.title} className="w-12 h-12 mb-4" />
-              <p className="font-semibold mb-1 text-center">{res.title}</p>
-              <p className="text-gray-700 text-sm text-center">{res.desc}</p>
-            </Link>
-            </Ripple>
-          </motion.div>
-        ))}
-      </div>
+  {/* Hero content */}
+  <div className="relative z-10 max-w-3xl mx-4 sm:mx-0 sm:ml-auto px-4 md:px-6 py-20 sm:py-0 space-y-4 text-blue-900">
+    <motion.h1
+      className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase leading-tight"
+      variants={heroTextVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      Find Everything You Need as a Student in the UAE
+    </motion.h1>
 
-      {/* ======================== Additional Content: Tips ======================== */}
-      <section className="max-w-4xl mx-auto mb-16">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Quick Student Tips</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tips.map((tip, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="p-6 bg-white shadow rounded-lg hover:shadow-lg transition duration-300"
-            >
-              <h3 className="text-xl font-semibold mb-2">{tip.title}</h3>
-              <p className="text-gray-600 text-sm">{tip.description}</p>
-            </motion.div>
+    <motion.h2
+      className="text-base sm:text-xl md:text-2xl lg:text-3xl font-semibold leading-snug"
+      variants={heroTextVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      Your One-Stop Hub for Student Life
+    </motion.h2>
+
+    <motion.p
+      className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed"
+      variants={heroTextVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      At The Student Dorm (TSD), we make your university journey smoother, smarter, and more connected.
+      Whether you're moving to the UAE for the first time or already studying here, we help you find verified
+      accommodation, explore student discounts, discover events, and unlock opportunities, all in one place.
+    </motion.p>
+  </div>
+</section>
+
+
+      {/* Main Sections */}
+      <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {mainSections.map((section, idx) => (
+            <StudentCard key={idx} {...section} />
           ))}
         </div>
-      </section>
 
-      {/* ======================== Featured Events ======================== */}
-      <section className="max-w-6xl mx-auto text-center mb-16">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">Upcoming Student Events</h2>
-        <p className="text-gray-700 mb-8">Discover workshops, networking events, and exhibitions happening soon.</p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden text-left">
-            <img src="/images/event1.jpg" alt="Event 1" className="w-full h-40 object-cover" />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">Meet The Top Students 2025</h3>
-              <p className="text-gray-600 mb-2">Mentoring successful student applications abroad.</p>
-              <div className="flex items-center text-sm text-gray-700 mb-2">
-                <Ticket className="w-4 h-4 mr-2" /> Free Admission
-              </div>
-              <div className="flex items-center text-sm text-gray-700 mb-2">
-                <Calendar className="w-4 h-4 mr-2" /> 31 August, 2025, 10:00 AM - 7 PM
-              </div>
-              <div className="flex items-center text-sm text-gray-700">
-                <MapPin className="w-4 h-4 mr-2" /> Millennium Plaza Downtown Hotel, Dubai
-              </div>
-            </div>
+        {/* Student Life */}
+        <section>
+          <h3 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+            Student Life in the UAE
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {lifeCards.map((card, idx) => (
+              <StudentCard key={idx} {...card} />
+            ))}
           </div>
+        </section>
+      </div>
 
-          <div className="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden text-left">
-            <img src="/images/event2.jpg" alt="Event 2" className="w-full h-40 object-cover" />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">GCC Exhibition for Education & Training 2025</h3>
-              <p className="text-gray-600 mb-2">Explore universities and education opportunities in the UAE!</p>
-              <div className="flex items-center text-sm text-gray-700 mb-2">
-                <Ticket className="w-4 h-4 mr-2" /> Free Admission
-              </div>
-              <div className="flex items-center text-sm text-gray-700 mb-2">
-                <Calendar className="w-4 h-4 mr-2" /> 22 - 24 September, 2025
-              </div>
-              <div className="flex items-center text-sm text-gray-700">
-                <MapPin className="w-4 h-4 mr-2" /> Etihad Arena, Abu Dhabi
-              </div>
-            </div>
-          </div>
-          
-        </div>
-        <div className="flex justify-center mt-6">
-                    <Link
-                      to="students/Events"
-                      className="text-indigo-600 font-medium hover:underline text-base sm:text-lg"
-                    >
-                      See All Events →
-                    </Link>
-                  </div>
-      </section>
-      <NavigationButtons/>
+      {/* Floating Navigation Buttons */}
+      <NavigationButtons className="absolute bottom-10 right-10 z-20" />
     </div>
-    
   );
-}
+};
+
+export default Students;

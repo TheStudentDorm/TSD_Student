@@ -14,21 +14,17 @@
     background: none !important;
     background-image: none !important;
     background-attachment: scroll !important;
-
-    /* allow content to flow naturally */
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     page-break-inside: auto !important;
     page-break-before: auto !important;
     page-break-after: auto !important;
     break-inside: auto !important;
     break-before: auto !important;
     break-after: auto !important;
-
-    margin: 0 0 16px 0 !important; /* small spacing below hero */
-    padding: 0 !important;
-
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
   }
 
   /* Show print-only elements */
@@ -44,7 +40,7 @@
   .print-logo {
     display: block !important;
     text-align: center;
-    margin-bottom: 24px !important;
+    margin: 0 0 16px 0 !important;
   }
 
   .print-logo img {
@@ -67,26 +63,24 @@
 
   .print-section .grid > div {
     width: 100% !important;
-    margin-bottom: 24px !important;
+    margin: 0 !important;
   }
 
   /* Remove Tailwind vertical spacing (space-y) */
   .space-y-16 > * + * {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .space-y-12 > * + * {
-    margin-top: 8px !important;
+    margin: 0 !important;
   }
 
   .space-y-6 > * + * {
-    margin-top: 4px !important;
+    margin: 0 !important;
   }
 
-  /* Reduce section padding/margin */
+  /* Remove padding/margin from utility classes */
   .py-16, .pt-16, .pb-16,
   .py-12, .pt-12, .pb-12,
   .py-6, .pt-6, .pb-6,
@@ -95,7 +89,7 @@
     margin: 0 !important;
   }
 
-  /* Remove background colors but keep icons */
+  /* Remove all background colors */
   body,
   header,
   footer,
@@ -109,28 +103,32 @@
     background-color: transparent !important;
   }
 
-  /* Layout sections */
+  /* ✅ REMOVE all margin/padding from sections */
   section,
   .print-section,
   .timeline-section,
   .timeline-item,
   .timeline-step {
-    display: block !important;
-    max-height: none !important;
-    overflow: visible !important;
-    margin-bottom: 64px !important;  /* spacing between sections */
-    padding-bottom: 16px !important;
-    page-break-inside: auto !important; /* allow splitting if needed */
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
   }
 
-  /* Only avoid breaking inside very small blocks (optional) */
+  /* Optional: spacing only between sections if needed */
+  section + section,
+  .print-section + .print-section,
+  .timeline-section + .timeline-section {
+    margin-top: 0 !important; /* Set to 0 for no spacing */
+  }
+
+  /* Avoid breaking inside small blocks */
   .print-block {
     page-break-inside: avoid !important;
+    margin: 0 !important;
     padding: 0 !important;
-    margin-bottom: 32px !important;
   }
 
-  /* Typography spacing cleanup */
+  /* Typography cleanup */
   h1, h2, h3, h4 {
     color: #000 !important;
     margin: 0 0 8px 0 !important;
@@ -157,7 +155,7 @@
     text-align: left !important;
   }
 
-  /* Prevent column gap issues */
+  /* Remove Tailwind gaps */
   .gap-12,
   .gap-6,
   .gap-y-12,
@@ -167,7 +165,7 @@
 
   /* Force Lucide icons to print */
   svg.lucide {
-    stroke: #000 !important; /* fallback to black */
+    stroke: #000 !important;
     fill: none !important;
     width: 16px !important;
     height: 16px !important;
@@ -175,11 +173,12 @@
     display: inline-block !important;
   }
 
-  /* Prevent automatic page breaks */
+  /* Prevent automatic page breaks mid-section */
   .page-break {
     page-break-before: always !important;
   }
 
+  /* Adjustments for PDF/print preview mode */
   .download-mode .hero-section {
     background: none !important;
     background-image: none !important;
@@ -190,14 +189,19 @@
     display: none !important;
   }
 
-  /* Keep buttons, backgrounds, and layout clean */
+  /* Hide buttons & non-essential UI */
   button {
-    display: none !important; /* hides print/export buttons */
+    display: none !important;
   }
 
+  /* Force white background on page */
   body {
-    background: #fff !important; /* force white page */
+    background: #fff !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+  .hero-section + .print-section {
+    margin-top: 4px !important; /* Adjust this value as needed */
+    padding-top: 16px !important;
   }
 }

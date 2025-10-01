@@ -50,6 +50,9 @@
     border: 1px solid #000 !important;
     padding: 6px !important;
     text-align: left !important;
+     word-wrap: break-word !important;  /* break long words */
+    white-space: normal !important;    /* allow wrapping */
+    max-width: 200px !important;       /* prevent overflow outside page */
   }
 
   /* Force black headings */

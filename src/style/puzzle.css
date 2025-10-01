@@ -1,0 +1,298 @@
+/* === Puzzle Wrapper & Container === */
+.puzzle-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  background: inherit;
+  overflow: visible;
+  /* ✅ ensure centering */
+  width: 100%;
+  margin: 0 auto;
+  
+}
+
+.puzzle-container {
+  display: grid;
+  grid-template-columns: repeat(2, 600px);
+  grid-template-rows: repeat(2, 250px);
+  width: 100%;
+  max-width: 1200px; /* 600px per piece */
+  gap: 0;
+  place-items: center;
+  position: relative;
+  padding: 0;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/* === Puzzle Piece === */
+.box {
+  width: 600px;
+  height: 250px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  text-align: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+  color: inherit;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* auto-shrink images if big */
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Hover lift */
+.box:hover {
+  transform: scale(1.02);
+}
+
+/* === Drag-in Animations === */
+@keyframes dragInTop {
+  0% { opacity: 0; transform: translateY(-120%) scale(0.95); }
+  60% { opacity: 1; transform: translateY(10%) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes dragInBottom {
+  0% { opacity: 0; transform: translateY(120%) scale(0.95); }
+  60% { opacity: 1; transform: translateY(-10%) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.box1.visible { animation: dragInTop 0.9s ease forwards; animation-delay: 0.2s; }
+.box2.visible { animation: dragInTop 0.9s ease forwards; animation-delay: 0.4s; }
+.box3.visible { animation: dragInBottom 0.9s ease forwards; animation-delay: 0.6s; }
+.box4.visible { animation: dragInBottom 0.9s ease forwards; animation-delay: 0.8s; }
+
+/* === Backgrounds === */
+.box1 { background-color: #004AAD; background-image: url('/images/funzone/00.png'); }
+.box2 { background-color: #002060; background-image: url('/images/funzone/10.png'); }
+.box3 { background-color: #F9943B; background-image: url('/images/funzone/01.png');  }
+.box4 { background-color: #F1EFE7; background-image: url('/images/funzone/11.png');  }
+
+/* === Fade out images === */
+.box.fade-out {
+  animation: fadeOutImage 1.2s forwards;
+}
+@keyframes fadeOutImage {
+  from { background-size: contain; opacity: 1; }
+  to { background-image: none; opacity: 1; }
+}
+
+/* === Content directly on puzzle, overlapping knobs === */
+.box.show-content {
+  background-image: none !important;
+  transform: none !important;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  text-align: center;
+  color: inherit;
+  z-index: 6; /* above knobs */
+}
+
+
+/* Dot navigation */
+.dot-navigation span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.3s;
+}
+.dot-navigation span.active,
+.dot-navigation span.bg-white {
+  background: #ffffff;
+}
+/* Fade-in content */
+.box-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+  position: relative;
+  z-index: 6;
+  margin: 0 -20px;
+}
+.box-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Knobs === */
+.box::before,
+.box::after {
+  content: '';
+  position: absolute;
+  width: clamp(40px, 8vw, 70px);
+  height: clamp(40px, 8vw, 70px);
+  border-radius: 50%;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Knob bounce animation */
+@keyframes knobBounce {
+  0% { transform: scale(0);opacity: 0; }
+  60% { transform: scale(1.3); opacity: 1;}
+  100% { transform: scale(1); opacity: 1;}
+}
+
+/* Knobs bounce staggered with piece */
+/* === Knob bounce synced with box animation — same delay as box === */
+.box1.visible::before,
+.box1.visible::after {
+  animation: knobBounce 0.5s ease forwards;
+  animation-delay: 0.2s; /* same as box1 */
+}
+.box2.visible::before,
+.box2.visible::after {
+  animation: knobBounce 0.5s ease forwards;
+  animation-delay: 0.4s;
+}
+.box3.visible::before,
+.box3.visible::after {
+  animation: knobBounce 0.5s ease forwards;
+  animation-delay: 0.6s;
+}
+.box4.visible::before,
+.box4.visible::after {
+  animation: knobBounce 0.5s ease forwards;
+  animation-delay: 0.8s;
+}
+
+/* Knob colors & positions */
+.box1::before { background-color: #004AAD; right: -8%; top: 50%; transform: translateY(-50%); }
+.box1::after  { background-color: #004AAD; bottom: -8%; left: 50%; transform: translateX(-50%); }
+.box2::before { background-color: #004AAD; left: -8%; top: 50%; transform: translateY(-50%); }
+.box2::after  { background-color: #002060; bottom: -8%; left: 50%; transform: translateX(-50%); }
+.box3::before { background-color: #F9943B; right: -8%; top: 50%; transform: translateY(-50%); }
+.box3::after  { background-color: #F9943B; top: -8%; left: 50%; transform: translateX(-50%); }
+.box4::before { background-color: #F1EFE7; left: -8%; top: 50%; transform: translateY(-50%); }
+.box4::after  { background-color: #002060; top: -8%; left: 50%; transform: translateX(-50%); }
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  /* Puzzle container/mobile styles */
+  .puzzle-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    place-items: center;
+    width: 100%;
+    padding: 0;
+    
+  }
+
+  .box {
+    width: 90%;
+    max-width: 95vw;
+    height: auto;
+    aspect-ratio: 11 / 6;
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    margin: 0 auto 20px auto;
+    padding: 10px;
+
+    /* ✅ prevent content from spilling out */
+    overflow: hidden;
+    word-break: break-word;
+  }
+.box1 {
+    background-image: url('/images/image_part_001_mobile.png');
+    background-size: cover;
+  }
+  .box2 {
+    background-image: url('/images/image_part_002_mobile.png');
+    background-size: cover;
+  }
+  .box3 {
+    background-image: url('/images/image_part_003_mobile.png');
+    background-size: cover;
+  }
+  .box4 {
+    background-image: url('/images/image_part_004_mobile.png');
+    background-size: cover;
+  }
+  .box::before,
+  .box::after {
+    display: none !important;
+  }
+
+  .box-content {
+    padding: 0 10px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+ 
+
+  /* ✅ Poll text fix */
+  .poll-text {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+    line-height: 1.4;
+    text-align: center;
+
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: scroll;
+    hyphens: auto;
+  }
+
+  /* ✅ Button wrapping fix */
+  button {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    text-align: center;
+
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* ✅ p-5 wrapper fix */
+  .p-5 {
+    padding: 1rem;
+    max-width: 100vw;
+    overflow-x: hidden;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+      height: auto !important;
+  }
+
+  .p-5 > div {
+    max-width: 100% !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ✅ Optional text sizing tweaks */
+  .riddle-text,
+  .onthisday-text,
+  .quote-text {
+    font-size: 0.95rem;
+    padding: 0 8px;
+    line-height: 1.3;
+    text-align: center;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}

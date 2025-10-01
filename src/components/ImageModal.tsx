@@ -1,4 +1,3 @@
-// src/components/ImageModal.tsx
 import React, { useEffect } from "react";
 
 interface ImageModalProps {
@@ -8,28 +7,36 @@ interface ImageModalProps {
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ src, alt = "", onClose }) => {
+  // Close modal on ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose(); // Close on ESC key
-      }
+      if (e.key === "Escape") onClose();
     };
-
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
   return (
     <div
-      className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-      onClick={onClose} // Click outside = close
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 overflow-auto"
+      onClick={onClose} // click outside closes
     >
-      <img
-        src={src}
-        alt={alt}
-        className="max-h-[90vh] max-w-[90vw] object-contain rounded shadow-lg"
-        onClick={(e) => e.stopPropagation()} // Prevent image click from closing
-      />
+      <div
+        className="relative max-w-[95vw] max-h-[95vh] mx-auto transition-transform transform scale-95 hover:scale-100"
+        onClick={(e) => e.stopPropagation()} // stop closing when clicking the image
+      >
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-auto rounded-lg shadow-lg object-contain"
+        />
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-white text-3xl font-bold hover:text-gray-300"
+        >
+          &times;
+        </button>
+      </div>
     </div>
   );
 };

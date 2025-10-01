@@ -1,0 +1,74 @@
+/* Full-page background with soft gradient */
+.students-background {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F1EFE7 0%, #E8E4DB 50%, #004AAD 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1.5rem;
+  color: #002060;
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+
+/* Parallax circles */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  filter: blur(100px);
+  will-change: transform;
+  z-index: -2;
+  animation: floatPulse 15s ease-in-out infinite alternate;
+}
+
+/* Individual circles */
+.circle1 {
+  width: 350px;
+  height: 350px;
+  background: rgba(249, 148, 59, 0.7);
+  top: -50px;
+  left: -50px;
+}
+
+.circle2 {
+  width: 500px;
+  height: 500px;
+  background: rgba(0, 74, 173, 0.7);
+  bottom: -80px;
+  right: -120px;
+}
+
+.circle3 {
+  width: 250px;
+  height: 250px;
+  background: rgba(0, 32, 96, 0.7);
+  top: 50%;
+  right: 15%;
+}
+
+/* Floating + pulsing animation */
+@keyframes floatPulse {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.7;
+  }
+}
+
+/* Headings */
+.students-background h1,
+.students-background h2,
+.students-background h3 {
+  color: #002060;
+  z-index: 10;
+}

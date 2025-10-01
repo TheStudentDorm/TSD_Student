@@ -14,7 +14,7 @@ export default function About() {
   const aboutImages: ImageCard[] = [
     {
       id: 1,
-      image: "/images/journey1.png",
+      image: "/images/about_us/journey1.png",
       title: "GITEX YouthX Unipreneur",
       caption: "Winner!",
       date: "2024",
@@ -24,7 +24,7 @@ export default function About() {
     },
     {
       id: 2,
-      image: "/images/journey2.png",
+      image: "/images/about_us/journey2.png",
       title: "Du Pitch Competition",
       caption: "Winner!",
       date: "2024",
@@ -34,7 +34,7 @@ export default function About() {
     },
     {
       id: 3,
-      image: "/images/journey3.png",
+      image: "/images/about_us/journey3.png",
       title: "Dubai Municipality",
       caption: "Sustainability in Education and Living",
       date: "2025",
@@ -44,7 +44,7 @@ export default function About() {
     },
     {
       id: 4,
-      image: "/images/journey4.png",
+      image: "/images/about_us/journey4.png",
       title: "Heriot-Watt Business Incubator",
       caption: "Discover Urban Life",
       date: "2025",
@@ -60,7 +60,7 @@ export default function About() {
       <HeroSection
         id="about-hero"
         title="ABOUT US"
-        image="/images/about-us.jpg"
+        image="/images/Slide_6.png"
         background
       >
         <div className="text-center">
@@ -79,7 +79,7 @@ export default function About() {
           "Built by students, for students, TSD began with one vision: to make university life simpler, smarter, and more connected.",
           "Whether it’s finding accommodation, understanding visa processes, discovering transport tips, discounts, or landing internships, we bring everything into one trusted platform."
         ]}
-        image="/images/who-we-are.jpg"
+        image="/images/about_us/who-we-are.jpg"
       />
 
       {/* Our Story Section */}
@@ -90,7 +90,7 @@ export default function About() {
           "What began as a small project has evolved into a student-first platform designed to make life easier for university students.",
           "Today, TSD is your all-in-one hub for every student need. We’re here to help students live smarter, save better, and thrive in the UAE."
         ]}
-        image="/images/our-story.jpg"
+        image="/images/about_us/our-story.jpg"
         reverse
       />
 

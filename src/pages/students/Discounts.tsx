@@ -16,19 +16,42 @@ export default function Discounts() {
   const [expandAll, setExpandAll] = useState(false);
 
   return (
-    <main className="max-w-6xl mx-auto">
-      <HeroSectionSmall
-        title="Student Discounts & Perks"
+    <main className="full">
+      <section className="hero-section relative h-screen w-screen flex items-center justify-center text-white overflow-hidden">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-fixed print:hidden"
+    style={{ backgroundImage: "url('/images/student-hero-discounts.jpg')" }}
+  >
+    <div className="absolute inset-0 bg-black/20"></div>
+  </div>
+
+  {/* Hero Content */}
+  <div className="relative z-10 max-w-3xl px-6 text-center mt-20 md:mt-0">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight uppercase text-white drop-shadow">
+     Student Discounts & Perks
+    </h1>
+
+    <p className="mt-6 text-lg md:text-xl text-white/90">
+      Take advantage of your student status!
+    </p>
+    <p className="mt-4 text-base md:text-lg text-white/80">
+      Being a student in the UAE comes with more than just assignments and exams, it also means access to some great deals across travel, food, entertainment, and more! Here's how you can save smartly as a student
+    </p>
+  </div>
+</section>
+      {/* <HeroSectionSmall
+        title="Student Discounts"
         subtitle="Take advantage of your student status!"
         caption="Being a student in the UAE comes with more than just assignments and exams, it also means access to some great deals across travel, food, entertainment, and more! Here's how you can save smartly as a student"
         icon="/icons/discount.svg"
         image="/images/student-hero-discounts.jpg"
-      />
+      /> */}
       <div>      
         <h2 className="text-lg  text-tsd-blue text-center mt-12 mb-6"><b>Heads up!</b> Your university may already have special partnerships with brands, gyms, or tech providers. Before paying full price, check with your university; you could be eligible for extra discounts or offers just for your campus!</h2>
       </div>
 
-      <div className="py-16 px-6">
+      <div className="py-16 px-6 space-y-20">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Student Discounts</h2>
           <button

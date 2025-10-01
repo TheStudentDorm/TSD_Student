@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Mail, MapPin } from "lucide-react";
 import NavigationButtons from "../components/NavigationButtons";
 import emailjs from "@emailjs/browser";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -15,115 +17,130 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    emailjs.send(
-      "service_nm9wacb",   // replace with your EmailJS service ID
-        "template_h0afoa3",// Replace with your EmailJS template ID
-      {
-        from_name: form.name,
-        from_email: form.email,
-        message: form.message,
-      },
-      "wYMZ0-6j3wayjyNO-"  // Replace with your EmailJS public key
-    )
-    .then(
-      (result) => {
-        alert("Message sent successfully!");
-        setForm({ name: "", email: "", message: "" });
-      },
-      (error) => {
-        alert("Failed to send message. Please try again later.");
-        console.error(error.text);
-      }
-    );
+    emailjs
+      .send(
+        "service_4dau9k8",
+        "template_bvle7nc",
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        "J3nZ4AQeVPkaFgElD"
+      )
+      .then(
+        () => {
+          toast.success("🎉 Message sent successfully!", {
+            position: "top-center",
+            autoClose: 3000,
+          });
+          setForm({ name: "", email: "", message: "" });
+        },
+        (error) => {
+          toast.error("❌ Failed to send. Please try again later.", {
+            position: "top-center",
+            autoClose: 4000,
+          });
+          console.error(error.text);
+        }
+      );
   };
 
   return (
-    <main className="pb-20">
-  {/* HEADER with Orange Gradient Background */}
-     <section className="relative bg-gradient-to-r from-white via-white to-white text-center py-20 px-6">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 
-            bg-gradient-to-r from-orange-400 via-blue-600 to-white 
-            bg-clip-text text-transparent transition-all duration-500 hover:from-orange-500 hover:via-blue-700 hover:to-white">
-          Contact Us
-        </h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 
-                       text-#ff6d34  transition-all duration-500 hover:from-orange-400 hover:via-blue-600 hover:to-white">
-          We’d love to hear from you. Reach out for inquiries, partnerships, or support.
-        </p>
-      </section>
+    <main className="relative w-full min-h-screen">
+      <ToastContainer />
 
-      {/* WHOLE SECTION GRADIENT BACKGROUND */}
-      <section className="px-6 py-16 bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-100">
-        <div className="max-w-6xl mx-auto grid gap-12 md:grid-cols-2">
-          {/* LEFT COLUMN - Info Cards */}
-          <div className="space-y-6">
-            <div className="p-6 rounded-xl shadow-lg bg-gradient-to-r from-green-400/80 to-purple-400/80 text-black backdrop-blur-md hover:scale-[1.02] hover:shadow-xl transition">
-              <div className="flex items-center mb-3">
-                <MapPin className="w-6 h-6 text-black mr-3" />
-                <h2 className="text-xl font-semibold">Our Address</h2>
-              </div>
-              <p>
-                Business Incubator, Heriot-Watt University, <br />
-                Knowledge Park, Dubai, UAE
+      {/* Full-page Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/contact-bg.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      {/* Centered Content */}
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 py-12">
+        <div className="bg-white/95 rounded-3xl shadow-2xl max-w-6xl w-full grid md:grid-cols-2 overflow-hidden">
+          {/* Left Column - Info */}
+          <div className="p-8 md:p-12 flex flex-col justify-center space-y-8 bg-gradient-to-br from-tsd-blue/20 to-tsd-orange/20">
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-tsd-blue">
+                Contact Us
+              </h2>
+              <p className="text-gray-700">
+                We’d love to hear from you. Reach out for inquiries, partnerships, or support.
               </p>
             </div>
 
-            <div className="p-6 rounded-xl shadow-lg bg-gradient-to-r from-orange-400/80 to-yellow-400/80 text-white backdrop-blur-md hover:scale-[1.02] hover:shadow-xl transition">
-              <div className="flex items-center mb-3">
-                <Mail className="w-6 h-6 text-black mr-3" />
-                <h2 className="text-xl font-semibold text-black">Email</h2>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <MapPin className="w-6 h-6 text-tsd-blue mt-1" />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Our Address</h3>
+                  <p>
+                    Business Incubator, Heriot-Watt University, <br />
+                    Knowledge Park, Dubai, UAE
+                  </p>
+                </div>
               </div>
-              <a
-                href="mailto:thestudentdorm@gmail.com"
-                className="underline hover:text-black"
-              >
-                thestudentdorm@gmail.com
-              </a>
+
+              <div className="flex items-start gap-4">
+                <Mail className="w-6 h-6 text-tsd-orange mt-1" />
+                <div>
+                  <h3 className="font-semibold text-gray-900">Email</h3>
+                  <a
+                    href="mailto:thestudentdorm15@outlook.com"
+                    className="underline text-tsd-blue hover:text-tsd-orange"
+                  >
+                    thestudentdorm15@outlook.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN - Contact Form (Glassmorphism) */}
-          <div className="p-8 rounded-xl shadow-lg bg-teal/30 backdrop-blur-xl border border-white/25 hover:scale-[1.01] hover:shadow-xl transition">
-            <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          {/* Right Column - Form */}
+          <div className="p-8 md:p-12 bg-white">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-900">
               Send Us a Message
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block mb-2 font-medium text-gray-700">Name</label>
+                <label className="block mb-2 font-medium text-gray-900">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
                   required
-                  className="w-full p-3 rounded-lg text-gray-900 bg-white/70 backdrop-blur-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full p-3 rounded-lg text-gray-900 bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tsd-blue"
                 />
               </div>
               <div>
-                <label className="block mb-2 font-medium text-gray-700">Email</label>
+                <label className="block mb-2 font-medium text-gray-900">Email</label>
                 <input
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
                   required
-                  className="w-full p-3 rounded-lg text-gray-900 bg-white/70 backdrop-blur-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full p-3 rounded-lg text-gray-900 bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tsd-blue"
                 />
               </div>
               <div>
-                <label className="block mb-2 font-medium text-gray-700">Message</label>
+                <label className="block mb-2 font-medium text-gray-900">Message</label>
                 <textarea
                   name="message"
                   value={form.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full p-3 rounded-lg text-gray-900 bg-white/70 backdrop-blur-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  className="w-full p-3 rounded-lg text-gray-900 bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tsd-blue"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bg-tsd-blue text-white py-3 rounded-lg font-semibold hover:bg-tsd-orange transition"
                 aria-label="Send Message"
               >
                 Submit
@@ -131,7 +148,7 @@ export default function Contact() {
             </form>
           </div>
         </div>
-      </section>
+      </div>
 
       <NavigationButtons />
     </main>

@@ -1,0 +1,55 @@
+.puzzle-piece {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: visible;
+  font-weight: bold;
+  color: white;
+  user-select: none;
+}
+
+/* Colors */
+.piece1 { background-color: #004AAD; }
+.piece2 { background-color: #002060; }
+.piece3 { background-color: #F9943B; }
+.piece4 { background-color: #F1EFE7; color: #333; }
+
+/* Interlocking clip-paths */
+
+/* Top-left */
+.piece1 {
+  clip-path: polygon(
+    0% 0%, 85% 0%, 90% 15%, 100% 15%, 100% 85%, 90% 90%, 85% 100%, 0% 100%
+  );
+}
+
+/* Top-right */
+.piece2 {
+  clip-path: polygon(
+    0% 15%, 10% 15%, 15% 0%, 100% 0%, 100% 100%, 15% 100%, 10% 85%, 0% 85%
+  );
+}
+
+/* Bottom-left */
+.piece3 {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 85%, 90% 90%, 85% 100%, 0% 100%, 0% 15%, 10% 10%
+  );
+}
+
+/* Bottom-right */
+.piece4 {
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 15%, 90% 10%, 85% 0%, 15% 0%, 10% 15%, 0% 15%
+  );
+}
+
+/* Optional shadow for depth */
+.puzzle-piece {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

@@ -1,126 +1,178 @@
-// src/pages/Events.tsx
-import { useState } from "react";
-import { Calendar, MapPin, Ticket, ExternalLink } from "lucide-react";
-import { events } from "../../data/eventsData";
-import NavigationButtons from "../../components/NavigationButtons";
+import React, { useState } from "react";
+import { events, categoryTips } from "../../data/eventsData";
 import ImageModal from "../../components/ImageModal";
 
-const categories = ["All", "Academic & Career", "Tech & Innovation", "Music & Lifestyle", "Art & Culture"];
-
-export default function EventsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+const Events: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<"All" | keyof typeof categoryTips>("All");
   const [modalImage, setModalImage] = useState<string | null>(null);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // normalize
+
+  const isTodayInEvent = (event: typeof events[0]) => {
+    const start = new Date(event.startDate);
+    start.setHours(0, 0, 0, 0);
+    const end = event.endDate ? new Date(event.endDate) : start;
+    end.setHours(0, 0, 0, 0);
+    return today.getTime() >= start.getTime() && today.getTime() <= end.getTime();
+  };
 
   const filteredEvents =
     selectedCategory === "All"
       ? events
       : events.filter((event) => event.category === selectedCategory);
 
+  const todaysEvents = filteredEvents.filter(isTodayInEvent)
+    .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+
+  const upcomingEvents = filteredEvents.filter((e) => new Date(e.startDate) > today && !isTodayInEvent(e))
+    .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+
+  const pastEvents = filteredEvents.filter((e) => new Date(e.startDate) < today && !isTodayInEvent(e))
+    .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+
   return (
-    <section className="py-16 px-6 bg-gray-50">
-<section className="relative py-12 px-6 bg-cover bg-center w-full h-[300px]"
-  style={{ backgroundImage: "url('/images/student_events.jpg')" }}
->
-  <div className="absolute inset-0 bg-black/40 z-0"></div> {/* Dark overlay */}
-  <h1 className="relative z-10 text-4xl uppercase font-bold text-center mb-6 text-white">
-     Student Events
-  </h1></section>
-      
+    <main className="w-full">
+      {/* Hero Section */}
+      <section
+        className="relative w-full h-64 sm:h-96 flex items-center justify-center text-center bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/student_events.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative z-10 text-white px-4">
+          <h1 className="text-3xl sm:text-5xl uppercase font-bold mb-2">Student Events </h1>
+           <p className="text-lg sm:text-xl max-w-2xl mx-auto">
+            Stay up-to-date with Social, Networking, Innovative and Cultural events happening around you.
+          </p> 
+        </div>
+      </section>
 
-      {/* Category Filter */}
-      <div className="flex flex-wrap justify-center gap-3 mb-12 mt-12">
-        {categories.map((cat) => (
+      <section className="max-w-6xl mx-auto p-4 space-y-8">
+        {/* Category Filter Buttons */}
+        <div className="flex flex-wrap gap-3 mb-6 justify-center">
           <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 rounded-full border text-sm font-medium transition ${
-              selectedCategory === cat
-                ? "bg-tsd-blue text-white border-tsd-blue"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-            }`}
+            className={`px-4 py-2 rounded-full ${selectedCategory === "All" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+            onClick={() => setSelectedCategory("All")}
           >
-            {cat}
+            All
           </button>
-        ))}
-      </div>
-
-      {/* Event Cards */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredEvents.map((event, idx) => (
-          <div key={idx} className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
-            {/* Image Wrapper */}
-            <div
-              className="h-48 flex items-center justify-center bg-tsd-blue/5 cursor-zoom-in"
-              onClick={() => setModalImage(event.image)}
+          {Object.keys(categoryTips).map((category) => (
+            <button
+              key={category}
+              className={`px-4 py-2 rounded-full ${selectedCategory === category ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+              onClick={() => setSelectedCategory(category as keyof typeof categoryTips)}
             >
-              <img
-                src={event.image}
-                alt={event.title}
-                className="max-h-full max-w-full object-contain transition hover:scale-105"
-              />
-            </div>
+              {category}
+            </button>
+          ))}
+        </div>
 
-            {/* Event Info */}
-            <div className="p-6">
-              <span className="text-sm font-semibold text-tsd-blue">{event.category}</span>
-              <h2 className="text-xl font-bold mt-2">{event.title}</h2>
-              <div className="flex items-center gap-2 text-gray-600 mt-3">
-                <Calendar size={16} /> <span>{event.date}</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-600 mt-1">
-                <MapPin size={16} /> <span>{event.location}</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-600 mt-1">
-                <Ticket size={16} /> <span>{event.entry}</span>
-              </div>
-              <ul className="mt-4 space-y-2 text-gray-700">
-                {event.description.map((line, i) => (
-                  <li key={i}>• {line}</li>
-                ))}
-              </ul>
-
-              {/* Links */}
-              {event.links && (
-                <div className="mt-4 flex flex-wrap gap-3">
-                  {event.links.map((link, i) => (
-                    <a
-                      key={i}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-tsd-blue hover:underline hover:text-tsd-orange text-sm"
-                    >
-                      {link.label} <ExternalLink size={14} />
-                    </a>
-                  ))}
-                </div>
-              )}
-              {/* TSD Pro Tips (conditional) */}
-              {event.proTips && event.proTips.length > 0 && (
-                <div className="mt-6 p-4 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg">
-                  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tip</h3>
-                  <ul className="list-disc pl-5 text-gray-800 space-y-1 text-sm">
-                    {event.proTips.map((tip, i) => (
-                      <li key={i}>{tip}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
+        {/* Pro Tips */}
+        {selectedCategory !== "All" && categoryTips[selectedCategory] && (
+          <div className="border-l-4 border-[#F9943B] bg-[#FFF7F0] p-4 rounded-xl mb-6">
+            <h3 className="font-semibold text-lg mb-2">💡 TSD Pro Tips</h3>
+            <ul className="list-disc pl-5 text-gray-700">
+              {categoryTips[selectedCategory].map((tip, idx) => (
+                <li key={idx}>{tip}</li>
+              ))}
+            </ul>
           </div>
+        )}
+
+        {/* Today’s Events */}
+        {todaysEvents.length > 0 && (
+          <EventSection title="🎉 Today’s Events" events={todaysEvents} highlight onImageClick={setModalImage} />
+        )}
+
+        {/* Upcoming Events */}
+        {upcomingEvents.length > 0 && (
+          <EventSection title="Upcoming Events" events={upcomingEvents} onImageClick={setModalImage} />
+        )}
+
+        {/* Past Events */}
+        {pastEvents.length > 0 && (
+          <EventSection title="Past Events" events={pastEvents} faded onImageClick={setModalImage} />
+        )}
+      </section>
+
+      {/* Image Modal */}
+      {modalImage && (
+        <ImageModal src={modalImage} alt="Event full image" onClose={() => setModalImage(null)} />
+      )}
+    </main>
+  );
+};
+
+export default Events;
+
+// --------------------------
+// EventSection Component
+interface EventSectionProps {
+  title: string;
+  events: typeof events;
+  faded?: boolean;
+  highlight?: boolean;
+  onImageClick: (src: string) => void;
+}
+
+const EventSection: React.FC<EventSectionProps> = ({ title, events, faded, highlight, onImageClick }) => {
+  // Alternate background colors for stacked boxes
+  const bgColor =
+    title.includes("Today") ? "bg-green-50" :
+    title.includes("Upcoming") ? "bg-blue-50" :
+    "bg-gray-50";
+
+  return (
+    <div className={`relative p-6 rounded-xl shadow-md border border-gray-200 mb-10 ${bgColor}`}>
+      <h2
+        className={`text-2xl font-bold mb-4 ${title.includes("Today") ? "text-green-700" : faded ? "text-gray-600" : "text-tsd-blue"}`}
+      >
+        {title}
+      </h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {events.map((event) => (
+          <EventCard key={event.id} event={event} faded={faded} highlight={highlight} onImageClick={onImageClick} />
         ))}
       </div>
-
-      
-      {modalImage && (
-        <ImageModal
-          src={modalImage}
-          alt="Event full image"
-          onClose={() => setModalImage(null)}
-        />
-      )}
-
-      <NavigationButtons />
-    </section>
+    </div>
   );
+};
+
+// --------------------------
+// EventCard Component
+interface EventCardProps {
+  event: typeof events[0];
+  faded?: boolean;
+  highlight?: boolean;
+  onImageClick?: (src: string) => void;
 }
+
+const EventCard: React.FC<EventCardProps> = ({ event, faded, highlight, onImageClick }) => (
+  <div
+    className={`rounded-xl overflow-hidden shadow-md transition cursor-pointer ${faded ? "bg-gray-100 opacity-80" : "bg-white"} ${highlight ? "ring-2 ring-green-500" : ""}`}
+  >
+    <div onClick={() => onImageClick && onImageClick(event.image)} className="h-40 overflow-hidden cursor-zoom-in">
+      <img src={event.image} alt={event.title} className="w-full h-full object-cover hover:scale-105 transition" />
+    </div>
+    <div className="p-4">
+      <h3 className="font-semibold text-lg">{event.title}</h3>
+      <p className="text-gray-500 text-sm">{event.date}</p>
+      <p className="text-gray-600">{event.location}</p>
+      <p className="text-sm text-gray-700 mt-2">{event.entry}</p>
+      <ul className="text-sm text-gray-600 mt-2 list-disc pl-4">
+        {event.description.map((line, idx) => (
+          <li key={idx}>{line}</li>
+        ))}
+      </ul>
+      {event.links && (
+        <div className="mt-3 flex gap-3">
+          {event.links.map((link, idx) => (
+            <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+);

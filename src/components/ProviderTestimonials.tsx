@@ -1,26 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "Abc",
-    role: "Student",
-    feedback: "Testing testimonial component. The service was fantastic and helped me find the perfect accommodation quickly!",
-    avatar: "/images/testimonial1.jpg",
-  },
-  {
-    name: "Xyz",
-    role: "Accommodation Provider",
-    feedback: "Testing testimonial component. Partnering with TSD has boosted our bookings and connected us with genuine students.",
-    avatar: "/images/testimonial2.jpg",
-  },
-  {
-    name: "Pqr.",
-    role: "Student",
-    feedback: "Testing testimonial component. The platform made my transition to university life in Dubai so much smoother!",
-    avatar: "/images/testimonial3.jpg",
-  },
-];
+import { testimonials, Testimonial } from "../data/testimonialsData";
 
 export default function ProviderTestimonials() {
   const [current, setCurrent] = useState(0);
@@ -59,27 +39,29 @@ export default function ProviderTestimonials() {
 
   return (
     <section 
-  className="relative bg-cover bg-center text-white"
-  style={{ backgroundImage: "url('/images/testimonial.jpeg')" }}
->
-  {/* Overlay for readability */}
-  <div className="absolute inset-0 bg-black/10 bg-opacity-40"></div>
+      className="relative bg-cover bg-center text-white"
+      style={{
+        backgroundImage: "url('/images/testimonial.jpeg')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        minHeight: "300px",
+      }}
+    >
+      <div className="absolute inset-0 bg-black/10 bg-opacity-40"></div>
 
-  <div className="relative max-w-4xl mx-auto px-6 py-12">
-    <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-tsd-orange">
-      What Providers & Students Say
-    </h2>
-    <p className="text-lg md:text-xl text-center text-gray-400 mb-10 italic">
-      Real experiences from our community.
-    </p>
+      <div className="relative max-w-4xl mx-auto px-6 py-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-white">
+          What Providers & Students Say
+        </h2>
+        <p className="text-lg md:text-xl text-center text-gray-100 mb-10 italic">
+          Real experiences from our community.
+        </p>
 
         <div
-          className="relative bg-white p-8 rounded-xl shadow-lg overflow-hidden bg-gradient-to-r from-[#FD903D]/80 via-white to-[#FD903D]/80
-"
+          className="relative bg-white p-8 rounded-xl shadow-lg overflow-hidden bg-gradient-to-r from-[#FD903D]/80 via-white to-[#FD903D]/80"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Left arrow */}
           <button
             onClick={prevSlide}
             aria-label="Previous testimonial"
@@ -88,18 +70,12 @@ export default function ProviderTestimonials() {
             <ChevronLeft size={30} />
           </button>
 
-          {/* Slides */}
           <div className="relative h-56 sm:h-64 md:h-72">
-            {testimonials.map((t, idx) => (
+            {testimonials.map((t: Testimonial, idx: number) => (
               <div
                 key={idx}
                 className={`absolute inset-0 transition-all duration-700 ease-in-out flex flex-col items-center justify-center text-center px-6
-                  ${
-                    current === idx
-                      ? "opacity-100 translate-x-0 z-10"
-                      : "opacity-0 translate-x-10 z-0"
-                  }
-                `}
+                  ${current === idx ? "opacity-100 translate-x-0 z-10" : "opacity-0 translate-x-10 z-0"}`}
               >
                 <img
                   src={t.avatar}
@@ -113,7 +89,6 @@ export default function ProviderTestimonials() {
             ))}
           </div>
 
-          {/* Right arrow */}
           <button
             onClick={nextSlide}
             aria-label="Next testimonial"
@@ -123,7 +98,6 @@ export default function ProviderTestimonials() {
           </button>
         </div>
 
-        {/* Dots */}
         <div className="flex justify-center mt-6 space-x-2">
           {testimonials.map((_, idx) => (
             <button

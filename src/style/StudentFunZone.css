@@ -1,0 +1,40 @@
+/* StudentFunZone.css */
+.funzone-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;      /* scales nicely */
+  aspect-ratio: 1 / 1;   /* square container */
+  margin: 50px auto;
+}
+
+.puzzle-piece {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  overflow: visible;
+}
+
+.puzzle-piece:nth-child(2) { left: 50%; top: 0; }
+.puzzle-piece:nth-child(3) { left: 0; top: 50%; }
+.puzzle-piece:nth-child(4) { left: 50%; top: 50%; }
+
+.puzzle-piece img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* images scale perfectly */
+}
+
+.back-content {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px;
+}

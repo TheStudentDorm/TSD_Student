@@ -1,28 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [desktopClick, setDesktopClick] = useState(false);
-  const [desktopHover, setDesktopHover] = useState(false);
-  const [studentsOpen, setStudentsOpen] = useState(location.pathname.startsWith("/students"));
   const [studentsDropdown, setStudentsDropdown] = useState(false);
+  const [extraDropdown, setExtraDropdown] = useState(false);
+  const [studentsOpen, setStudentsOpen] = useState(location.pathname.startsWith("/students"));
 
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  let hideTimeout: NodeJS.Timeout;
+  const studentsRef = useRef<HTMLDivElement>(null);
+  const extraRef = useRef<HTMLDivElement>(null);
 
   const isActive = (path: string) => location.pathname === path;
   const isStudentsActive = location.pathname.startsWith("/students");
 
   const studentLinks = [
+    { path: "/students", label: "A Glance" },
     { path: "/students/accommodation", label: "Accommodation" },
     { path: "/students/academics", label: "Academics" },
     { path: "/students/visa", label: "Visa" },
     { path: "/students/transport", label: "Transport" },
-    { path: "/students/careers", label: "Careers" },
+    // { path: "/students/careers", label: "Careers" },
+    { path: "/students/CareerPage", label: "Careers" },
     { path: "/students/discounts", label: "Discounts" },
     { path: "/students/events", label: "Events" },
     { path: "/students/attractions", label: "Attractions" },
@@ -34,109 +33,78 @@ export default function Navbar() {
     { path: "/contact", label: "Contact" },
   ];
 
+  // Close dropdowns when clicking outside
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (studentsRef.current && !studentsRef.current.contains(event.target as Node)) {
+        setStudentsDropdown(false);
       }
-      setLastScrollY(window.scrollY);
-
-      if (mobileOpen) {
-        setMobileOpen(false);
+      if (extraRef.current && !extraRef.current.contains(event.target as Node)) {
+        setExtraDropdown(false);
       }
     };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, mobileOpen]);
-
-  // ✅ underline animation helper
   const underlineClass = (active: boolean) =>
-    `relative pb-1 hover:text-[#ff6d34] after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#ff6d34] after:transition-all after:duration-300 after:ease-in-out ${
-      active ? "text-[#ff6d34] font-semibold after:w-full" : "after:w-0 hover:after:w-full"
+    `relative pb-1 text-white font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-tsd-orange after:transition-all after:duration-300 after:ease-in-out ${
+      active ? "text-tsd-orange after:w-full" : "hover:text-tsd-orange after:w-0 hover:after:w-full"
     }`;
 
   return (
-    <nav
-      className={`bg-[#002060] text-white fixed top-0 w-full z-50 shadow-lg transform transition-transform duration-300 ${
-        showNavbar ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
+    <nav className="bg-[#002060] fixed top-0 w-full z-50 shadow-lg">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img src="/logo1.png" alt="The Student Dorm" className="h-10 w-auto" />
+        <Link to="/">
+          <img src="/logo1.png" alt="The Student Dorm" className="h-10 w-48 md:h-10 object-contain" />
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to="/about" className={underlineClass(isActive("/about"))}>
-            About
-          </Link>
+          <Link to="/about" className={underlineClass(isActive("/about"))}>About</Link>
 
           {/* Students Dropdown */}
           <div
+            ref={studentsRef}
             className="relative"
-            onMouseEnter={() => {
-              clearTimeout(hideTimeout);
-              setStudentsDropdown(true);
-            }}
-            onMouseLeave={() => {
-              hideTimeout = setTimeout(() => setStudentsDropdown(false), 150);
-            }}
+            onMouseEnter={() => setStudentsDropdown(true)}
+            onMouseLeave={() => setStudentsDropdown(false)}
           >
             <button className={underlineClass(isStudentsActive)}>Students</button>
-            <div
-              className={`absolute left-0 mt-1 bg-[#002060] text-white shadow-lg rounded-md min-w-[200px] transition-all duration-200 ${
-                studentsDropdown ? "block" : "hidden"
-              }`}
-            >
-              {studentLinks.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block px-4 py-2 rounded transition-colors duration-200 ${
-                    isActive(item.path)
-                      ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                      : "hover:bg-[#ff6d34]/10 hover:text-[#ff6d34]"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
+            {studentsDropdown && (
+              <div className="absolute left-0 mt-1 bg-[#002060] text-white shadow-lg rounded-md min-w-[200px]">
+                {studentLinks.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`block px-4 py-2 text-white hover:text-tsd-orange hover:bg-[#003080] ${isActive(item.path) ? "bg-tsd-orange/20 text-tsd-orange font-semibold" : ""}`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
-          <Link to="/providers" className={underlineClass(isActive("/providers"))}>
-            Providers
-          </Link>
+          <Link to="/providers" className={underlineClass(isActive("/providers"))}>Providers</Link>
 
-          {/* Desktop Hamburger */}
-          <div
-            className="relative"
-            onMouseEnter={() => setDesktopHover(true)}
-            onMouseLeave={() => setDesktopHover(false)}
-          >
+          {/* Extra Dropdown */}
+          <div ref={extraRef} className="relative">
             <button
-              className="text-white px-3 py-2 bg-[#002060]/80 rounded-md hover:bg-[#ff6d34]/80"
-              onClick={() => setDesktopClick((prev) => !prev)}
+              className="text-white px-3 py-2 rounded-md hover:text-tsd-orange"
+              onClick={() => setExtraDropdown(prev => !prev)}
             >
               ☰
             </button>
-            {(desktopHover || desktopClick) && (
-              <div className="absolute right-0 mt-2 w-48 bg-[#002060] text-white shadow-lg rounded-md z-50">
+            {extraDropdown && (
+              <div className="absolute right-0 mt-2 w-48 bg-[#002060] text-white shadow-lg rounded-md">
                 {extraLinks.map((link) => (
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`block px-4 py-2 transition-colors duration-200 ${
-                      isActive(link.path)
-                        ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                        : "hover:bg-[#ff6d34]/10 hover:text-[#ff6d34]"
-                    }`}
-                    onClick={() => setDesktopClick(false)}
+                    className="block px-4 py-2 text-white hover:text-tsd-orange hover:bg-[#003080]"
+                    onClick={() => setExtraDropdown(false)}
                   >
                     {link.label}
                   </Link>
@@ -147,81 +115,52 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger */}
-        <button className="md:hidden text-white" onClick={() => setMobileOpen(!mobileOpen)}>
-          ☰
-        </button>
+        <button className="md:hidden text-white text-2xl" onClick={() => setMobileOpen(!mobileOpen)}>☰</button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#002060] text-white shadow-md">
-          <Link
-            to="/about"
-            className={`block px-4 py-2 hover:bg-[#ff6d34]/20 ${
-              isActive("/about") ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold" : ""
-            }`}
-            onClick={() => setMobileOpen(false)}
-          >
-            About
-          </Link>
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setMobileOpen(false)} />
+          <div className="absolute top-0 right-0 h-full w-3/4 max-w-sm bg-[#002060] shadow-lg flex flex-col">
+            <div className="flex justify-between items-center p-4 border-b border-[#003080]">
+              <img src="/logo1.png" alt="The Student Dorm" className="h-12 w-auto object-contain" />
+              <button className="text-white text-2xl" onClick={() => setMobileOpen(false)}>✕</button>
+            </div>
 
-          {/* Expandable Students */}
-          <button
-            onClick={() => setStudentsOpen(!studentsOpen)}
-            className={`w-full text-left px-4 py-2 hover:bg-[#ff6d34]/20 flex justify-between items-center ${
-              isStudentsActive ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold" : ""
-            }`}
-          >
-            Students ▾
-          </button>
-          <div
-            className={`transition-all duration-300 ease-in-out overflow-hidden ${
-              studentsOpen ? "max-h-60" : "max-h-0"
-            }`}
-          >
-            <div className="pl-6">
-              {studentLinks.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block px-4 py-2 rounded transition-colors duration-200 ${
-                    isActive(item.path)
-                      ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                      : "hover:bg-[#ff6d34]/10"
-                  }`}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
+            <div className="flex-1 overflow-y-auto">
+              <Link to="/about" className="block px-4 py-3 text-white hover:text-tsd-orange hover:bg-[#003080]" onClick={() => setMobileOpen(false)}>About</Link>
+
+              <button
+                onClick={() => setStudentsOpen(!studentsOpen)}
+                className={`w-full text-left px-4 py-3 flex justify-between items-center text-white hover:text-tsd-orange hover:bg-[#003080] font-semibold ${isStudentsActive ? "bg-tsd-orange/20 text-tsd-orange" : ""}`}
+              >
+                Students <span className={`${studentsOpen ? "rotate-90" : ""}`}>▸</span>
+              </button>
+              {studentsOpen && (
+                <div className="bg-[#001540]">
+                  {studentLinks.map((sub) => (
+                    <Link
+                      key={sub.path}
+                      to={sub.path}
+                      className="block px-6 py-2 text-white hover:text-tsd-orange hover:bg-[#003080]"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              <Link to="/providers" className="block px-4 py-3 text-white hover:text-tsd-orange hover:bg-[#003080]" onClick={() => setMobileOpen(false)}>Providers</Link>
+
+              {extraLinks.map((link) => (
+                <Link key={link.path} to={link.path} className="block px-4 py-3 text-white hover:text-tsd-orange hover:bg-[#003080]" onClick={() => setMobileOpen(false)}>
+                  {link.label}
                 </Link>
               ))}
             </div>
           </div>
-
-          {/* Extra links */}
-          {extraLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`block px-4 py-2 transition-colors duration-200 ${
-                isActive(link.path)
-                  ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold"
-                  : "hover:bg-[#ff6d34]/10 hover:text-[#ff6d34]"
-              }`}
-              onClick={() => setDesktopClick(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          <Link
-            to="/providers"
-            className={`block px-4 py-2 hover:bg-[#ff6d34]/20 ${
-              isActive("/providers") ? "bg-[#ff6d34]/20 text-[#ff6d34] font-semibold" : ""
-            }`}
-            onClick={() => setMobileOpen(false)}
-          >
-            Providers
-          </Link>
         </div>
       )}
     </nav>

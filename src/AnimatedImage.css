@@ -1,0 +1,75 @@
+/* Container styles */
+.animated-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 100px 0;
+}
+
+/* Grid setup */
+.image-grid {
+  display: grid;
+  grid-template-columns: 582px 582px;
+  grid-template-rows: 384px 384px;
+  gap: 4px;
+  border: 3px solid #000;
+}
+
+/* Quadrants */
+.quadrant {
+  position: relative;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 582px;
+  height: 384px;
+  opacity: 0;
+  animation: flyIn 0.8s forwards;
+}
+
+/* Fly-in variations for each quadrant */
+.q0 { animation-delay: 0.1s; transform: translateX(-100%); }
+.q1 { animation-delay: 0.3s; transform: translateY(-100%); }
+.q2 { animation-delay: 0.5s; transform: translateY(100%); }
+.q3 { animation-delay: 0.7s; transform: translateX(100%); }
+
+/* Image slice styling */
+.image-slice {
+  width: 582px;
+  height: 384px;
+  background-image: url('/TSD_Puzzle.png');
+  background-size: 1164px 768px;
+  background-repeat: no-repeat;
+}
+
+.q0 .image-slice { background-position: 0px 0px; }
+.q1 .image-slice { background-position: -582px 0px; }
+.q2 .image-slice { background-position: 0px -384px; }
+.q3 .image-slice { background-position: -582px -384px; }
+
+/* Replaced content */
+.content {
+  padding: 16px;
+  font-size: 18px;
+  background-color: white;
+  text-align: center;
+  animation: fadeIn 1s ease;
+  max-width: 90%;
+}
+
+/* Fly-in animation */
+@keyframes flyIn {
+  to {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Fallback fade-in (used for content text) */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

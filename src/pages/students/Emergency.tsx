@@ -1,19 +1,10 @@
 // src/pages/students/Emergency.tsx
 import React from "react";
-import HeroSectionSmall from "../../components/HeroSectionSmall";
-import TipsCarousel from "../../components/TipsCarousel";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { Download, Printer } from "lucide-react";
 import "../../style/print.css";
 import NavigationButtons from "../../components/NavigationButtons";
-
-/* const emergencyTips = [
-  { title: "Know Numbers", description: "Keep emergency numbers handy at all times." },
-  { title: "Health Services", description: "Familiarize yourself with nearby hospitals and clinics." },
-  { title: "Embassy Contacts", description: "Know your embassy’s contact for urgent assistance." },
-  { title: "Student Support", description: "Reach out to university support for emergencies." },
-]; */
 
 // PDF Generation
 const generatePDF = async () => {
@@ -32,9 +23,9 @@ const generatePDF = async () => {
     const logoImg = await loadImage("/images/tsd-logo.png");
 
     // Add logo and title on first page
-    doc.addImage(logoImg, "PNG", 80, 10, 50, 20);
+    doc.addImage(logoImg, "PNG", 75, 10, 60, 0); // auto height
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
+    doc.setFontSize(14);
     doc.text("Emergency & Essential Contacts (UAE)", 14, 40);
 
     const sections = [
@@ -56,11 +47,9 @@ const generatePDF = async () => {
         contacts: [
           ["Dubai Health Authority (DHA)", "800 342", ""],
           ["Abu Dhabi SEHA Hotline", "800 50", ""],
-          [
-            "NMC / Aster / Mediclinic Clinics",
-            "NMC: 800 6624 / Mediclinic: 800 2000",
-            "Aster: www.asterdmhealthcare.com",
-          ],
+          ["NMC", "800 6624",""],
+          ["Aster","+971 4 4400500", "www.asterdmhealthcare.com"],
+          ["Mediclinic Clinics", "800 2000", ""],
           ["Mental Health (Dubai)", "04 519 2519", "Rashid Hospital Psychiatry Dept., 24/7"],
         ],
         headerColor: [200, 230, 255],
@@ -81,29 +70,39 @@ const generatePDF = async () => {
 
     for (const section of sections) {
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(14);
+      doc.setFontSize(12);
       doc.text(section.title, 14, startY);
       startY += 6;
 
-      autoTable(doc, {
-        startY,
-        head: [section.headers],
-        body: section.contacts,
-        theme: "grid",
-        headStyles: { fillColor: section.headerColor },
-        styles: { font: "helvetica", fontSize: 12 },
-        margin: { left: 14, right: 14 },
-        didDrawPage: (data: any) => {
-          // Repeat logo + title on every new page
-          if (data.pageNumber > 1) {
-            doc.addImage(logoImg, "PNG", 80, 10, 50, 20);
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(16);
-            doc.text("Emergency & Essential Contacts (UAE)", 14, 40);
-          }
-          startY = data.cursor.y + 10;
-        },
-      });
+     autoTable(doc, {
+  startY,
+  head: [section.headers],
+  body: section.contacts,
+  theme: "grid",
+  headStyles: { fillColor: section.headerColor },
+  styles: {
+    font: "helvetica",
+    fontSize: 10,
+    cellWidth: "wrap",        // ensures wrapping
+    overflow: "linebreak",    // 🔑 force line breaks
+  },
+  columnStyles: {
+    0: { cellWidth: 50 },     // Service / Embassy
+    1: { cellWidth: 50 },     // Number / Contact
+    2: { cellWidth: "auto" }, // Descriptions / Notes → flexible & wraps
+  },
+  margin: { left: 14, right: 14 },
+  didDrawPage: (data: any) => {
+    if (data.pageNumber > 1) {
+      doc.addImage(logoImg, "PNG", 75, 10, 60, 0);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(16);
+      doc.text("Emergency & Essential Contacts (UAE)", 14, 40);
+    }
+    startY = data.cursor.y + 10;
+  },
+});
+
 
       startY += 4;
     }
@@ -120,178 +119,224 @@ const printPage = () => window.print();
 
 export default function Emergency() {
   return (
-    <main className="max-w-6xl mx-auto">
+    <main className="w-full">
       <>
         {/* Logo for print */}
         <div className="hidden print:block text-center mb-4">
-  <img src="/images/tsd-logo.png" alt="TSD Logo" className="h-16 mx-auto" />
-</div>
+          <img src="/images/tsd-logo.png" alt="TSD Logo" className="h-16 mx-auto" />
+        </div>
 
         {/* Hero Section */}
-        <HeroSectionSmall
-          title="Emergency & Essential Contacts"
-          subtitle="Important contacts for medical emergencies, police, embassies, and student support services."
-          
-          image="/images/student-hero-emergency.png"
-           fixedBackground
-           className="hero-section print:hidden"
-        />
+        <section className="hero-section relative h-screen w-screen flex items-center justify-center overflow-hidden">
+          <div
+            className="absolute inset-0 w-full h-full bg-cover bg-no-repeat bg-center bg-fixed print:hidden"
+            style={{ backgroundImage: `url('/images/student-hero-emergency.png')`, transform: "translateZ(0)" }}
+          >
+            <div className="absolute inset-0 bg-black/10"></div>
+          </div>
 
-        <div className="py-16 px-6 space-y-16">
-          {/* Action Buttons */}
-          <div className="print:hidden flex justify-end gap-3 mb-6">
-            <button
-              onClick={generatePDF}
-              className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow transition"
-            >
-              <Download className="w-4 h-4" />
-              Download PDF
-            </button>
-
-            <button
-              onClick={printPage}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition"
-            >
-              <Printer className="w-4 h-4" />
-              Print Version
-            </button>
+          <div className="relative z-10 max-w-6xl px-6 mt-32 text-center">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-bold leading-tight text-white uppercase">
+              Emergency & Essential Contacts
+            </h1>
+            <p className="text-lg md:text-xl text-gray-100">
+              Important contacts for medical emergencies, police, embassies, and student support services.
+            </p>
           </div>
-        {/* Intro Section */}
-        <section className="bg-white p-6 rounded-xl shadow">
-          <h2 className="text-2xl font-bold mb-4">Emergency Contacts & Services</h2>
-          <p className="text-gray-700">
-            Whether it’s a minor issue or an emergency, knowing who to call can make all the difference.
-            Save these numbers in your phone and share with your flatmates and friends, just in case.
-          </p>
-        </section>
-        {/* General Emergencies */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4">General Emergencies</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white rounded-lg shadow">
-              <thead className="bg-red-100">
-                <tr>
-                  <th className="px-4 py-2 text-left">Service</th>
-                  <th className="px-4 py-2 text-left">Number</th>
-                  <th className="px-4 py-2 text-left">What it’s for</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                <tr>
-                  <td className="px-4 py-2">Police</td>
-                  <td className="px-4 py-2">999</td>
-                  <td className="px-4 py-2">Crime, personal safety, or suspicious activity</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2">Ambulance</td>
-                  <td className="px-4 py-2">998</td>
-                  <td className="px-4 py-2">Medical emergencies</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2">Fire Department</td>
-                  <td className="px-4 py-2">997</td>
-                  <td className="px-4 py-2">Fires, smoke, gas leaks</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2">Civil Defence</td>
-                  <td className="px-4 py-2">996</td>
-                  <td className="px-4 py-2">Natural hazards, disaster support</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2">Traffic Accidents</td>
-                  <td className="px-4 py-2">999</td>
-                  <td className="px-4 py-2">Call police directly if you’re in or witness an accident</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto">
-        <p className="text-gray-800 text-center text-base sm:text-md">
-          💡 <span className="font-semibold"> TSD Pro Tip !</span><p> Keep a physical card or note on your fridge with key contacts in case your phone dies. And don’t worry, emergency services here are efficient and multilingual. 
-If you’re ever unsure, call 999, they’ll direct you to the right department.
-</p>
-        </p>
-      </div>
-        </section>
-        {/* Health & Medical Support */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Health & Medical Support</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white rounded-lg shadow">
-              <thead className="bg-blue-100"> <tr>
-                <th className="px-4 py-2 text-left">Service</th>
-                <th className="px-4 py-2 text-left">Contact</th>
-              </tr>
-              </thead>
-              <tbody className="divide-y">
-                <tr><td className="px-4 py-2">Dubai Health Authority (DHA)</td>
-                  <td className="px-4 py-2">800 342 (DHA)</td></tr>
-                <tr><td className="px-4 py-2">Abu Dhabi SEHA Hotline</td>
-                  <td className="px-4 py-2">800 50</td></tr>
-                <tr><td className="px-4 py-2">NMC / Aster / Mediclinic Clinics</td>
-                  <td className="px-4 py-2">NMC: 800 6624<br />Aster: <a href="https://www.asterdmhealthcare.com/" target="_blank" className="text-blue-600 underline">Website</a>/+971 4 4400500
-                    <br />Mediclinic: 800 2000</td></tr>
-                <tr><td className="px-4 py-2">Mental Health Support (Dubai)</td>
-                  <td className="px-4 py-2">04 519 2519 (Rashid Hospital Psychiatry Dept., 24/7)</td></tr>
-              </tbody> </table>
-          </div>
- <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto">
-        <p className="text-gray-800 text-center text-base sm:text-md">
-          💡 <span className="font-semibold"> Heads up!</span><p>  Check with your university's student affairs or admin team for on-campus emergency procedures and 24/7 contacts. Most universities in the UAE have dedicated wellbeing and campus safety units.
-</p>
-        </p>
-      </div>
-        </section>
-        {/* Embassy & Consulate Assistance */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4">Embassy & Consulate Assistance</h2>
-          <p className="mb-4 text-gray-700">If you lose your passport or face a legal issue, contact your embassy for immediate support.</p>
-          <div className="overflow-x-auto"> <table className="min-w-full bg-white rounded-lg shadow">
-            <thead className="bg-green-100">
-              <tr> <th className="px-4 py-2 text-left">Embassy</th>
-                <th className="px-4 py-2 text-left">General Contact</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              <tr><td className="px-4 py-2">Indian Embassy (Abu Dhabi)</td>
-                <td className="px-4 py-2">02 449 2700</td></tr>
-              <tr><td className="px-4 py-2">Pakistan Consulate (Dubai)</td>
-                <td className="px-4 py-2">04 397 3600</td></tr>
-              <tr><td className="px-4 py-2">British Embassy (Abu Dhabi)</td>
-                <td className="px-4 py-2">02 610 1100</td></tr>
-              <tr><td className="px-4 py-2">US Embassy (Abu Dhabi)</td>
-                <td className="px-4 py-2">02 414 2200</td></tr>
-              <tr><td className="px-4 py-2">Philippine Consulate (Dubai)</td>
-                <td className="px-4 py-2">04 220 7100</td></tr>
-            </tbody>
-          </table>
-          </div>
-          <p className="mt-4 text-gray-600 text-sm"> *For other nationalities, check your embassy’s UAE page or contact Ministry of Foreign Affairs at <strong>800 44444</strong>.
-          </p>
         </section>
 
-        {/* Tips Carousel */}
-        {/* <section>
-          <div className="print:hidden">
-            <h2 className="text-2xl font-semibold mb-4">TSD Pro Tips!</h2>
-            <TipsCarousel tips={emergencyTips} duration={30} />
+        <div className="max-w-6xl mx-auto">
+          <div className="py-16 px-6 space-y-16">
+            {/* Action Buttons */}
+            <div className="print:hidden flex justify-end gap-3 mb-6">
+              <button
+                onClick={generatePDF}
+                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow transition"
+              >
+                <Download className="w-4 h-4" />
+                Download PDF
+              </button>
+
+              <button
+                onClick={printPage}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition"
+              >
+                <Printer className="w-4 h-4" />
+                Print Version
+              </button>
+            </div>
+
+            {/* Intro Section */}
+            <section className="bg-white p-6 rounded-xl shadow print:hidden">
+              <h2 className="text-2xl font-bold mb-4">Emergency Contacts & Services</h2>
+              <p className="text-gray-700">
+                Whether it’s a minor issue or an emergency, knowing who to call can make all the difference. Save these
+                numbers in your phone and share with your flatmates and friends, just in case.
+              </p>
+            </section>
+
+            {/* General Emergencies */}
+            <section>
+              <h2 className="text-2xl font-bold mb-4">General Emergencies</h2>
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white rounded-lg shadow">
+                  <thead className="bg-red-100">
+                    <tr>
+                      <th className="px-4 py-2 text-left">Service</th>
+                      <th className="px-4 py-2 text-left">Number</th>
+                      <th className="px-4 py-2 text-left">What it’s for</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="px-4 py-2">Police</td>
+                      <td className="px-4 py-2">999</td>
+                      <td className="px-4 py-2">Crime, personal safety, or suspicious activity</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Ambulance</td>
+                      <td className="px-4 py-2">998</td>
+                      <td className="px-4 py-2">Medical emergencies (injury, chest pain, fainting, etc.)</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Fire Department</td>
+                      <td className="px-4 py-2">997</td>
+                      <td className="px-4 py-2">Fires, smoke, gas leaks</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Civil Defence</td>
+                      <td className="px-4 py-2">996</td>
+                      <td className="px-4 py-2">Natural hazards, disaster support</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Traffic Accidents</td>
+                      <td className="px-4 py-2">999</td>
+                      <td className="px-4 py-2">Call police directly if you’re in or witness an accident</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto text-center print:hidden">
+                <span className="font-semibold">💡 TSD Pro Tip!</span>{" "}
+                <span>
+                  Keep a physical card or note on your fridge with key contacts in case your phone dies. Emergency
+                  services here are efficient and multilingual. If you’re ever unsure, call 999—they’ll direct you to the
+                  right department.
+                </span>
+              </div>
+            </section>
+
+            {/* Health & Medical Support */}
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Health & Medical Support</h2>
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white rounded-lg shadow">
+                  <thead className="bg-blue-100">
+                    <tr>
+                      <th className="px-4 py-2 text-left">Service</th>
+                      <th className="px-4 py-2 text-left">Contact</th>
+                      <th className="px-4 py-2 text-left">Notes/Website</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="px-4 py-2">Dubai Health Authority (DHA)</td>
+                      <td className="px-4 py-2">800 342 (DHA)</td>
+                      <td className="px-4 py-2">For licensed clinics, hospitals, vaccine centres, and health queries</td>
+                      
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Abu Dhabi SEHA Hotline</td>
+                      <td className="px-4 py-2">800 50</td>
+                      <td className="px-4 py-2">For licensed clinics, hospitals, vaccine centres, and health queries</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">NMC</td>
+                      <td className="px-4 py-2">800 6624 </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Aster</td>
+                      <td className="px-4 py-2">+971 4 4400500</td>
+                      <td className="px-4 py-2"><a
+                          href="https://www.asterdmhealthcare.com/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-600 underline"
+                        >
+                          Website
+                        </a>{" "}</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Mediclinic Clinics</td>
+                      <td className="px-4 py-2">800 2000</td>
+                      <td className="px-4 py-2">For licensed clinics, hospitals, vaccine centres, and health queries</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Mental Health Support (Dubai)</td>
+                      <td className="px-4 py-2">04 519 2519 </td>
+                      <td className="px-4 py-2">(Rashid Hospital Psychiatry Dept., 24/7)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-8 p-4 border-l-4 border-[#F9943B] bg-[#FFF7F0] rounded-md shadow-sm max-w-2xl mx-auto text-center print:hidden">
+                <span className="font-semibold">⚠️ Heads up!</span>{" "}
+                <span>
+                  Check with your university's student affairs or admin team for on-campus emergency procedures and
+                  24/7 contacts. Most universities in the UAE have dedicated wellbeing and campus safety units.
+                </span>
+              </div>
+            </section>
+
+            {/* Embassy & Consulate Assistance */}
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Embassy & Consulate Assistance</h2>
+              <p className="mb-4 text-gray-700 print:hidden">
+                If you lose your passport or face a legal issue, contact your embassy for immediate support.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="min-w-full bg-white rounded-lg shadow">
+                  <thead className="bg-green-100">
+                    <tr>
+                      <th className="px-4 py-2 text-left">Embassy</th>
+                      <th className="px-4 py-2 text-left">General Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="px-4 py-2">Indian Embassy (Abu Dhabi)</td>
+                      <td className="px-4 py-2">02 449 2700</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Pakistan Consulate (Dubai)</td>
+                      <td className="px-4 py-2">04 397 3600</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">British Embassy (Abu Dhabi)</td>
+                      <td className="px-4 py-2">02 610 1100</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">US Embassy (Abu Dhabi)</td>
+                      <td className="px-4 py-2">02 414 2200</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2">Philippine Consulate (Dubai)</td>
+                      <td className="px-4 py-2">04 220 7100</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-gray-600 text-sm">
+                *For other nationalities, check your embassy’s UAE page or contact Ministry of Foreign Affairs at{" "}
+                <strong>800 44444</strong>.
+              </p>
+            </section>
           </div>
-        </section> */}
-      {/*  <section className="mt-16 p-6 bg-tsd-blue/10 border-l-4 border-tsd-orange rounded-lg max-w-3xl mx-auto">
-  <h3 className="font-bold mb-2 text-tsd-blue text-lg">💡 TSD Pro Tips</h3>
-  <ul className="list-disc pl-5 text-gray-800 space-y-2">
-    {emergencyTips.map((tip, index) => (
-      <li key={index}>
-        <span className="font-semibold text-tsd-blue">{tip.title}:</span> {tip.description}
-      </li>
-    ))}
-  </ul>
-</section> */}
-      </div>
-     <div className="print:hidden">
-        <NavigationButtons />
-      </div>
-      
+        </div>
+
+        <div className="print:hidden">
+          <NavigationButtons />
+        </div>
       </>
     </main>
   );

@@ -1,6 +1,6 @@
 // src/pages/UAEAttractions.tsx
 import React, { useState, useEffect, useRef } from "react";
-
+import HeroSectionSmall from "../../components/HeroSectionSmall";
 import NavigationButtons from "../../components/NavigationButtons";
 import ImageModal from "../../components/ImageModal";
 interface Attraction {
@@ -240,20 +240,18 @@ const [modalImage, setModalImage] = useState<string | null>(null);
     
     <div>
       {/* Hero Section with Overlay */}
-      {/* Hero Section with reduced height */}
-<section className="relative h-[60vh] flex flex-col items-center justify-center text-center bg-gradient-to-r from-[#004AAD] to-[#F9943B]">
+     <section className="w-full" >
+      <HeroSectionSmall
+              title="Must-Visit Places Across the UAE"
+              subtitle=" Whether you're new to the UAE or just looking to explore beyond your university campus, here's a roundup of the country’s top attractions, from natural wonders and cultural landmarks to thrilling theme parks."
+              icon="/icons/career.svg"
+              image="/images/attractions/attr_hero.jpg"
+            />
   {/* Optional overlay */}
-  <div className="absolute inset-0 bg-black/40"></div>
+  <div className="absolute inset-0 bg-gray/50"></div>
 
   {/* Content */}
-  <div className="relative z-10 px-4">
-    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-      Must-Visit Places Across the UAE
-    </h1>
-          <p className="text-lg sm:text-xl text-gray-200 mx-auto">
-            Whether you're new to the UAE or just looking to explore beyond your university campus, here's a roundup of the country’s top attractions, from natural wonders and cultural landmarks to thrilling theme parks.
-          </p>
-        </div>
+  
       </section>
 
       {/* Sticky Navigation Bar */}
